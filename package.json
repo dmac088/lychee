@@ -1,0 +1,53 @@
+{
+  "name": "full_stack_hateoas_react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@stripe/react-stripe-js": "^1.4.0",
+    "@stripe/stripe-js": "^1.13.2",
+    "axios": "^0.26.1",
+    "classnames": "^2.2.6",
+    "local-storage": "^2.0.0",
+    "node-sass": "^4.14.1",
+    "qs": "^6.9.4",
+    "rc-slider": "^9.3.1",
+    "react": "^16.13.0",
+    "react-bootstrap": "^1.5.2",
+    "react-bootstrap-typeahead": "^5.1.0",
+    "react-dom": "^16.13.0",
+    "react-modal": "^3.11.2",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.0",
+    "react-slick": "^0.26.1",
+    "react-transition-group": "^4.4.1",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3",
+    "redux-thunk": "^2.3.0",
+    "velocity-animate": "^1.5.2",
+    "velocity-ui-pack": "^1.2.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.7.0",
+    "@testing-library/react": "^10.0.4",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jquery": "^3.5.1",
+    "react-test-renderer": "^16.13.1"
+  }
+}
