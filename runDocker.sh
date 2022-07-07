@@ -1,5 +1,5 @@
-docker run -it \
+docker run --rm -it \
            --name my-react-container  \
-	   -p 3000:3000 \
+           -p 8070:80 \
            --network my-net \
  my-react-app
