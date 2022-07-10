@@ -4,14 +4,10 @@ domains=(littlebagshop.com www.littlebagshop.com)
 rsa_key_size=4096
 data_path="data/certbot"
 email="danielmackie82@gmail.com" # Adding a valid address is strongly recommended
-staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
+staging=1 # Set to 1 if you're testing your setup to avoid hitting request limits
 
 path="/etc/letsencrypt/live/$domains"
 mkdir -p "$data_path/conf/live/$domains"
-
-echo $path/privkey.pem
-echo $(pwd)/data/certbot/conf
-
 
 if [ ! -e "$data_path/conf/options-ssl-nginx.conf" ] || [ ! -e "$data_path/conf/ssl-dhparams.pem" ]; then
   echo "### Downloading recommended TLS parameters ..."
@@ -21,29 +17,43 @@ if [ ! -e "$data_path/conf/options-ssl-nginx.conf" ] || [ ! -e "$data_path/conf/
   echo
 fi
 
-docker run --rm -td \
-  --name certbot \
-  -v $(pwd)/$data_path/conf:/etc/letsencrypt \
-  -v $(pwd)/$data_path/www:/var/www/certbot \
-   certbot certonly 
+echo $(pwd)/$data_path
+if [ ! "$(docker ps -q -f name=certbot)" ]; then
+  if [ "$(docker ps -aq -f status=exited -f name=certbot)" ]; then
+      # cleanup
+      docker rm certbot
+  fi
+  docker run -itd --entrypoint="/bin/sh" --rm \
+    --name certbot \
+    -v $(pwd)/$data_path/conf:/etc/letsencrypt \
+    -v $(pwd)/$data_path/www:/var/www/certbot \
+    certbot 
+fi
 
 docker exec -u root certbot sh -c "openssl req -x509 -nodes -newkey rsa:$rsa_key_size -days 1 \
     -keyout '$path/privkey.pem' \
     -out '$path/fullchain.pem' \
     -subj '/CN=localhost'" 
 
-docker run --rm -it -d \
-           --name my-react-container  \
-           -p 8070:80 \
-           -p 81:81 \
-           -p 443:443 \
-           -v $(pwd)/data/certbot/conf:/etc/letsencrypt \
-           -v $(pwd)/data/certbot/www:/var/www/certbot \
-           -v $(pwd)/data/nginx:/etc/nginx/conf.d \
-           --network my-net \
- my-react-app
+echo "### Starting nginx ..."
+#if [ ! "$(docker ps -q -f name=my-react-container)" ]; then
+ # if [ "$(docker ps -aq -f status=exited -f name=my-react-container)" ]; then
+      # cleanup
+      #docker rm my-react-app
+  #fi
+  docker run --rm -it -d \
+            --name my-react-container  \
+            -p 8070:8070 \
+            -p 70:80 \
+            -p 443:443 \
+            -v $(pwd)/$data_path/conf:/etc/letsencrypt \
+            -v $(pwd)/$data_path/www:/var/www/certbot \
+            -v $(pwd)/data/nginx:/etc/nginx/conf.d \
+            --network my-net \
+  my-react-app
+#fi
 
-echo "### Deleting dummy certificate for $domains ..."
+# echo "### Deleting dummy certificate for $domains ..."
 docker exec -u root certbot sh -c "rm -Rf /etc/letsencrypt/live/$domains && \
   rm -Rf /etc/letsencrypt/archive/$domains && \
   rm -Rf /etc/letsencrypt/renewal/$domains.conf"
@@ -63,6 +73,12 @@ esac
 
 # Enable staging mode if needed
 if [ $staging != "0" ]; then staging_arg="--staging"; fi
+
+# echo "### Reloading nginx ..."
+echo $staging_arg
+echo $email_arg 
+echo $domain_args
+echo $rsa_key_size
 
 docker exec -u root certbot sh -c "\
   certbot certonly --webroot -w /var/www/certbot \
