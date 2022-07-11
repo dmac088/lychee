@@ -1,6 +1,6 @@
 #!/bin/bash
 
-domains=(www.littlebagshop.com)
+domains=(littlebagshop.com)
 rsa_key_size=4096
 data_path="data/certbot"
 email="danielmackie82@gmail.com" # Adding a valid address is strongly recommended
@@ -85,13 +85,13 @@ echo   "certbot certonly --webroot -w /var/www/certbot \
      --agree-tos \
      --force-renewal"
 
-# docker exec -u root certbot sh -c "\
-#   certbot certonly --webroot -w /var/www/certbot \
-#     $staging_arg \
-#     $email_arg \
-#     $domain_args \
-#     --rsa-key-size $rsa_key_size \
-#     --agree-tos \
-#     --force-renewal"
+docker exec -u root certbot sh -c "\
+  certbot certonly --webroot -w /var/www/certbot \
+    $staging_arg \
+    $email_arg \
+    $domain_args \
+    --rsa-key-size $rsa_key_size \
+    --agree-tos \
+    --force-renewal"
 
-# docker restart my-react-container 
+docker restart my-react-container 
