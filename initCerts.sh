@@ -45,6 +45,7 @@ docker run --rm -it -d \
             -v $(pwd)/$data_path/conf:/etc/letsencrypt \
             -v $(pwd)/$data_path/www:/var/www/certbot \
             -v $(pwd)/data/nginx:/etc/nginx/conf.d \
+            -v $(pwd)/data/app:/usr/share/nginx/html \
             --network my-net \
    my-react-app
 
@@ -75,13 +76,22 @@ echo $email_arg
 echo $domain_args
 echo $rsa_key_size
 
-docker exec -u root certbot sh -c "\
-  certbot certonly --webroot -w /var/www/certbot \
-    $staging_arg \
-    $email_arg \
-    $domain_args \
-    --rsa-key-size $rsa_key_size \
-    --agree-tos \
-    --force-renewal"
 
-docker restart my-react-container 
+echo   "certbot certonly --webroot -w /var/www/certbot \
+     $staging_arg \
+     $email_arg \
+     $domain_args \
+     --rsa-key-size $rsa_key_size \
+     --agree-tos \
+     --force-renewal"
+
+# docker exec -u root certbot sh -c "\
+#   certbot certonly --webroot -w /var/www/certbot \
+#     $staging_arg \
+#     $email_arg \
+#     $domain_args \
+#     --rsa-key-size $rsa_key_size \
+#     --agree-tos \
+#     --force-renewal"
+
+# docker restart my-react-container 
