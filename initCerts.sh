@@ -4,7 +4,7 @@ domains=(www.littlebagshop.com)
 rsa_key_size=4096
 data_path="data/certbot"
 email="danielmackie82@gmail.com" # Adding a valid address is strongly recommended
-staging=1 # Set to 1 if you're testing your setup to avoid hitting request limits
+staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
 path="/etc/letsencrypt/live/$domains"
 mkdir -p "$data_path/conf/live/$domains"
@@ -30,16 +30,16 @@ docker exec -u root certbot sh -c "openssl req -x509 -nodes -newkey rsa:$rsa_key
     -out '$path/fullchain.pem' \
     -subj '/CN=localhost'" 
 
-docker run --rm -it -d  \
+docker run --rm -it -d \
             --name my-react-container  \
             -p 8070:8070 \
-            -p 5000:8080 \
+            -p 80:8080 \
             -p 443:4443 \
             -v $(pwd)/$data_path/conf:/etc/letsencrypt \
             -v $(pwd)/$data_path/www:/var/www/certbot \
             -v $(pwd)/data/nginx:/etc/nginx/conf.d \
             --network my-net \
-   nginx
+   my-react-app
 
 # echo "### Deleting dummy certificate for $domains ..."
 docker exec -u root certbot sh -c "rm -Rf /etc/letsencrypt/live/$domains && \

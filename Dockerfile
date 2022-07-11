@@ -6,7 +6,7 @@ COPY package.json /app
 RUN npm install
 RUN npm audit fix
 COPY . /app
-RUN npm run build 
+RUN npm run build
 
 # nginx state for serving content
 FROM nginx
