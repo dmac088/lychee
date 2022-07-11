@@ -13,3 +13,5 @@ docker run  --rm -it -d \
             -v $(pwd)/build:/usr/share/nginx/html \
             --network my-net \
    my-react-app
+
+docker exec -u root my-react-container sh -c "while :; do sleep 6h && wait $$; nginx -s reload; done && nginx -g 'daemon off;'"
