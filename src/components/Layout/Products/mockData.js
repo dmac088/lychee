@@ -18,10 +18,10 @@ export const products = {
           },
           "_links": {
             "self": {
-              "href": "https://localhost:8090/api/Product/en-GB/HKD/code/12345678"
+              "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/code/12345678"
             },
             "categories": {
-              "href": "https://localhost:8090/api/Category/en-GB/HKD/product/12345678"
+              "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/product/12345678"
             }
           }
         },
@@ -40,10 +40,10 @@ export const products = {
           },
           "_links": {
             "self": {
-              "href": "https://localhost:8090/api/Product/en-GB/HKD/code/17366878"
+              "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/code/17366878"
             },
             "categories": {
-              "href": "https://localhost:8090/api/Category/en-GB/HKD/product/17366878"
+              "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/product/17366878"
             }
           }
         },
@@ -62,10 +62,10 @@ export const products = {
           },
           "_links": {
             "self": {
-              "href": "https://localhost:8090/api/Product/en-GB/HKD/code/10688155"
+              "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/code/10688155"
             },
             "categories": {
-              "href": "https://localhost:8090/api/Category/en-GB/HKD/product/10688155"
+              "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/product/10688155"
             }
           }
         },
@@ -84,10 +84,10 @@ export const products = {
           },
           "_links": {
             "self": {
-              "href": "https://localhost:8090/api/Product/en-GB/HKD/code/15483827"
+              "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/code/15483827"
             },
             "categories": {
-              "href": "https://localhost:8090/api/Category/en-GB/HKD/product/15483827"
+              "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/product/15483827"
             }
           }
         },
@@ -106,10 +106,10 @@ export const products = {
           },
           "_links": {
             "self": {
-              "href": "https://localhost:8090/api/Product/en-GB/HKD/code/17236024"
+              "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/code/17236024"
             },
             "categories": {
-              "href": "https://localhost:8090/api/Category/en-GB/HKD/product/17236024"
+              "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/product/17236024"
             }
           }
         },
@@ -128,10 +128,10 @@ export const products = {
           },
           "_links": {
             "self": {
-              "href": "https://localhost:8090/api/Product/en-GB/HKD/code/19037164"
+              "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/code/19037164"
             },
             "categories": {
-              "href": "https://localhost:8090/api/Category/en-GB/HKD/product/19037164"
+              "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/product/19037164"
             }
           }
         },
@@ -150,10 +150,10 @@ export const products = {
           },
           "_links": {
             "self": {
-              "href": "https://localhost:8090/api/Product/en-GB/HKD/code/23464789"
+              "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/code/23464789"
             },
             "categories": {
-              "href": "https://localhost:8090/api/Category/en-GB/HKD/product/23464789"
+              "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/product/23464789"
             }
           }
         },
@@ -172,10 +172,10 @@ export const products = {
           },
           "_links": {
             "self": {
-              "href": "https://localhost:8090/api/Product/en-GB/HKD/code/25556789"
+              "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/code/25556789"
             },
             "categories": {
-              "href": "https://localhost:8090/api/Category/en-GB/HKD/product/25556789"
+              "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/product/25556789"
             }
           }
         },
@@ -194,10 +194,10 @@ export const products = {
           },
           "_links": {
             "self": {
-              "href": "https://localhost:8090/api/Product/en-GB/HKD/code/10760430"
+              "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/code/10760430"
             },
             "categories": {
-              "href": "https://localhost:8090/api/Category/en-GB/HKD/product/10760430"
+              "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/product/10760430"
             }
           }
         },
@@ -216,10 +216,10 @@ export const products = {
           },
           "_links": {
             "self": {
-              "href": "https://localhost:8090/api/Product/en-GB/HKD/code/18911676"
+              "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/code/18911676"
             },
             "categories": {
-              "href": "https://localhost:8090/api/Category/en-GB/HKD/product/18911676"
+              "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/product/18911676"
             }
           }
         }
@@ -227,16 +227,16 @@ export const products = {
     },
     "_links": {
       "first": {
-        "href": "https://localhost:8090/api/Product/en-GB/HKD/category/FRT01?page=0&size=10"
+        "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/FRT01?page=0&size=10"
       },
       "self": {
-        "href": "https://localhost:8090/api/Product/en-GB/HKD/category/FRT01?page=0&size=10"
+        "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/FRT01?page=0&size=10"
       },
       "next": {
-        "href": "https://localhost:8090/api/Product/en-GB/HKD/category/FRT01?page=1&size=10"
+        "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/FRT01?page=1&size=10"
       },
       "last": {
-        "href": "https://localhost:8090/api/Product/en-GB/HKD/category/FRT01?page=1&size=10"
+        "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/FRT01?page=1&size=10"
       }
     },
     "page": {

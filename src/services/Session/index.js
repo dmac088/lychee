@@ -40,7 +40,7 @@ export const authenticate = (discovery, username, password) => {
     return (dispatch) => {
   
       const localStorageService = LocalStorageService.getService();
-      const tokenLink = 'https://localhost:8090/oauth/token';
+      const tokenLink = 'https://littlebagshop.com:8090/oauth/token';
       const refreshToken = localStorageService.getRefreshToken();
   
       const form = new FormData();

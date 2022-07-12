@@ -90,7 +90,7 @@ instance.interceptors.response.use((response) => {
     });
     
     //get the token link
-    const tokenLink = 'https://localhost:8090/oauth/token';
+    const tokenLink = 'https://littlebagshop.com:8090/oauth/token';
 
     //when we get 2 or more 401 at the same time, the a duplicate request with the same refresh token is fired
     //to the token endpoint, resulting in a 500 error

@@ -15,10 +15,10 @@ export const mockCategory = {
   },
   "_links": {
     "self": {
-      "href": "https://localhost:8090/api/Category/en-GB/HKD/code/PRM01"
+      "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/PRM01"
     },
     "products": {
-      "href": "https://localhost:8090/api/Product/en-GB/HKD/category/PRM01?page=0&size=10"
+      "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/PRM01?page=0&size=10"
     }
   }
 }
@@ -40,10 +40,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/POM01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/POM01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/POM01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/POM01?page=0&size=10"
                 }
               }
             },
@@ -61,10 +61,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/DRU01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/DRU01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/DRU01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/DRU01?page=0&size=10"
                 }
               }
             },
@@ -82,10 +82,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/VEG01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/VEG01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/VEG01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/VEG01?page=0&size=10"
                 }
               }
             },
@@ -103,10 +103,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/REV01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/REV01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/REV01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/REV01?page=0&size=10"
                 }
               }
             },
@@ -124,10 +124,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/OFT01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/OFT01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/OFT01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/OFT01?page=0&size=10"
                 }
               }
             },
@@ -145,10 +145,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/ONT01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/ONT01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/ONT01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/ONT01?page=0&size=10"
                 }
               }
             },
@@ -166,10 +166,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/MEL01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/MEL01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/MEL01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/MEL01?page=0&size=10"
                 }
               }
             },
@@ -187,10 +187,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/PEC01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/PEC01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/PEC01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/PEC01?page=0&size=10"
                 }
               }
             },
@@ -208,10 +208,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/PEA01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/PEA01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/PEA01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/PEA01?page=0&size=10"
                 }
               }
             },
@@ -229,10 +229,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/DGV01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/DGV01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/DGV01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/DGV01?page=0&size=10"
                 }
               }
             },
@@ -250,10 +250,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/ORV01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/ORV01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/ORV01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/ORV01?page=0&size=10"
                 }
               }
             },
@@ -271,10 +271,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/BER01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/BER01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/BER01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/BER01?page=0&size=10"
                 }
               }
             },
@@ -291,10 +291,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/FBR01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/FBR01"
                 },
                 "brands": {
-                  "href": "https://localhost:8090/api/Brand/en-GB/HKD/category/FBR01"
+                  "href": "https://littlebagshop.com:8090/api/Brand/en-GB/HKD/category/FBR01"
                 }
               }
             },
@@ -312,10 +312,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/BAP01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/BAP01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/BAP01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/BAP01?page=0&size=10"
                 }
               }
             },
@@ -333,10 +333,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/PIS01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/PIS01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/PIS01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/PIS01?page=0&size=10"
                 }
               }
             },
@@ -354,10 +354,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/MAC01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/MAC01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/MAC01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/MAC01?page=0&size=10"
                 }
               }
             },
@@ -375,10 +375,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/ALM01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/ALM01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/ALM01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/ALM01?page=0&size=10"
                 }
               }
             },
@@ -396,10 +396,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/DUM03"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/DUM03"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/DUM03?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/DUM03?page=0&size=10"
                 }
               }
             },
@@ -417,10 +417,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/DUM04"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/DUM04"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/DUM04?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/DUM04?page=0&size=10"
                 }
               }
             },
@@ -438,10 +438,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/BRA01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/BRA01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/BRA01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/BRA01?page=0&size=10"
                 }
               }
             },
@@ -459,10 +459,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/DUM01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/DUM01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/DUM01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/DUM01?page=0&size=10"
                 }
               }
             },
@@ -480,10 +480,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/CAS01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/CAS01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/CAS01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/CAS01?page=0&size=10"
                 }
               }
             },
@@ -501,10 +501,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/DUM02"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/DUM02"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/DUM02?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/DUM02?page=0&size=10"
                 }
               }
             },
@@ -522,10 +522,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/CIT01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/CIT01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/CIT01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/CIT01?page=0&size=10"
                 }
               }
             },
@@ -543,10 +543,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/SVG01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/SVG01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/SVG01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/SVG01?page=0&size=10"
                 }
               }
             },
@@ -564,10 +564,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/BND01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/BND01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/BND01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/BND01?page=0&size=10"
                 }
               }
             },
@@ -585,10 +585,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/UNK01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/UNK01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/UNK01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/UNK01?page=0&size=10"
                 }
               }
             },
@@ -606,10 +606,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/PRM02"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/PRM02"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/PRM02?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/PRM02?page=0&size=10"
                 }
               }
             },
@@ -627,10 +627,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/DUM09"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/DUM09"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/DUM09?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/DUM09?page=0&size=10"
                 }
               }
             },
@@ -648,10 +648,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/OTH01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/OTH01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/OTH01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/OTH01?page=0&size=10"
                 }
               }
             },
@@ -669,10 +669,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/DUM07"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/DUM07"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/DUM07?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/DUM07?page=0&size=10"
                 }
               }
             },
@@ -690,10 +690,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/OTH02"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/OTH02"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/OTH02?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/OTH02?page=0&size=10"
                 }
               }
             },
@@ -711,10 +711,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/DUM08"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/DUM08"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/DUM08?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/DUM08?page=0&size=10"
                 }
               }
             },
@@ -732,10 +732,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/PRM01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/PRM01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/PRM01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/PRM01?page=0&size=10"
                 }
               }
             },
@@ -753,10 +753,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/DUM05"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/DUM05"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/DUM05?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/DUM05?page=0&size=10"
                 }
               }
             },
@@ -774,10 +774,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/DUM06"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/DUM06"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/DUM06?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/DUM06?page=0&size=10"
                 }
               }
             },
@@ -795,10 +795,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/FRT01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/FRT01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/FRT01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/FRT01?page=0&size=10"
                 }
               }
             },
@@ -816,10 +816,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/FET01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/FET01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/FET01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/FET01?page=0&size=10"
                 }
               }
             },
@@ -837,10 +837,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/ROV01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/ROV01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/ROV01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/ROV01?page=0&size=10"
                 }
               }
             },
@@ -858,10 +858,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/HAZ01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/HAZ01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/HAZ01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/HAZ01?page=0&size=10"
                 }
               }
             },
@@ -879,10 +879,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/TRO01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/TRO01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/TRO01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/TRO01?page=0&size=10"
                 }
               }
             },
@@ -900,10 +900,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/BSP01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/BSP01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/BSP01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/BSP01?page=0&size=10"
                 }
               }
             },
@@ -921,10 +921,10 @@ export const mockCategoryList = {
               },
               "_links": {
                 "self": {
-                  "href": "https://localhost:8090/api/Category/en-GB/HKD/code/NUT01"
+                  "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/code/NUT01"
                 },
                 "products": {
-                  "href": "https://localhost:8090/api/Product/en-GB/HKD/category/NUT01?page=0&size=10"
+                  "href": "https://littlebagshop.com:8090/api/Product/en-GB/HKD/category/NUT01?page=0&size=10"
                 }
               }
             }
@@ -932,7 +932,7 @@ export const mockCategoryList = {
         },
         "_links": {
           "self": {
-            "href": "https://localhost:8090/api/Category/en-GB/HKD/"
+            "href": "https://littlebagshop.com:8090/api/Category/en-GB/HKD/"
           }
         }
       }

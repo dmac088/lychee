@@ -3,7 +3,7 @@ import { instance as axios } from "../api";
 
 export function uploadFile(file) {
     axios.post(
-      'https://localhost:8090/api/Product/Upload/', {
+      'https://littlebagshop.com:8090/api/Product/Upload/', {
       file,
     })
       .then(response => response.json())
