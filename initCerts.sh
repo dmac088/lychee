@@ -76,7 +76,6 @@ echo $email_arg
 echo $domain_args
 echo $rsa_key_size
 
-
 echo   "certbot certonly --webroot -w /var/www/certbot \
      $staging_arg \
      $email_arg \

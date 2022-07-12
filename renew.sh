@@ -16,8 +16,9 @@ docker run -it -d  \
 docker exec certbot sh -c 'certbot renew --webroot -w /var/www/certbot --agree-tos'
     
 echo "Reloading nginx..."
-docker exec my-react-container nginx -s reload
+docker exec my-react-container  sh -c 'nginx -s reload'
 echo "Done!"
 echo "Certificate is already up-to-date."
 
 docker container stop certbot
+
