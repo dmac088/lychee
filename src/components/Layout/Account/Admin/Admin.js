@@ -26,13 +26,13 @@ function Admin() {
         
         // Request made to the backend api 
         // Send formData object 
-        axios.post("https://littlebagshop.com:8090/api/Product/Upload/", 
+        axios.post("/api/Product/Upload/", 
                    formData,); 
     }
 
     const onFileDownload = () => {
         axios({
-            url: "https://littlebagshop.com:8090/api/Product/Download/food_master.csv",
+            url: "/api/Product/Download/food_master.csv",
             method: 'GET',
             responseType: 'blob',
         })

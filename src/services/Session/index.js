@@ -23,10 +23,11 @@ export const authenticate = (discovery, username, password) => {
   
       dispatch(getSessionStarted());
   
-      return instance.post(
-        href,
-        form,
-        apiConfig.config,
+      return instance({method: "post",
+                       crossDomain: true,
+                       url: href,
+                       data: form,
+                       ...apiConfig.config}
       ).then((response) => {
         dispatch(getSessionSuccess(response.data));
         localStorageService.setToken(response.data);
@@ -40,7 +41,7 @@ export const authenticate = (discovery, username, password) => {
     return (dispatch) => {
   
       const localStorageService = LocalStorageService.getService();
-      const tokenLink = 'https://littlebagshop.com:8090/oauth/token';
+      const tokenLink = '/oauth/token';
       const refreshToken = localStorageService.getRefreshToken();
   
       const form = new FormData();
@@ -52,10 +53,11 @@ export const authenticate = (discovery, username, password) => {
         return new Promise((resolve) => { return resolve(); });
       }
   
-      return axios.post(
-        tokenLink,
-        form,
-        apiConfig.config)
+      return axios({  method: "post",
+                      crossDomain: true,
+                      url: tokenLink,
+                      data: form,
+                      ...apiConfig.config})
         .then(response => {
           if (response.status === 200) {
             console.log('assigning new access token to further requests.....');
