@@ -10,6 +10,5 @@ docker run  --rm -it -d \
             -v $(pwd)/$data_path/conf:/etc/letsencrypt \
             -v $(pwd)/$data_path/www:/var/www/certbot \
             -v $(pwd)/data/nginx:/etc/nginx/conf.d \
-            -v $(pwd)/build:/usr/share/nginx/html \
             --network my-net \
    my-react-app
