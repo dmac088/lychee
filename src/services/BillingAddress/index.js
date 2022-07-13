@@ -11,7 +11,6 @@ import {
 export const getAddress = (customer, addressTypeCode) => {
     return (dispatch) => {
         dispatch(getBillingAddressStarted());
-        
         return axios.get(customer._links.address.href.replace('{addressTypeCode}', addressTypeCode))
             .then((payload) => {
                 return payload.data;

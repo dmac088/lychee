@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccountSubPath } from "../../Helpers/route";
 import { Spinner } from '../../../Layout/Helpers/animation';
 import { Form } from 'react-bootstrap';
-import { componentAlias } from '../Dashboard/Dashboard';
 
 function AddressEdit(props) {
-    const { history, match, address, getAddress, updateAddress, type, toggleEdit } = props;
+    const { address, getAddress, updateAddress, type, toggleEdit } = props;
 
     const customer = useSelector(state => state.customer);
     const dispatch = useDispatch();
@@ -72,26 +70,11 @@ function AddressEdit(props) {
             dispatch(getAddress(customer, type))
             .then(() => {
                 toggleEdit(e);
-               // history.push(getAccountSubPath(match, componentAlias.ADDRESS));
             });
         })
     }
 
-    useEffect(() => {
-        let isSubscribed = true;
-        if(isSubscribed) {
-            if (!customer.loading) {
-                if (!address.loading) {
-                    dispatch(getAddress(customer));
-                }
-            }
-        }
-        return () => (isSubscribed = false);
-    }, [
-        customer.loading, 
-        address.loading,
-    ]);
-
+    const { data } = address;
     return (
         ((address.loading))
         ? <Spinner />
@@ -103,7 +86,7 @@ function AddressEdit(props) {
                         <div className="col-12 mb-30">
                             <input  onChange={setAddressLine1} 
                                     id="address-line-1" 
-                                    placeholder="Address Line 1" 
+                                    placeholder={data.addressLine1}
                                     type="text"
                                     autoComplete="on" />
                         </div>
@@ -111,7 +94,7 @@ function AddressEdit(props) {
                         <div className="col-12 mb-30">
                             <input  onChange={setAddressLine2} 
                                     id="address-line-2" 
-                                    placeholder="Address Line 2" 
+                                    placeholder={data.addressLine2}
                                     type="text"
                                     autoComplete="on" />
                         </div>
@@ -119,14 +102,14 @@ function AddressEdit(props) {
                         <div className="col-12 mb-30">
                             <input  onChange={setAddressLine3} 
                                     id="address-line-3" 
-                                    placeholder="Address Line 3" 
+                                    placeholder={data.addressLine3}
                                     type="text" />
                         </div>
 
                         <div className="col-12 mb-30">
                             <input  onChange={setAddressCountry} 
                                     id="country" 
-                                    placeholder="Country" 
+                                    placeholder={data.country}
                                     type="text"
                                     autoComplete="on"
                                     required/>
@@ -135,7 +118,7 @@ function AddressEdit(props) {
                         <div className="col-12 mb-30">
                             <input  onChange={setAddressPostCode} 
                                     id="post-code" 
-                                    placeholder="Post Code" 
+                                    placeholder={data.postCode}
                                     type="text" 
                                     autoComplete="on"/>
                         </div>

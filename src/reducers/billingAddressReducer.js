@@ -17,6 +17,7 @@ import {
         return {
           ...state,
           ...action.payload,
+          loading: true,
       }
   
       case GET_BILLING_ADDRESS_SUCCESS:
