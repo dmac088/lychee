@@ -9,7 +9,9 @@ import * as apiConfig from '../../../../services/api';
 import queryString from 'query-string';
 
 export const instance = axios.create({
-    baseURL: 'https://littlebagshop.com:8090',
+    baseURL: (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') 
+              ? 'https://localhost:8080' 
+              : 'https://littlebagshop.com:8090',
     crossDomain: true,
     headers: {
         "content-type": "application/json"
