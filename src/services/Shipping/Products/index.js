@@ -6,7 +6,7 @@ import {
 } from "../../../actions/ShippingProductActions";
 
 //we inject the selected destination to get the relevant types
-//https://littlebagshop.com:8090/api/Product/{locale}/{currency}/Destination/{code}/Type/{type}
+//https://sv2.io:8090/api/Product/{locale}/{currency}/Destination/{code}/Type/{type}
 
 export const getShippingProduct = (destCode, typeCode) => {  
     return (dispatch, getState) => {
