@@ -2,7 +2,7 @@
 
 data_path="data/certbot"
 
-docker run  --rm -it -d  \
+docker run  --rm -it -d \
             --name my-react-container  \
             -p 8070:8070 \
             -p 8002:8080 \
