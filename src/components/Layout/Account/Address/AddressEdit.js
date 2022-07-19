@@ -86,7 +86,7 @@ function AddressEdit(props) {
                         <div className="col-12 mb-30">
                             <input  onChange={setAddressLine1} 
                                     id="address-line-1" 
-                                    placeholder={data.addressLine1}
+                                    placeholder="Address Line 1"
                                     type="text"
                                     autoComplete="on" />
                         </div>
@@ -94,7 +94,7 @@ function AddressEdit(props) {
                         <div className="col-12 mb-30">
                             <input  onChange={setAddressLine2} 
                                     id="address-line-2" 
-                                    placeholder={data.addressLine2}
+                                    placeholder="Address Line 2"
                                     type="text"
                                     autoComplete="on" />
                         </div>
@@ -102,14 +102,14 @@ function AddressEdit(props) {
                         <div className="col-12 mb-30">
                             <input  onChange={setAddressLine3} 
                                     id="address-line-3" 
-                                    placeholder={data.addressLine3}
+                                    placeholder="Address Line 3"
                                     type="text" />
                         </div>
 
                         <div className="col-12 mb-30">
                             <input  onChange={setAddressCountry} 
                                     id="country" 
-                                    placeholder={data.country}
+                                    placeholder="Country"
                                     type="text"
                                     autoComplete="on"
                                     required/>
@@ -118,7 +118,7 @@ function AddressEdit(props) {
                         <div className="col-12 mb-30">
                             <input  onChange={setAddressPostCode} 
                                     id="post-code" 
-                                    placeholder={data.postCode}
+                                    placeholder="Post Code"
                                     type="text" 
                                     autoComplete="on"/>
                         </div>
