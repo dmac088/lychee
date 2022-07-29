@@ -7,7 +7,6 @@ import { getBagPath } from '../../Helpers/route';
 import { localization } from '../../Localization/Localization';
 import { useSelector, useDispatch } from 'react-redux';
 import * as bagService from '../../../../services/Bag/index';
-import { Spinner } from '../../Helpers/animation';
 import { round } from '../../Helpers/math';
 
 
@@ -17,13 +16,11 @@ function BagMenu(props) {
   const { lang } = match.params;
 
   const dispatch = useDispatch();   
-
+  
   const bag = useSelector(state => state.bag);
   const discovery = useSelector(state => state.discovery);
   const session = useSelector(state => state.session);
-
   const [stateInContainer, setInContainer] = useState(false);
-
   const visibleRef = useRef(stateInContainer);
   visibleRef.current = stateInContainer;
 

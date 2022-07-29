@@ -15,6 +15,7 @@ function Accordion(props) {
   const bag = useSelector(state => state.bag);
   const bagContents = useSelector(state => state.bagContents);
   const session = useSelector(state => state.session);
+  const authenticated = useSelector(state => state.session.authenticated);
 
   const dispatch = useDispatch();
 
@@ -50,7 +51,7 @@ function Accordion(props) {
   const { totalAmount } = bag.data;
   return (
     
-    (bag.loading)
+    (authenticated && bag.loading)
     ? <Spinner />
     : <React.Fragment>
       <div className="cart-items">
@@ -58,7 +59,7 @@ function Accordion(props) {
       </div>
       <div className="cart-calculation">
         <div className="calculation-details">
-          <p className="total">{localization[lang]['subtotal']}<span>${round(totalAmount)}</span></p>
+          <p className="total">{localization[lang]['subtotal']}<span>${round(totalAmount) || 0}</span></p>
         </div>
         <div className="floating-cart-btn text-center">
           <Link to={getCheckoutPath(match)}>

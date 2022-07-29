@@ -5,11 +5,14 @@ import * as bagService from '../../../services/Bag/index';
 import { useDispatch } from 'react-redux';
 import { Spinner } from '../../Layout/Helpers/animation';
 import { round } from '../Helpers/math';
+import Auth from '../Login/Auth';
 
 function Bag() {
 
     const bag = useSelector(state => state.bag);
     const bagContents = useSelector(state => state.bagContents);
+    const authenticated = useSelector(state => state.session.authenticated);
+    
     const dispatch = useDispatch();
 
     const removeItem = (e) => {
@@ -70,9 +73,12 @@ function Bag() {
     const {totalWeight, totalAmount} = bag.data;  
     return (
         <React.Fragment>
-            {(bag.loading || bagContents.loading) 
-            ? <Spinner />
-            :
+            {(!authenticated) 
+            ? <Auth/>
+            : (bag.loading || bagContents.loading)
+               ? <Spinner />
+               :
+        
             <div className="page-section section mb-50">
                 <div className="container">
                     <div className="row">
