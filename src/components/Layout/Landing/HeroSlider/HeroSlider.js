@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import CategoryMenuContainer from "./CategoryMenu/CategoryMenuContainer";
 import Slider from "react-slick";
 import { HsSlickArrowLeft, HsSlickArrowRight } from './sliderHelper';
+import placeholder from '../../../../assets/images/banners/home3-banner1-2.jpg';
+
 
 const $ = window.$;
 const hs1_settings = {
@@ -73,12 +75,12 @@ function HeroSlider(props) {
               <div className="hero-slider-three">
                 <Slider {...hs3_settings}>
                   <div className="slider-content">
-                    <h1>Organic<span>vegetables</span></h1>
-                    <h1 className="change-text">Up to <span>50% off</span></h1>
-                    <p><img src="assets/images/icon-slider.png" alt="" /> <span>save up to 10%</span></p>
-                    <p><img src="assets/images/icon-slider.png" alt="" /> <span>free shipping</span></p>
-                    <p><img src="assets/images/icon-slider.png" alt="" /> <span>return in 24 hours</span></p>
-                    <a href="shop-left-sidebar.html" className="slider-two-btn mt-20">start at $9</a>
+                    <h1>sv2.io</h1>
+                    <h1 className="change-text">"Levelling the playing field"</h1>
+                    <p><img src="assets/images/icon-slider.png" alt="" /> <span>For Manufacturers</span></p>
+                    <p><img src="assets/images/icon-slider.png" alt="" /> <span>For Brands</span></p>
+                    <p><img src="assets/images/icon-slider.png" alt="" /> <span>For Partners</span></p>
+                    <a href="shop-left-sidebar.html" className="slider-two-btn mt-20">start now</a>
                   </div>
                   <div className="slider-content">
                     <h1>Organic<span>vegetables</span></h1>
@@ -97,15 +99,15 @@ function HeroSlider(props) {
               <div className="row">
                 <div className="col-lg-12 col-sm-6">
                   <div className="slider-side-banner mb-20 mb-sm-0 mb-xs-0">
-                    <a href="shop-left-sidebar.html">
-                      <img src="assets/images/landing/home3-banner1-1.jpg" className="img-fluid" alt="" />
+                    <a href="#">
+                      <img src={placeholder} className="img-fluid" alt="" />
                     </a>
                   </div>
                 </div>
                 <div className="col-lg-12 col-sm-6">
                   <div className="slider-side-banner mb-0 mb-sm-0 mb-xs-0">
-                    <a href="shop-left-sidebar.html">
-                      <img src="assets/images/landing/home3-banner1-2.jpg" className="img-fluid" alt="" />
+                    <a href="#">
+                      <img src={placeholder} className="img-fluid" alt="" />
                     </a>
                   </div>
                 </div>
