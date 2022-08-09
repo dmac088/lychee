@@ -31,9 +31,7 @@ export const authenticate = (discovery, username, password) => {
       ).then((response) => {
         dispatch(getSessionSuccess(response.data));
         localStorageService.setToken(response.data);
-      }).catch((error) => {
-        dispatch(getSessionFailure(error.response));
-      });
+      })
     }
   }
   

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../../services/Customer';
 import { Spinner } from '../../Layout/Helpers/animation';
@@ -16,7 +17,6 @@ function Register() {
 
   const dispatch = useDispatch();
   const customer = useSelector(state => state.customer);
-  const session = useSelector(state => state.session);
 
   const setGivenName = (e) => {
     e.preventDefault();
@@ -69,21 +69,23 @@ function Register() {
       ...prevState,
       loading: true,
     }));
-    dispatch(register(stateObject));
   }
 
   useEffect(() => {
-    if(!customer.loading && stateObject.loading) {
-      setObjectState((prevState) => ({
-        ...prevState,
-        loading: false,
-      }));
+    if (stateObject.loading) {
+      dispatch(register(stateObject))
+        .finally(() => {
+          setObjectState((prevState) => ({
+            ...prevState,
+            loading: false,
+          }));
+        });
     }
-  }, [customer.loading, stateObject.loading]);
+  }, [stateObject.loading]);
 
   return (
     (stateObject.loading)
-      ? 
+      ?
       <div className="login-form">
         <div className="row">
           <div className="col-md-12 col-12 mb-20">
@@ -92,39 +94,39 @@ function Register() {
         </div>
       </div>
       :
-      <form action="#">
+      <Form onSubmit={registerCustomer}>
         <div className="login-form">
           <h4 className="login-title">Register</h4>
           <div className="row">
             <div className="col-md-6 col-12 mb-20">
               <label>First Name</label>
-              <input id="customer.givenName" onChange={setGivenName} className="mb-0" type="text" placeholder="Given Name" />
+              <input required id="customer.givenName" onChange={setGivenName} className="mb-0" type="text" placeholder="Given Name" />
             </div>
             <div className="col-md-6 col-12 mb-20">
               <label>Last Name</label>
-              <input id="customer.familyName" onChange={setFamilyName} className="mb-0" type="text" placeholder="Family Name" />
+              <input required id="customer.familyName" onChange={setFamilyName} className="mb-0" type="text" placeholder="Family Name" />
             </div>
             <div className="col-md-12 mb-20">
               <label>Email Address*</label>
-              <input id="customer.userName" onChange={setUsername} className="mb-0" type="email" placeholder="Email Address" />
+              <input required id="customer.userName" onChange={setUsername} className="mb-0" type="email" placeholder="Email Address" />
             </div>
             <div className="col-md-6 mb-20">
               <label>Password</label>
-              <input id="customer.password" onChange={setPassword} className="mb-0" type="password" placeholder="Password" />
+              <input required id="customer.password" onChange={setPassword} className="mb-0" type="password" placeholder="Password" />
             </div>
             <div className="col-md-6 mb-20">
               <label>Confirm Password</label>
-              <input onChange={setConfirmPassword} className="mb-0" type="password" placeholder="Confirm Password" />
+              <input required onChange={setConfirmPassword} className="mb-0" type="password" placeholder="Confirm Password" />
             </div>
             <div className="col-12">
-              <button className="register-button mt-0" onClick={registerCustomer}>Register</button>
+              <button className="register-button mt-0">Register</button>
             </div>
             <div className="col-md-12">
               {(customer.isError) ? `${customer.error.code} - ${customer.error.description}` : ``}
             </div>
           </div>
         </div>
-      </form>
+      </Form>
   )
 }
 

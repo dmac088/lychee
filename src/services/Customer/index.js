@@ -37,9 +37,6 @@ export const register = customer => {
       .then(() => {
         dispatch(regCustomerSuccess(customer));
       })
-      .then(() => {
-        dispatch(authenticate(customer.userName, customer.password));
-      })
       .catch((error) => {
         dispatch(regCustomerFailure(error.response.data));
       });

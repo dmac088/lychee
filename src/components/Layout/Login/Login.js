@@ -4,6 +4,7 @@ import { authenticate } from '../../../services/Session/index';
 import { getBag } from '../../../services/Bag/index';
 import { getForgotPath } from "../Helpers/route";
 import { Form } from 'react-bootstrap';
+import { getSessionFailure } from '../../../actions/SessionActions';
 
 function Login(props) {
 
@@ -41,7 +42,10 @@ function Login(props) {
     e.preventDefault();
     if (!discovery.loading) {
       dispatch(authenticate(discovery, stateObject.username, stateObject.password))
-        .then(() => dispatch(getBag()));
+        .then(() => dispatch(getBag()))
+        .catch((error) => {
+          dispatch(getSessionFailure(error.response.data));
+        });
     }
   }
 
