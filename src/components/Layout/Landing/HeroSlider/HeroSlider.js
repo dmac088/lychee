@@ -14,7 +14,7 @@ const hs1_settings = {
   pauseOnFocus: false,
   pauseOnHover: false,
   fade: true,
-  infinite: true,
+  infinite: false,
   slidesToShow: 1,
   prevArrow: <HsSlickArrowLeft />,
   nextArrow: <HsSlickArrowRight />,
@@ -27,7 +27,7 @@ const hs2_settings = {
   pauseOnFocus: false,
   pauseOnHover: false,
   fade: true,
-  infinite: true,
+  infinite: false,
   slidesToShow: 1
 }
 const hs3_settings = {
@@ -38,7 +38,7 @@ const hs3_settings = {
   pauseOnFocus: false,
   pauseOnHover: false,
   fade: true,
-  infinite: true,
+  infinite: false,
   slidesToShow: 1,
   afterChange: (index) => {
     styleSlider(index);

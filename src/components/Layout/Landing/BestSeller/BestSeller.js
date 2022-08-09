@@ -9,7 +9,7 @@ const settings = {
   arrows: true,
   autoplay: false,
   dots: false,
-  infinite: true,
+  infinite: false,
   slidesToShow: 3,
   prevArrow: <SlickArrowLeft />,
   nextArrow: <SlickArrowRight />,
