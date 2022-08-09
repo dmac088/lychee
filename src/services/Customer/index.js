@@ -8,7 +8,6 @@ import {
   getCustomerSuccess,
   getCustomerFailure
 } from '../../actions/CustomerActions'
-import { authenticate } from '../Session';
 
 export const findByUserName = (discovery, session) => {
   return (dispatch) => {

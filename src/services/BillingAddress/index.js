@@ -9,7 +9,6 @@ import {
 } from "../../actions/BillingAddressActions";
 
 export const getAddress = (customer, addressTypeCode) => {
-    console.log(customer)
     return (dispatch) => {
         dispatch(getBillingAddressStarted());
         return axios.get(customer._links.address.href.replace('{addressTypeCode}', addressTypeCode))
