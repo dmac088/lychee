@@ -44,7 +44,7 @@ export const getCustomerStarted = () => ({
 export const getCustomerSuccess = customer => ({
   type: GET_CUSTOMER_SUCCESS,
   payload: {
-    ...customer,
+    ...customer.data,
     loading: false,
     isError: false,
   }

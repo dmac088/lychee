@@ -34,11 +34,9 @@ function Login(props) {
 
   const dispatch = useDispatch();
 
-  const error = useSelector(state => state.session.error);
+  const session = useSelector(state => state.session);
   const discovery = useSelector(state => state.discovery);
-  const status = (error) ? error.status : null;
-  const data = (error) ? error.data : null;
-  
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!discovery.loading) {
@@ -46,8 +44,6 @@ function Login(props) {
         .then(() => dispatch(getBag()));
     }
   }
-
-
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -58,18 +54,11 @@ function Login(props) {
             <div>
               <label>Email Address</label>
             </div>
-            <div>
-              demo@demo
-            </div>
             <input onChange={setUsername} className="mb-0" type="email" placeholder="Email Address" required />
           </div>
-
           <div className="col-12 mb-20">
             <div>
               <label>Password</label>
-            </div>
-            <div>
-              demo
             </div>
             <input onChange={setPassword} className="mb-0" type="password" placeholder="Password" required />
           </div>
@@ -86,7 +75,7 @@ function Login(props) {
             <button type="submit" className="register-button mt-0">Login</button>
           </div>
           <div className="col-md-12">
-            {status} - {((data) ? data.error_description : "")}
+            {(session.isError) ? `${session.error.code} - ${session.error.description}` : ``}
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@ export const findByUserName = (discovery, session) => {
     
     dispatch(getCustomerStarted());
 
-    axios.get(href.replace('{username}', userName))
+   return axios.get(href.replace('{username}', userName))
       .then((response) => {
         dispatch(getCustomerSuccess(response.data));
       }).catch((error) => {
@@ -32,8 +32,8 @@ export const register = customer => {
     const state = getState();
     const { href } = state.discovery.links.registerCustomer;
     dispatch(regCustomerStarted());
-
-    axios.post(href, customer)
+    
+   return  axios.post(href, customer)
       .then(() => {
         dispatch(regCustomerSuccess(customer));
       })

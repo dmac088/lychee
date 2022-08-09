@@ -6,11 +6,19 @@ import {
 } from "./ActionTypes";
  
 export const clearSession = () => ({
-  type: RESET_SESSION
+  type: RESET_SESSION,
+  payload: {
+    loading: false,
+    isError: false,
+  }
 });
 
 export const getSessionStarted = () => ({
-  type: GET_SESSION_STARTED
+  type: GET_SESSION_STARTED,
+  payload: {
+    loading: true,
+    isError: false,
+  }
 });
 
 export const getSessionSuccess = session => ({
@@ -18,12 +26,15 @@ export const getSessionSuccess = session => ({
   payload: {
     ...session,
     loading: false,
+    isError: false,
   }
 });
 
 export const getSessionFailure = error => ({
   type: GET_SESSION_FAILURE,
   payload: {
-    error,
+    error: {...error},
+    loading: false,
+    isError: true,
   }
 });

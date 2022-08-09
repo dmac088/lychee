@@ -4,8 +4,8 @@ import { GET_SESSION_STARTED,
          RESET_SESSION} from "../actions/ActionTypes";
 
   const initialState = { 
-    loading: true,
-    error:{},
+    loading: false,
+    isError: false,
     authenticated: false,
   };
   
@@ -21,20 +21,18 @@ import { GET_SESSION_STARTED,
       return {
         ...state,
         ...action.payload,
-        loading: false,
       }
 
     case GET_SESSION_FAILURE:
       return {
         ...state,
-        loading: false,
-        error: action.payload.error
+        ...action.payload,
       }
 
     case RESET_SESSION:
       return {
         ...initialState,
-        loading: false,
+        ...action.payload,
       }
 
     default:

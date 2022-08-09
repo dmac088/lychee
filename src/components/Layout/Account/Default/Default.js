@@ -1,18 +1,23 @@
 
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Spinner } from '../../../Layout/Helpers/animation';
 
 function Default(props) {
 
-    const {customer} = props;
+    //const {customer} = props;
+    const customer = useSelector(state => state.customer);
+    const session = useSelector(state => state.session);
     
+
+    console.log(customer);
     return (
         (customer.loading)
             ? <Spinner />
             : <React.Fragment>
                 <h3>Dashboard</h3>
 
-                <div className="welcome"><p>Hello, <strong></strong> (If Not <strong>{customer.data.givenName} </strong><a href="login-register.html" className="logout"> Logout</a>)</p>
+                <div className="welcome"><p>Hello, <strong></strong> (If Not <strong>{customer.givenName} </strong><a href="login-register.html" className="logout"> Logout</a>)</p>
                 </div>
 
                 <p className="mb-0">From your account dashboard. you can easily check &amp; view your
