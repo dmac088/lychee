@@ -31,7 +31,6 @@ export const register = customer => {
 
     const state = getState();
     const { href } = state.discovery.links.registerCustomer;
-
     dispatch(regCustomerStarted());
 
     axios.post(href, customer)
@@ -42,7 +41,29 @@ export const register = customer => {
         dispatch(authenticate(customer.userName, customer.password));
       })
       .catch((error) => {
-        dispatch(regCustomerFailure(error.response));
+        dispatch(regCustomerFailure(error.response.data));
       });
+    }
   }
-}
+
+
+  // export const confirm = () => {
+  //   return (dispatch, getState) => {
+  
+  //     const state = getState();
+  //     const { href } = state.discovery.links.confirmRegistration;
+  
+  //     dispatch(regCustomerStarted());
+  
+  //     axios.post(href, customer)
+  //       .then(() => {
+  //         dispatch(regCustomerSuccess(customer));
+  //       })
+  //       .then(() => {
+  //         dispatch(authenticate(customer.userName, customer.password));
+  //       })
+  //       .catch((error) => {
+  //         dispatch(regCustomerFailure(error.response));
+  //       });
+  //   }
+  // }

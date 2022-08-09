@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../../services/Customer';
+import { Spinner } from '../../Layout/Helpers/animation';
 
 function Register() {
 
@@ -13,6 +14,7 @@ function Register() {
   });
   
   const dispatch = useDispatch();
+  const customer = useSelector(state => state.customer);
 
   const setGivenName = (e) => {
     e.preventDefault();
@@ -65,6 +67,9 @@ function Register() {
   }
 
   return (
+    (customer.loading) 
+    ? <Spinner/>
+    :
     <form action="#">
       <div className="login-form">
         <h4 className="login-title">Register</h4>
@@ -91,6 +96,9 @@ function Register() {
           </div>
           <div className="col-12">
             <button className="register-button mt-0" onClick={registerCustomer}>Register</button>
+          </div>
+          <div className="col-md-12">
+            {(customer.isError) ? `${customer.error.code} - ${customer.error.description}` : ``}
           </div>
         </div>
       </div>

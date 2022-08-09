@@ -11,6 +11,7 @@ export const regCustomerStarted = () => ({
   type: REGISTER_CUSTOMER_STARTED,
   payload: {
     loading: true,
+    isError: false,
   }
 });
 
@@ -18,6 +19,7 @@ export const regCustomerSuccess = customer => ({
   type: REGISTER_CUSTOMER_SUCCESS,
   payload: {
     loading: false,
+    isError: false,
     ...customer,
   }
 });
@@ -25,8 +27,9 @@ export const regCustomerSuccess = customer => ({
 export const regCustomerFailure = error => ({
   type: REGISTER_CUSTOMER_FAILURE,
   payload: {
-    error,
     loading: false,
+    isError: true,
+    error: {...error},
   }
 });
 
@@ -34,6 +37,7 @@ export const getCustomerStarted = () => ({
   type: GET_CUSTOMER_STARTED,
   payload: {
     loading: true,
+    isError: false,
   }
 });
 
@@ -42,13 +46,15 @@ export const getCustomerSuccess = customer => ({
   payload: {
     ...customer,
     loading: false,
+    isError: false,
   }
 });
 
 export const getCustomerFailure = error => ({
   type: GET_CUSTOMER_FAILURE,
   payload: {
-    error,
+    error: {...error},
     loading: false,
+    isError: false,
   }
 });

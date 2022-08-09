@@ -8,6 +8,7 @@ import "./assets/css/elegent.min.css";
 import "./assets/css/plugins.css";
 import "./assets/css/helper.css";
 import Account from "./components/Layout/Account/Account";
+import Confirmation from "./components/Layout/Account/Confirmation/Confirmation";
 import Landing from "./components/Layout/Landing/Landing";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import NotFound from "./components/Layout/NotFound";
@@ -82,7 +83,11 @@ function App() {
 
           <Route
             exact path="/:lang/:curr/category/:categoryCode/product/:productCode"
-            render={(props) => renderContainer(Product, props)} />   
+            render={(props) => renderContainer(Product, props)} />  
+
+          <Route
+             path="/:lang/:curr/registrationConfirmation"
+            render={(props) => renderContainer(Confirmation, props)} />     
 
           <Redirect from="/" to="/en-GB/HKD" />
 

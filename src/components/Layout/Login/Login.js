@@ -36,7 +36,9 @@ function Login(props) {
 
   const error = useSelector(state => state.session.error);
   const discovery = useSelector(state => state.discovery);
-
+  const status = (error) ? error.status : null;
+  const data = (error) ? error.data : null;
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!discovery.loading) {
@@ -45,8 +47,7 @@ function Login(props) {
     }
   }
 
-  const status = (error) ? error.status : null;
-  const data = (error) ? error.data : null;
+
 
   return (
     <Form onSubmit={handleSubmit}>
