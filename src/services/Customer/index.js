@@ -19,7 +19,7 @@ export const findByUserName = (discovery, session) => {
 
    return axios.get(href.replace('{username}', userName))
       .then((response) => {
-        dispatch(getCustomerSuccess(response.data));
+        dispatch(getCustomerSuccess(response));
       }).catch((error) => {
         dispatch(getCustomerFailure(error.response));
       });
