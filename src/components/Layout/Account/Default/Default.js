@@ -3,14 +3,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Spinner } from '../../../Layout/Helpers/animation';
 
-function Default(props) {
+function Default() {
 
-    //const {customer} = props;
     const customer = useSelector(state => state.customer);
-    const session = useSelector(state => state.session);
-    
-
-    console.log(customer);
     return (
         (customer.loading)
             ? <Spinner />
