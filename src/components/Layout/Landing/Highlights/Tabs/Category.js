@@ -57,7 +57,6 @@ const settings = {
 function Category(props) {
   const { category } = props;
   const { lang, curr } = props.match.params;
-  const prevParams = usePrevious({ lang, curr });
 
   //we need local state to store products 
   const [stateObject, setObjectState] = useState({
@@ -66,40 +65,18 @@ function Category(props) {
 
   useEffect(() => {
     let isSubscribed = true;
-    console.log(category)
-    axios.post(category._links.products.href, [])
-      .then((response) => {
-        return response.data;
-      })
-      .then((payload) => {
-        if (isSubscribed) {
-          setObjectState((prevState) => ({
-            ...prevState,
-            products: (payload.searchResults) ? payload.searchResults._embedded.products
-              : [],
-          }));
-        }
-      });
+      axios.post(category._links.products.href, [])
+        .then((response) => {
+          if (isSubscribed) {
+            setObjectState((prevState) => ({
+              ...prevState,
+              products: (response.data.searchResults) ? response.data.searchResults._embedded.products
+                : [],
+            }));
+          }
+        });
     return () => (isSubscribed = false);
-  }, []);
-
-  // useEffect(() => {
-  //   let isSubscribed = true;
-  //   if (prevParams && (lang !== prevParams.lang || curr !== prevParams.curr)) {
-  //     console.log(category)
-  //     axios.post(category._links.products.href, [])
-  //       .then((response) => {
-  //         if (isSubscribed) {
-  //           setObjectState((prevState) => ({
-  //             ...prevState,
-  //             products: (response.data.searchResults) ? response.data.searchResults._embedded.products
-  //               : [],
-  //           }));
-  //         }
-  //       });
-  //   }
-  //   return () => (isSubscribed = false);
-  // }, [lang, curr]);
+  }, [lang, curr]);
 
   
   const renderColumns = (products, category) => {
