@@ -8,6 +8,8 @@ function Confiramtion(props) {
     const query = queryString.parse(props.location.search);
     const { token } = query;
 
+    //call service to push the token to the back end confirmation URL
+
     console.log(token);
     return (
         <div>Thanks for registering!</div>
