@@ -2,8 +2,7 @@ import { instance } from "../../components/Layout/Helpers/api";
 import {
   clearSession,
   getSessionStarted,
-  getSessionSuccess,
-  getSessionFailure
+  getSessionSuccess
 } from '../../actions/SessionActions';
 import axios from "axios";
 import LocalStorageService from '../../components/Layout/Helpers/storage/token';

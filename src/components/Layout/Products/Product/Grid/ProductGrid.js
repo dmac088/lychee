@@ -2,10 +2,6 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { getCategoryProductPath } from '../../../Helpers/route';
 
-const images = require.context('../../../../../assets/images/products', true);
-
-
-
 function ProductGrid(props) {
   const { match, toggleQuickView, addToBag, product } = props;
 
