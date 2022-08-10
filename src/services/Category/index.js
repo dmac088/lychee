@@ -22,7 +22,6 @@ export const findRootNode = (categories) => {
 export const getAllCategories = () => {
   return (dispatch, getState) => {
     dispatch(getCategoriesStarted());
-    console.log(getState().discovery)
     return axios.get(getState().discovery.links.getAllCategories.href)
       .then((payload) => {  
         return payload.data._embedded.objects;

@@ -33,7 +33,6 @@ function Container(props) {
     //we really only want to reinitialize on a change of locale or currency
     //not on every reload, but worry about this later
     useEffect(() => {
-            console.log('initialize')
             dispatch(discoveryService.initialize(lang, curr));
     }, [lang, curr]);
 
