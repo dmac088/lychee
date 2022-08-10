@@ -8,6 +8,15 @@ import axios from "axios";
 import LocalStorageService from '../../components/Layout/Helpers/storage/token';
 import * as apiConfig from '../api';
 
+
+export const confirm = (token) => {
+  return (dispatch, getState) => {
+    const { href } = getState().discovery.links.confirmRegistration;
+    return axios.get(href.replace('{token}', token));
+  }
+}
+
+
 export const authenticate = (username, password) => {
   return (dispatch, getState) => {
     const localStorageService = LocalStorageService.getService();
@@ -72,12 +81,6 @@ export const reauthenticate = () => {
       .catch((error) => {
         dispatch(logoutSession());
       });
-  }
-}
-
-export const confirm = (token) => {
-  return (dispatch, getState) => {
-
   }
 }
 
