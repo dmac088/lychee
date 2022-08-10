@@ -4,12 +4,12 @@ import  { GET_DISCOVERY_STARTED,
           GET_DISCOVERY_FAILURE
         } from "./ActionTypes";
 
-  export const discover = () => { 
+  export const discover = (locale, currency) => { 
       return (dispatch) => {
         
         dispatch(getDiscoveryStarted());
 
-        return discoveryService.discoverAll()
+        return discoveryService.discoverAll(locale, currency)
         .then((response) => {
           dispatch(getDiscoverySuccess(response.data._links));
         }).catch((error) => {

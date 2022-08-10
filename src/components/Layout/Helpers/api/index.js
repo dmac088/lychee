@@ -34,8 +34,8 @@ instance.interceptors.request.use(config => {
         strict: true
     });
 
-    url = url.replace('{locale}', match.params.lang);
-    url = url.replace('{currency}', match.params.curr);
+    // url = url.replace('{locale}', match.params.lang);
+    // url = url.replace('{currency}', match.params.curr);
 
     const query = queryString.parse(history.location.search);
     url = url.replace('{page}', query.page || 0);

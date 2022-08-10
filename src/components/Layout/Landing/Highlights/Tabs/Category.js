@@ -66,6 +66,7 @@ function Category(props) {
 
   useEffect(() => {
     let isSubscribed = true;
+    console.log(category)
     axios.post(category._links.products.href, [])
       .then((response) => {
         return response.data;
@@ -82,22 +83,23 @@ function Category(props) {
     return () => (isSubscribed = false);
   }, []);
 
-  useEffect(() => {
-    let isSubscribed = true;
-    if (prevParams && (lang !== prevParams.lang || curr !== prevParams.curr)) {
-      axios.post(category._links.products.href, [])
-        .then((response) => {
-          if (isSubscribed) {
-            setObjectState((prevState) => ({
-              ...prevState,
-              products: (response.data.searchResults) ? response.data.searchResults._embedded.products
-                : [],
-            }));
-          }
-        });
-    }
-    return () => (isSubscribed = false);
-  }, [lang, curr]);
+  // useEffect(() => {
+  //   let isSubscribed = true;
+  //   if (prevParams && (lang !== prevParams.lang || curr !== prevParams.curr)) {
+  //     console.log(category)
+  //     axios.post(category._links.products.href, [])
+  //       .then((response) => {
+  //         if (isSubscribed) {
+  //           setObjectState((prevState) => ({
+  //             ...prevState,
+  //             products: (response.data.searchResults) ? response.data.searchResults._embedded.products
+  //               : [],
+  //           }));
+  //         }
+  //       });
+  //   }
+  //   return () => (isSubscribed = false);
+  // }, [lang, curr]);
 
   
   const renderColumns = (products, category) => {

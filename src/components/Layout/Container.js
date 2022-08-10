@@ -34,20 +34,23 @@ function Container(props) {
         }));
     }
 
-    useEffect(() => {
-        dispatch(reauthenticate())
-        .then(() => {
-            dispatch(discoveryService.initialize());
-        });
-    }, []);
+    // useEffect(() => {
+    //     dispatch(reauthenticate())
+    //     .then(() => {
+    //         dispatch(discoveryService.initialize(lang, curr));
+    //     });
+    // }, []);
 
     //we really only want to reinitialize on a change of locale or currency
     //not on every reload, but worry about this later
     useEffect(() => {
-        if (prevParams && (lang !== prevParams.lang || curr !== prevParams.curr)) {
-            dispatch(discoveryService.initialize());
-        }
-    }, [lang, curr]);
+      //  if (prevParams && (lang !== prevParams.lang || curr !== prevParams.curr)) {
+            console.log('initialize')
+            dispatch(discoveryService.initialize(lang, curr));
+      //  }
+    }, [
+        //lang, curr
+    ]);
 
 
     return (

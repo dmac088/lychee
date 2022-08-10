@@ -54,6 +54,7 @@ function Highlights(props) {
     if(!categories) { return null; }
     return categories.filter(c => categoryMaster.includes(c.data.id)).map((c, index) => {
       const isActive = (c.data.id === stateObject.selectedCategoryCode);
+      console.log(c)
       return (
         <div key={index}
              className={"tab-pane fade "  + ((isActive) ? " show active" : "")}

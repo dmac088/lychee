@@ -33,7 +33,8 @@ export const localization = {
         "vegetables": "Vegetables",
         "nuts": "Nuts",
         "homeandlifestyle": "Home & Lifestyle",
-        "registrationConfirmation": "Registration Confirmation"
+        "registrationConfirmation": "Registration Confirmation",
+        "forgot": "Forgot Password",
     },
     "zh-HK": {
         "home": "首頁",
@@ -59,6 +60,7 @@ export const localization = {
         "fruit": "水果",
         "vegetables": "蔬菜",
         "nuts": "堅果",
-        "registrationConfirmation": "註冊確認"
+        "registrationConfirmation": "註冊確認",
+        "forgot": "忘記密碼",
     }
 }
