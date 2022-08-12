@@ -56,9 +56,9 @@ function Container(props) {
             {(stateObject.showQVModal && stateObject.currentProduct)
                 ? <QuickViewProduct
                     {...props}
+                    product={stateObject.currentProduct}
                     toggleQuickView={toggleQuickView}
-                    showQVModal={stateObject.showQVModal}
-                    productCode={stateObject.currentProduct.data.productUPC} />
+                    showQVModal={stateObject.showQVModal} />
                 : <React.Fragment />}
         </React.Fragment>
     );

@@ -21,7 +21,7 @@ export const authenticate = (username, password) => {
   return (dispatch, getState) => {
     const localStorageService = LocalStorageService.getService();
 
-    const { href } = getState().discovery.links.accessTokens;
+    const { href } = getState().discovery.links.token;
 
     const form = new FormData();
     Object.keys(apiConfig.formData).forEach((key) => {
@@ -48,10 +48,10 @@ export const authenticate = (username, password) => {
 }
 
 export const reauthenticate = () => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
 
     const localStorageService = LocalStorageService.getService();
-    const tokenLink = '/oauth/token';
+    const { href } = getState().discovery.links.token;
     const refreshToken = localStorageService.getRefreshToken();
 
     const form = new FormData();
@@ -66,7 +66,7 @@ export const reauthenticate = () => {
     return axios({
       method: "post",
       crossDomain: true,
-      url: tokenLink,
+      url: href,
       data: form,
       ...apiConfig.config
     })

@@ -100,7 +100,10 @@ export const updateItem = (item) => {
 export const getBag = () => {
     return (dispatch, getState) => {
         dispatch(getBagStarted());
-        return axios.get(getState().discovery.links.getBag.href)
+
+        console.log(getState());
+        const { href } = getState().customer.links.bag;
+        return axios.get(href)
             .then((payload) => {    
                 return payload.data;
             }).then((response) => {
