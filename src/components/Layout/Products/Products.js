@@ -92,7 +92,7 @@ function Products(props) {
 
             const { href } = (type == 'browse')
                               ? category._links.products
-                              : discovery.links.searchResource
+                              : discovery.links.productNavigationResource
 
             const node = (type == 'browse')
                          ? category
