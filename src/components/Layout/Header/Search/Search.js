@@ -10,7 +10,7 @@ import { getSearchPath } from "../../Helpers/route";
 function Search(props) {
 
     const { history, match } = props;
-    const { lang } = match.params;
+    const { lang, curr } = match.params;
     const [isLoading, setIsLoading] = useState(false);
     const [options, setOptions] = useState([]);
     const links = useSelector(state => state.discovery.links);
@@ -35,12 +35,17 @@ function Search(props) {
 
         setIsLoading(true);
 
-        const SEARCH_URI = links.searchSuggestion.href.replace('{q}', query);
-
-        axios.get(`${SEARCH_URI}`)
-            .then((resp) => {
-                return resp.data;
-            })
+        const { href } = links.productSuggestResource;
+        
+        axios.post(href, {
+            "locale": lang,
+            "currency": curr,
+            "q": query,
+        }).then((response) => {
+            return axios.get(response.data._links.suggest.href)
+        }).then((response) => {
+            return response.data;
+        })
             .then((items) => {
                 const options = items.map((i) => ({
                     suggestion: i,
