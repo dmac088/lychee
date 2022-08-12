@@ -33,9 +33,7 @@ function QuickViewProduct(props) {
   const discovery = useSelector(state => state.discovery);
 
   const retrieveProduct = (id) => {
-    console.log(discovery);
     const { href } = discovery.links.productResource;
-    console.log(href);
     axios.post(href, {
       ...constants,
       "code": id
