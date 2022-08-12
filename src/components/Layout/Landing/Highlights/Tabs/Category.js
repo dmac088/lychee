@@ -4,7 +4,7 @@ import { chunkArray } from '../../../../Layout/Helpers/general';
 import Slider from "react-slick";
 import { SlickArrowLeft, SlickArrowRight } from '../../HeroSlider/sliderHelper';
 import Column from '../Column';
-import { usePrevious } from '../../../Helpers/general';
+import { constants } from '../../../../../services/api'
 const $ = window.$;
 
 const settings = {
@@ -57,30 +57,32 @@ const settings = {
 function Category(props) {
   const { category } = props;
   const { lang, curr } = props.match.params;
-
   //we need local state to store products 
   const [stateObject, setObjectState] = useState({
-    products: null,
+    products: [],
   });
 
   useEffect(() => {
     let isSubscribed = true;
-      axios.post(category._links.products.href, [])
-        .then((response) => {
-          if (isSubscribed) {
-            setObjectState((prevState) => ({
-              ...prevState,
-              products: (response.data.searchResults) ? response.data.searchResults._embedded.products
-                : [],
-            }));
-          }
-        });
+    axios.post(category._links.products.href, {
+      ...constants,
+      "category": category.data.id,
+    })
+      .then((response) =>
+        axios.post(response.data._links.products.href, [])
+          .then((response) => {
+            if (isSubscribed) {
+              setObjectState((prevState) => ({
+                ...prevState,
+                products: (response.data.searchResults) ? response.data.searchResults._embedded.products
+                  : [],
+              }));
+            }
+          }))
     return () => (isSubscribed = false);
   }, [lang, curr]);
 
-  
   const renderColumns = (products, category) => {
-    if (!products) { return null; }
     const chunks = chunkArray(products, 3);
     return chunks.map(chunk => {
       return (

@@ -6,10 +6,8 @@ import  { GET_DISCOVERY_STARTED,
 
   export const discover = (locale, currency) => { 
       return (dispatch) => {
-        
         dispatch(getDiscoveryStarted());
-
-        return discoveryService.discoverAll(locale, currency)
+        return discoveryService.getDiscoveryURIs(locale, currency)
         .then((response) => {
           dispatch(getDiscoverySuccess(response.data._links));
         }).catch((error) => {

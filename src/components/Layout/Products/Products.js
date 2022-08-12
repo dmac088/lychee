@@ -14,6 +14,7 @@ import { Spinner } from '../../Layout/Helpers/animation';
 import { usePrevious } from '../Helpers/general';
 import { ListSidebar } from './Sidebars/Layout/ListSidebar';
 import { RangeSidebar } from './Sidebars/Layout/RangeSidebar';
+import { constants } from '../../../services/api';
 
 
 function Products(props) {
@@ -86,28 +87,43 @@ function Products(props) {
         //categories is the application root, if it refreshes everything else refreshes
         if (!categories.loading) {
 
-            const currentCategory = findByCode(categoryCode);
-            const rootNode = findRootNode(categories.list);
+            const category = findByCode(categoryCode);
+            const rootCategory = findRootNode(categories.list);
 
-            axios.post(
-                (type === 'browse')
-                    ? currentCategory._links.products.href
-                    : discovery.links.searchProduct.href.replace('{category}', rootNode.data.id).replace('{q}', query.q),
-                stateObject.selectedFacets.map(f => f.data))
-                .then((response) => {
-                    if (isSubscribed) {
-                        setObjectState((prevState) => ({
-                            ...prevState,
-                            page: response.data.searchResults.page,
-                            products: (response.data.searchResults._embedded)
-                                ? response.data.searchResults._embedded.products
-                                : [],
-                            facets: response.data.searchFacets || [],
-                            category: currentCategory,
-                            loading: false,
-                        }));
-                    }
-                });
+            const { href } = (type == 'browse')
+                              ? category._links.products
+                              : discovery.links.searchResource
+
+            const node = (type == 'browse')
+                         ? category
+                         : rootCategory
+
+            const params = {
+                ...constants,
+                "category": node.data.id,
+                "q": q,
+                "page": page,
+                "size": size,
+                "sort": sort,
+            }
+
+            axios.post(href, params)
+            .then((response) => {
+               return  axios.post(response.data._links.products.href,
+                    stateObject.selectedFacets.map(f => f.data))
+               })
+            .then((response) => {
+                if (isSubscribed) {
+                    setObjectState((prevState) => ({
+                        ...prevState,
+                        page: response.data.searchResults.page,
+                        products: response.data.searchResults._embedded.products,
+                        facets: response.data.searchFacets || [],
+                        category: category,
+                        loading: false,
+                    }));
+                }
+            });
         }
         return () => (isSubscribed = false);
     }, [categories.loading,
@@ -145,12 +161,8 @@ function Products(props) {
         }));
     }
 
-    
-
     const componentSelector = (type) => {
-
         const priceFacet = stateObject.selectedFacets.filter(f => f.data.facetingName === 'price');
-
         return (type === 'browse')
             ? <RangeSidebar
                 heading={"Price Range"}

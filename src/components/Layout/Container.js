@@ -5,12 +5,12 @@ import Footer from "./Footer/Footer";
 import BreadCrumb from "./BreadCrumb/BreadCrumb";
 import Scroller from "../Layout/Scroller/Scroller";
 import { isHomePath } from './Helpers/route';
-import * as discoveryService from "../../services/Discovery/index";
+import { initialize } from "../../services/Discovery/index";
 import QuickViewProduct from "./Landing/QuickView/QuickViewProduct";
 import { Spinner } from './Helpers/animation';
 
 function Container(props) {
-    const { path, params } = props.match;
+    const { path, params } = props.match; 
     const { lang, curr } = params;
     const categories = useSelector(state => state.categories);
 
@@ -33,7 +33,7 @@ function Container(props) {
     //we really only want to reinitialize on a change of locale or currency
     //not on every reload, but worry about this later
     useEffect(() => {
-            dispatch(discoveryService.initialize(lang, curr));
+            dispatch(initialize(lang, curr));
     }, [lang, curr]);
 
 

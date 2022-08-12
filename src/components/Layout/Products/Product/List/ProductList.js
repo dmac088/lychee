@@ -2,13 +2,10 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { getCategoryProductPath } from '../../../Helpers/route';
 
-const images = require.context('../../../../../assets/images/products', true);
-
 function ProductList(props) {
   const { match, toggleQuickView, addToBag, product} = props;
 
   return (
-
     <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
       <div className="gf-product shop-list-view-product">
         <div className="image">

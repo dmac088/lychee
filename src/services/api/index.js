@@ -1,5 +1,5 @@
 export const config = {
-	headers: { 
+	headers: {
 		Authorization: "Basic c3ByaW5nLXNlY3VyaXR5LW9hdXRoMi1yZWFkLXdyaXRlLWNsaWVudDpzcHJpbmctc2VjdXJpdHktb2F1dGgyLXJlYWQtd3JpdGUtY2xpZW50LXBhc3N3b3JkMTIzNA==",
 	}
 };
@@ -7,4 +7,14 @@ export const config = {
 export const formData = {
 	client_id: 'spring-security-oauth2-read-write-client',
 	grant_type: 'password'
- };
+};
+
+
+export const constants = {
+	"locale": 'en-GB',
+	"currency": 'HKD',
+	"category": 'PRM04',
+	"page": "0",
+	"size": "10",
+	"sort": "nameAsc"
+}
