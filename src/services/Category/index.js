@@ -5,6 +5,8 @@ import {
   getCategoriesSuccess,
   getCategoriesFailure
 } from "../../actions/CategoryActions";
+import { parseTemplate } from 'url-template';
+import { localisation } from '../../services/api';
 
 export const findByCode = (code) => {
   return store.getState().categories.list.filter(o => o.data.id === code)[0];
@@ -19,17 +21,25 @@ export const findRootNode = (categories) => {
   return min;
 }
 
-export const getAllCategories = () => {
+export const getAllCategories = (def = localisation) => {
   return (dispatch, getState) => {
     dispatch(getCategoriesStarted());
-    return axios.get(getState().discovery.links.categories.href)
-      .then((payload) => {    
+    return axios.get(getState().discovery.links.categoryResource.href)
+      .then((response) => {
+        const { href } = response.data._links.categories;
+        return parseTemplate(href).expand({
+          ...def
+        })
+      })
+      .then((link) => axios.get(link))
+      .then((payload) => {
         return payload.data._embedded.objects;
       }).then((categories) => {
         dispatch(getCategoriesSuccess(categories));
       }).catch((error) => {
         dispatch(getCategoriesFailure(error.response));
       });
+
   }
 }
 

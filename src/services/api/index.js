@@ -9,11 +9,14 @@ export const formData = {
 	grant_type: 'password'
 };
 
+export const localisation = { 
+	"locale": "en-GB",
+	"currency": "HKD"
+}
 
 export const constants = {
-	"locale": 'en-GB',
-	"currency": 'HKD',
-	"category": 'PRM04',
+	...localisation, 
+	"category": "PRM04",
 	"page": "0",
 	"size": "10",
 	"sort": "nameAsc"

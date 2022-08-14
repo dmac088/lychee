@@ -3,14 +3,14 @@ import { discover } from '../../actions/DiscoveryActions';
 import { getAllCategories } from '../Category/index';
 
 export const getDiscoveryURIs = (locale, currency) =>
-    axios.post('/api/discover', {"locale": locale, 
-                                 "currency": currency});
+    axios.get('/api/discover');
 
 export const initialize = (locale, currency) => {
     return (dispatch) => {
-        return dispatch(discover(locale, currency))
+        return dispatch(discover())
             .then(() => {
-                dispatch(getAllCategories());
+                dispatch(getAllCategories({locale, currency}));
             });
     }
 }
+
