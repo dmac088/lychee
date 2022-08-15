@@ -133,13 +133,11 @@ export const getBagContents = (locale, currency) => {
     return (dispatch, getState) => {
         dispatch(getBagContentsStarted());
         const { href } = getState().bag._links.bagContents;
-        console.log(href)
         const link = parseTemplate(href).expand({
             ...localisation,
             "locale": locale,
             "currency": currency,
         })
-        console.log(link)
         return axios.get(link)
             .then((payload) => {
                 return (payload.data._embedded)

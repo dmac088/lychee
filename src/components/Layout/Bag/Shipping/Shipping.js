@@ -12,9 +12,6 @@ function Shipping(props) {
     const { match } = props;
     const { lang, curr } = match.params;
 
-    console.log(lang);
-    console.log(curr)
-
     const dispatch              = useDispatch();
     const bag                   = useSelector(state => state.bag);
     const shippingDestinations  = useSelector(state => state.shippingDestinations);
@@ -78,15 +75,19 @@ function Shipping(props) {
             <h4>Calculate Shipping</h4>
             <form action="#">
                 <div className="row">
-                    {/* <ShippingProvider /> */}
+                    <ShippingProvider 
+                        {...props}
+                    />
                     <ShippingDestination
+                        {...props}
                         shippingDestinations={shippingDestinations}
                         currentDestinationCode={stateObject.currentDestinationCode}
                         setDestination={setDestinationCode} />
-                    {/* <ShippingType 
+                     <ShippingType 
+                        {...props}
                         destinationCode={stateObject.currentDestinationCode}
                         setShipTypeCode={setShipTypeCode}
-                        destination={findByCode(shippingDestinations._embedded.shippingDestinationResources, stateObject.currentDestinationCode)}/> */}
+                        destination={findByCode(shippingDestinations._embedded.shippingDestinationResources, stateObject.currentDestinationCode)}/> 
                     <div className="col-md-6 col-12 mb-25">
                         <input type="submit" defaultValue="Estimate" />
                     </div>

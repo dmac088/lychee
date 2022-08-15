@@ -5,6 +5,10 @@ import { getShippingType } from '../../../../../services/Shipping/Type/index';
 import { usePrevious } from '../../../Helpers/general';
 
 function ShippingType(props) {
+
+    const { match } = props;
+    const { lang, curr } = match.params;
+
     const { destination, destinationCode, setShipTypeCode } = props;
     const dispatch = useDispatch();
     const shippingTypes = useSelector(state => state.shippingTypes);
@@ -13,18 +17,16 @@ function ShippingType(props) {
 
     const renderTypes = (types) => {
         return types.map((p, index) => {
-          return <option key={index}
-                         value={p.data.shippingTypeCode}>{p.data.shippingTypeDesc}</option>
+            return <option key={index}
+                value={p.data.shippingTypeCode}>{p.data.shippingTypeDesc}</option>
         })
     }
 
     useEffect(() => {
         let isSubscribed = true;
         if (isSubscribed) {
-            if (prevDestinationCode !== destinationCode && destination) {
-                if(!bag.loading) {
-                    dispatch(getShippingType(destination));
-                }
+            if (!bag.loading) {
+                dispatch(getShippingType(destination, lang, curr));
             }
         }
         return () => (isSubscribed = false);
@@ -34,10 +36,10 @@ function ShippingType(props) {
 
     return (
         (shippingTypes.loading)
-        ? <Spinner />
-        :
+            ? <Spinner />
+            :
             <div className="col-md-6 col-12 mb-25">
-                <select  defaultValue={destinationCode} onChange={setShipTypeCode} className="nice-select">
+                <select defaultValue={destinationCode} onChange={setShipTypeCode} className="nice-select">
                     {renderTypes(shippingTypes._embedded.shippingTypeResources)}
                 </select>
             </div>

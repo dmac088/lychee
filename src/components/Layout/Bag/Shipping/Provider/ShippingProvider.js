@@ -3,7 +3,10 @@ import { Spinner } from '../../../../Layout/Helpers/animation';
 import { useDispatch, useSelector } from 'react-redux';
 import { getShippingProviders } from '../../../../../services/Shipping/Provider/index';
 
-function ShippingProvider() {
+function ShippingProvider(props) {
+
+    const { match } = props;
+    const { lang, curr } = match.params;
 
     const dispatch = useDispatch();
     const discovery = useSelector(state => state.discovery);
@@ -19,7 +22,7 @@ function ShippingProvider() {
         let isSubscribed = true;
         if (isSubscribed) {
             if (!discovery.loading) {
-                dispatch(getShippingProviders());
+                dispatch(getShippingProviders(lang, curr));
             }
         }
         return () => (isSubscribed = false);
