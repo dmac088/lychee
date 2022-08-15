@@ -21,3 +21,8 @@ export const productParams = {
 	"size": "10",
 	"sort": "nameAsc"
 }
+
+export const searchParams = {
+	...localisation, 
+	"q": ""
+}

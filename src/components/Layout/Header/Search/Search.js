@@ -6,6 +6,8 @@ import { InputGroup, Form } from 'react-bootstrap';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import './Search.css';
 import { getSearchPath } from "../../Helpers/route";
+import { parseTemplate } from 'url-template';
+import { searchParams } from '../../../../services/api';
 
 function Search(props) {
 
@@ -13,7 +15,7 @@ function Search(props) {
     const { lang, curr } = match.params;
     const [isLoading, setIsLoading] = useState(false);
     const [options, setOptions] = useState([]);
-    const links = useSelector(state => state.discovery.links);
+    const searchResource = useSelector(state => state.discovery.links.searchResource);
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -32,17 +34,17 @@ function Search(props) {
     }
 
     const handleSearch = (query) => {
-
         setIsLoading(true);
+        const { href } = searchResource;
 
-        const { href } = links.productSuggestResource;
-        
-        axios.post(href, {
-            "locale": lang,
-            "currency": curr,
-            "q": query,
-        }).then((response) => {
-            return axios.get(response.data._links.suggest.href)
+        axios.get(href).then((response) => {
+            return axios.get(
+                parseTemplate(response.data._links.suggest.href).expand({
+                    ...searchParams,
+                    "locale:": lang,
+                    "currency": curr,
+                    "q": query,
+                  }))
         }).then((response) => {
             return response.data;
         })

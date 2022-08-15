@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
 import WebMenu from './MainMenu/Web/WebMenu';
 import MobileMenu from './MainMenu/Mob/MobileMenu';
 import Search from './Search/Search';
@@ -12,9 +13,12 @@ import { slide } from "../Helpers/animation";
 import logo from '../../../assets/images/logo.png'
 import iconPhone from '../../../assets/images/icon-phone.png';
 import { localization } from '../Localization/Localization';
+import { Spinner } from '../Helpers/animation'
 
 function Header(props) {
   const { lang } = props.match.params;
+
+  const discovery = useSelector(state => state.discovery);
 
   const [stateObject, setObjectState] = useState({
     scrollPosition: 0,
@@ -67,6 +71,10 @@ function Header(props) {
   }
 
   return (
+    (discovery.loading)
+    ? <Spinner />
+    :
+  
     <header>
       {/*<!--=======  header top  =======-->*/}
       <div className="header-top pt-10 pb-10 pt-lg-10 pb-lg-10 pt-md-10 pb-md-10">

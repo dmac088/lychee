@@ -114,8 +114,11 @@ function Products(props) {
                 ...params,
             })
 
+            console.log(uri)
+
             axios.post(uri, stateObject.selectedFacets.map(f => f.data))
             .then((response) => {
+                console.log(response)
                 if (isSubscribed) {
                     setObjectState((prevState) => ({
                         ...prevState,
@@ -176,6 +179,7 @@ function Products(props) {
                 modFacet={addFacet} />
     }
 
+    console.log(stateObject.facets);
     return (
         (stateObject.loading)
             ? <Spinner />
