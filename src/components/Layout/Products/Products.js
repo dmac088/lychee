@@ -113,12 +113,11 @@ function Products(props) {
                 .then((response) => {
                     return jp.query(response, `data._links.${type}`)[0].href;
                 })
-                .then((response) => {
-                    const uri = parseTemplate(response).expand({
+                .then((response) =>
+                    axios.post(parseTemplate(response).expand({
                         ...productParams,
                         ...params,
-                    });
-                    axios.post(uri, stateObject.selectedFacets.map(f => f.data))
+                    }), stateObject.selectedFacets.map(f => f.data))
                         .then((response) => {
                             if (isSubscribed) {
                                 setObjectState((prevState) => ({
@@ -130,8 +129,8 @@ function Products(props) {
                                     loading: false,
                                 }));
                             }
-                        });
-                })
+                        }));
+
         }
         return () => (isSubscribed = false);
     }, [categories.loading,
