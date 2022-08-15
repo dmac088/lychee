@@ -14,7 +14,9 @@ import { Spinner } from '../../Layout/Helpers/animation';
 import { usePrevious } from '../Helpers/general';
 import { ListSidebar } from './Sidebars/Layout/ListSidebar';
 import { RangeSidebar } from './Sidebars/Layout/RangeSidebar';
-import { constants } from '../../../services/api';
+import { localisation } from '../../../services/api';
+import { parseTemplate } from 'url-template';
+import { productParams } from '../../../services/api';
 
 
 function Products(props) {
@@ -99,7 +101,7 @@ function Products(props) {
                          : rootCategory
 
             const params = {
-                ...constants,
+                ...localisation,
                 "category": node.data.id,
                 "q": q,
                 "page": page,
@@ -107,11 +109,12 @@ function Products(props) {
                 "sort": sort,
             }
 
-            axios.post(href, params)
-            .then((response) => {
-               return  axios.post(response.data._links.products.href,
-                    stateObject.selectedFacets.map(f => f.data))
-               })
+            const uri = parseTemplate(href).expand({
+                ...productParams,
+                ...params,
+            })
+
+            axios.post(uri, stateObject.selectedFacets.map(f => f.data))
             .then((response) => {
                 if (isSubscribed) {
                     setObjectState((prevState) => ({

@@ -6,14 +6,14 @@ import { categoryMaster } from './Categories';
 function Highlights(props) {
 
   const [stateObject, setObjectState] = useState({
-    selectedCategoryCode: categoryMaster[0],
+    categoryCode: categoryMaster[0],
   });
 
   const showTab = (e) => {
     e.preventDefault();
     setObjectState((prevState) => ({
       ...prevState,
-      selectedCategoryCode: e.currentTarget.id
+      categoryCode: e.currentTarget.id
     }));
   }
 
@@ -23,7 +23,7 @@ function Highlights(props) {
     if(isSubscribed) {
       setObjectState((prevState) => ({
         ...prevState,
-        selectedCategoryCode: categoryMaster[0],
+        categoryCode: categoryMaster[0],
       }));
     }
     return () => (isSubscribed = false);
@@ -34,7 +34,7 @@ function Highlights(props) {
   const renderCategoryTabHeaders = (categories) => {
     if(!categories) { return null; }
     return categories.filter(c => categoryMaster.includes(c.data.id)).map((c, index) => {
-      const isActive = (c.data.id === stateObject.selectedCategoryCode);
+      const isActive = (c.data.id === stateObject.categoryCode);
         return (
           <a  key={index}
               className={"nav-item nav-link" + ((isActive) ? " active" : "")}
@@ -53,7 +53,7 @@ function Highlights(props) {
   const renderCategoryTabs = (categories, props) => {
     if(!categories) { return null; }
     return categories.filter(c => categoryMaster.includes(c.data.id)).map((c, index) => {
-      const isActive = (c.data.id === stateObject.selectedCategoryCode);
+      const isActive = (c.data.id === stateObject.categoryCode);
       return (
         <div key={index}
              className={"tab-pane fade "  + ((isActive) ? " show active" : "")}

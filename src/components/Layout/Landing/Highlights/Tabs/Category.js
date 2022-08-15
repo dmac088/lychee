@@ -4,7 +4,8 @@ import { chunkArray } from '../../../../Layout/Helpers/general';
 import Slider from "react-slick";
 import { SlickArrowLeft, SlickArrowRight } from '../../HeroSlider/sliderHelper';
 import Column from '../Column';
-import { constants } from '../../../../../services/api'
+import { productParams } from '../../../../../services/api'
+import { parseTemplate } from 'url-template';
 const $ = window.$;
 
 const settings = {
@@ -64,21 +65,24 @@ function Category(props) {
 
   useEffect(() => {
     let isSubscribed = true;
-    axios.post(category._links.products.href, {
-      ...constants,
-      "category": category.data.id,
+
+    const { href } = category._links.products;
+    const uri = parseTemplate(href).expand({
+      ...productParams,
+      "locale:": lang,
+      "currency": curr,
     })
-      .then((response) =>
-        axios.post(response.data._links.products.href, [])
-          .then((response) => {
-            if (isSubscribed) {
-              setObjectState((prevState) => ({
-                ...prevState,
-                products: (response.data.searchResults) ? response.data.searchResults._embedded.products
-                  : [],
-              }));
-            }
-          }))
+
+    axios.post(uri, [])
+      .then((response) => {
+        if (isSubscribed) {
+          setObjectState((prevState) => ({
+            ...prevState,
+            products: (response.data.searchResults) ? response.data.searchResults._embedded.products
+              : [],
+          }));
+        }
+      })
     return () => (isSubscribed = false);
   }, [lang, curr]);
 

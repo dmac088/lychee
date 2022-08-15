@@ -14,7 +14,7 @@ export const localisation = {
 	"currency": "HKD"
 }
 
-export const constants = {
+export const productParams = {
 	...localisation, 
 	"category": "PRM04",
 	"page": "0",
