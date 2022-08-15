@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { parseTemplate } from 'url-template';
 import { instance as axios } from "../../Helpers/api";
 import { Spinner } from '../../Helpers/animation';
+import { localisation } from '../../../../services/api';
 
 function Sidebar(props) {
     const { type, selectedFacets, facets, link } = props;
@@ -18,7 +20,9 @@ function Sidebar(props) {
     useEffect(() => {
         let isSubscribed = true;
         if (!categories.loading) {
-            axios.post(link, (type === 'browse')
+            axios.post(parseTemplate(link).expand({
+                ...localisation,
+            }), (type === 'browse')
                 ? selectedFacets.map(f => f.data)
                 : [])
                 .then((response) => {

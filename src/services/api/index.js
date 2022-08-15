@@ -7,7 +7,7 @@ export const config = {
 export const formData = {
 	client_id: 'spring-security-oauth2-read-write-client',
 	grant_type: 'password'
-};
+}; 
 
 export const localisation = { 
 	"locale": "en-GB",
