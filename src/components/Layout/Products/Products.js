@@ -22,10 +22,12 @@ import { productParams } from '../../../services/api';
 function Products(props) {
     const { toggleQuickView, match } = props;
 
+    const BROWSE_TYPE = "browse";
     const discovery = useSelector(state => state.discovery);
 
     const query = queryString.parse(props.location.search);
     const { page, size, sort, q } = query;
+    var jp = require('jsonpath');
 
     const [stateObject, setObjectState] = useState({
         gridLayout: true,
@@ -92,13 +94,11 @@ function Products(props) {
             const category = findByCode(categoryCode);
             const rootCategory = findRootNode(categories.list);
 
-            const { href } = (type == 'browse')
-                              ? category._links.products
-                              : discovery.links.productNavigationResource
+            const { href } = discovery.links.searchResource
 
-            const node = (type == 'browse')
-                         ? category
-                         : rootCategory
+            const node = (type == BROWSE_TYPE)
+                ? category
+                : rootCategory
 
             const params = {
                 ...localisation,
@@ -109,31 +109,33 @@ function Products(props) {
                 "sort": sort,
             }
 
-            const uri = parseTemplate(href).expand({
-                ...productParams,
-                ...params,
-            })
-
-            console.log(uri)
-
-            axios.post(uri, stateObject.selectedFacets.map(f => f.data))
-            .then((response) => {
-                console.log(response)
-                if (isSubscribed) {
-                    setObjectState((prevState) => ({
-                        ...prevState,
-                        page: response.data.searchResults.page,
-                        products: response.data.searchResults._embedded.products,
-                        facets: response.data.searchFacets || [],
-                        category: category,
-                        loading: false,
-                    }));
-                }
-            });
+            axios.get(href)
+                .then((response) => {
+                    return jp.query(response, `data._links.${type}`)[0].href;
+                })
+                .then((response) => {
+                    const uri = parseTemplate(response).expand({
+                        ...productParams,
+                        ...params,
+                    });
+                    axios.post(uri, stateObject.selectedFacets.map(f => f.data))
+                        .then((response) => {
+                            if (isSubscribed) {
+                                setObjectState((prevState) => ({
+                                    ...prevState,
+                                    page: response.data.searchResults.page,
+                                    products: response.data.searchResults._embedded.products,
+                                    facets: response.data.searchFacets || [],
+                                    category: category,
+                                    loading: false,
+                                }));
+                            }
+                        });
+                })
         }
         return () => (isSubscribed = false);
     }, [categories.loading,
-        stateObject.loading,
+    stateObject.loading,
         page,
         size,
         sort,
@@ -179,7 +181,6 @@ function Products(props) {
                 modFacet={addFacet} />
     }
 
-    console.log(stateObject.facets);
     return (
         (stateObject.loading)
             ? <Spinner />
