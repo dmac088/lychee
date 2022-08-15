@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Spinner } from '../../Helpers/animation';
 import { instance as axios } from "../../../Layout/Helpers/api";
 import * as bagService from "../../../../services/Bag/index";
-import { usePrevious } from "../../Helpers/general";
 import { localisation } from "../../../../services/api";
 import { parseTemplate } from 'url-template';
 
@@ -16,9 +15,6 @@ function Product(props) {
         quantity: 1,
         loading: true,
     });
-
-    const prevLang = usePrevious(lang);
-    const prevCurr = usePrevious(curr);
 
     const incrementQty = (e) => {
         e.preventDefault();
@@ -38,19 +34,19 @@ function Product(props) {
 
     const discovery = useSelector(state => state.discovery);
 
-    const retrieveProduct = (id) => {
+    const retrieveProduct = () => {
         const { href } = discovery.links.productResource;
         axios.get(href)
             .then((response) =>
                 axios.get(parseTemplate(response.data._links.product.href).expand({
                     ...localisation,
+                    "locale": lang,
+                    "currency": curr,
                     "code": productCode,
                 })).then((response) => {
                     setObjectState((prevState) => ({
                         ...prevState,
-                        product: (response.data)
-                            ? response.data
-                            : {},
+                        product: response.data || {},
                         loading: false,
                     }));
                 }));
@@ -63,12 +59,8 @@ function Product(props) {
     }
 
     useEffect(() => {
-        if (!discovery.loading) {
-            if (prevLang !== lang || prevCurr !== curr || stateObject.loading) {
-                retrieveProduct(productCode);
-            }
-        }
-    }, [discovery.loading, stateObject.loading, lang, curr]);
+            retrieveProduct();
+    }, [lang, curr]);
 
     const { product } = stateObject;
     const { primaryCategory } = product;
