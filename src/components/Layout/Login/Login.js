@@ -9,6 +9,7 @@ import { getSessionFailure } from '../../../actions/SessionActions';
 function Login(props) {
 
   const { match } = props;
+  const { lang, curr } = match.params;
 
   const [stateObject, setObjectState] = useState({
     username: null,
@@ -42,7 +43,8 @@ function Login(props) {
     e.preventDefault();
     if (!discovery.loading) {
       dispatch(authenticate(stateObject.username, stateObject.password))
-        .then(() => dispatch(getBag()))
+        .then(() => 
+        dispatch(getBag(lang, curr)))
         .catch((error) => {
           dispatch(getSessionFailure(error.response.data));
         });

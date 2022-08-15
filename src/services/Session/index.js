@@ -9,6 +9,7 @@ import LocalStorageService from '../../components/Layout/Helpers/storage/token';
 import * as apiConfig from '../api';
 
 
+
 export const confirm = (token) => {
   return (dispatch, getState) => {
     const { href } = getState().discovery.links.confirmRegistration;
@@ -21,7 +22,7 @@ export const authenticate = (username, password) => {
   return (dispatch, getState) => {
     const localStorageService = LocalStorageService.getService();
 
-    const { href } = getState().discovery.links.token;
+    const { href } = getState().discovery.links.customerResource;
 
     const form = new FormData();
     Object.keys(apiConfig.formData).forEach((key) => {
@@ -33,14 +34,16 @@ export const authenticate = (username, password) => {
 
     dispatch(getSessionStarted());
 
-    return instance({
-      method: "post",
-      crossDomain: true,
-      url: href,
-      data: form,
-      ...apiConfig.config
-    }
-    ).then((response) => {
+    return instance.get(href)
+    .then((response) => {
+      return instance({
+        method: "post",
+        crossDomain: true,
+        url: response.data._links.token.href,
+        data: form,
+        ...apiConfig.config
+      })
+    }).then((response) => {
       dispatch(getSessionSuccess(response.data));
       localStorageService.setToken(response.data);
     })

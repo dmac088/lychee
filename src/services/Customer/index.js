@@ -1,5 +1,6 @@
 
 import { instance as axios } from "../../components/Layout/Helpers/api";
+import { parseTemplate } from 'url-template';
 import {
   regCustomerStarted,
   regCustomerSuccess,
@@ -9,14 +10,17 @@ import {
   getCustomerFailure
 } from '../../actions/CustomerActions'
 
-export const findByUserName = (discovery, session) => {
-  return (dispatch) => {
-    const { userName } = session;
-    const { href } = discovery.links.getCustomer;
+export const findByUserName = () => {
+  return (dispatch, getState) => {
     
+    const { userName } = getState().session;
+    const { href } = getState().discovery.links.customerResource;
+
     dispatch(getCustomerStarted());
 
-   return axios.get(href.replace('{username}', userName))
+   return axios.get(parseTemplate(href).expand({
+                  "username": userName
+                  }))
       .then((response) => {
         dispatch(getCustomerSuccess(response));
       }).catch((error) => {

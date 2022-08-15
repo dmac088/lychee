@@ -13,7 +13,7 @@ import { round } from '../../Helpers/math';
 function BagMenu(props) {
 
   const { match } = props;
-  const { lang } = match.params;
+  const { lang, curr } = match.params;
 
   const dispatch = useDispatch();   
   
@@ -44,7 +44,7 @@ function BagMenu(props) {
   
   useEffect(() => {
     if(!discovery.loading && session.authenticated) {
-        dispatch(bagService.getBag());
+        dispatch(bagService.getBag(lang, curr));
     }
   }, [discovery.loading, 
       session.authenticated]);

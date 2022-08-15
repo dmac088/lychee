@@ -29,8 +29,8 @@ function Dashboard(props) {
   const { match, history } = props;
   const dispatch = useDispatch();
   const customer = useSelector(state => state.customer);
-  const discovery = useSelector(state => state.discovery);
-  const session = useSelector(state => state.session);
+  // const discovery = useSelector(state => state.discovery);
+  // const session = useSelector(state => state.session);
 
   const logout = (e) => {
     e.preventDefault();
@@ -42,16 +42,10 @@ function Dashboard(props) {
   useEffect(() => {
     let isSubscribed = true;
     if (isSubscribed) {
-      if (!discovery.loading) {
-        if (!session.loading) {
-            dispatch(findByUserName(discovery, session));
-        }
-      }
+            dispatch(findByUserName());
     }
     return () => (isSubscribed = false);
-  }, [
-    discovery.loading,
-    session.loading,]);
+  }, []);
 
   const componentChoice = {
       [componentAlias.ORDERS]           : Orders,

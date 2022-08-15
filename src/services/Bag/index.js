@@ -3,6 +3,8 @@ import { history } from '../../components/Layout/Helpers/route';
 import { getAccountPath } from "../../components/Layout/Helpers/route";
 import { matchPath } from 'react-router';
 import store from '../../store';
+import { parseTemplate } from 'url-template';
+import { localisation } from "../api";
 import {
     getBagStarted,
     getBagSuccess,
@@ -97,14 +99,18 @@ export const updateItem = (item) => {
     }
 }
 
-export const getBag = () => {
+export const getBag = (locale, currency) => {
     return (dispatch, getState) => {
         dispatch(getBagStarted());
-
-        console.log(getState());
-        const { href } = getState().customer.links.bag;
+        const { href } = getState().discovery.links.customerResource;
         return axios.get(href)
-            .then((payload) => {    
+            .then((response) => {
+               return  axios.get(parseTemplate(response.data._links.bag.href).expand({
+                    ...localisation,
+                    "locale": locale,
+                    "currency": currency,
+                }))})
+            .then((payload) => {
                 return payload.data;
             }).then((response) => {
                 dispatch(getBagSuccess(response));
@@ -117,7 +123,7 @@ export const getBag = () => {
 export const clearBag = () => {
     return (dispatch) => {
         dispatch(emptyBag());
-        dispatch(emptyBagContents());   
+        dispatch(emptyBagContents());
     }
 }
 
