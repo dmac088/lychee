@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { parseTemplate } from 'url-template';
 import { instance as axios } from "../../Helpers/api";
 import { Spinner } from '../../Helpers/animation';
-import { localisation } from '../../../../services/api';
+import { localisation, BROWSE_TYPE, PRICE_FACET } from '../../../../services/api';
 
 function Sidebar(props) {
     const { type, selectedFacets, facets, link } = props;
@@ -22,7 +22,7 @@ function Sidebar(props) {
         if (!categories.loading) {
             axios.post(parseTemplate(link).expand({
                 ...localisation,
-            }), (type === 'browse')
+            }), (type === BROWSE_TYPE)
                 ? selectedFacets.map(f => f.data)
                 : [])
                 .then((response) => {
@@ -46,12 +46,12 @@ function Sidebar(props) {
             {(stateObject.loading)
                 ? <Spinner />
                 : React.cloneElement(props.children, {
-                    items: (type === 'browse')
+                    items: (type === BROWSE_TYPE)
                         ? [...stateObject.facetState
                             .filter(c => c.data.count > 0)
-                            .filter(({ data }) => !selectedFacets.some(x => x.data.id === data.id)), 
-                            ...stateObject.facetState
-                            .filter(c => c.data.facetingName === 'price')]
+                            .filter(({ data }) => !selectedFacets.some(x => x.data.id === data.id)),
+                        ...stateObject.facetState
+                            .filter(c => c.data.facetingName === PRICE_FACET)]
                         : facets
                 })
 

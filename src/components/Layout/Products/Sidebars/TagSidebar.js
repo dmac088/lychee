@@ -36,7 +36,7 @@ function TagSidebar(props) {
             
             //get the link to populate the list of tag facets
             const { href } = currentCategory._links.tags;
-            axios.post(href,    (type === 'browse')
+            axios.post(href,    (type === BROWSE_TYPE)
                                 ? selectedFacets.map(f => f.data)
                                 : [])
                 .then((response) => {
@@ -66,7 +66,7 @@ function TagSidebar(props) {
                 : <ButtonSidebar
                     filterType={"tag"}
                     heading={"filter by tag"}
-                    items={(type === 'browse') ? stateObject.objects.filter(({ data }) => !selectedFacets.some(x => x.data.id === data.id)) : facets}
+                    items={(type === BROWSE_TYPE) ? stateObject.objects.filter(({ data }) => !selectedFacets.some(x => x.data.id === data.id)) : facets}
                     modFacet={addFacet} />}
         </React.Fragment>
     )

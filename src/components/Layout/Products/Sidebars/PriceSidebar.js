@@ -20,7 +20,7 @@ function PriceSidebar(props) {
 
     useEffect(() => {
         let isSubscribed = true;
-        if (type === 'browse' && 
+        if (type === BROWSE_TYPE && 
             (categoryCode !== prevCategoryCode
             || !categories.loading
             || loading)) {
@@ -62,7 +62,7 @@ function PriceSidebar(props) {
         <React.Fragment>
             {(loading || categories.loading)
                 ? <Spinner />
-                : (type === 'browse')
+                : (type === BROWSE_TYPE)
                     ? <RangeSidebar
                         filterType={"price"}
                         heading={"filter by price"}

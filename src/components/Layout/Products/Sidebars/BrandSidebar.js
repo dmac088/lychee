@@ -5,6 +5,7 @@ import { findByCode } from '../../../../services/Category';
 import { instance as axios } from "../../Helpers/api";
 import { Spinner } from '../../Helpers/animation';
 import { usePrevious } from '../../Helpers/general';
+import { BROWSE_TYPE } from '../../../services/api';
 
 
 function BrandSidebar(props) {
@@ -26,7 +27,7 @@ function BrandSidebar(props) {
             !categories.loading) {
             const currentCategory = findByCode(categories.list, categoryCode);
             if (!currentCategory) { return; }
-            axios.post(currentCategory._links.brands.href, (type === 'browse')
+            axios.post(currentCategory._links.brands.href, (type === BROWSE_TYPE)
                                                                 ? selectedFacets.map(f => f.data)
                                                                 : [])
                 .then((response) => {
@@ -52,7 +53,7 @@ function BrandSidebar(props) {
                 : <ListSidebar
                     filterType={"brand"}
                     heading={"filter by brand"}
-                    items={(type === 'browse') ? stateObject.brands.filter(({ data }) => !selectedFacets.some(x => x.data.id === data.id)) : facets}
+                    items={(type === BROWSE_TYPE) ? stateObject.brands.filter(({ data }) => !selectedFacets.some(x => x.data.id === data.id)) : facets}
                     modFacet={addFacet} />}
         </React.Fragment>
     )

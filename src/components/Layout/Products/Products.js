@@ -16,13 +16,17 @@ import { ListSidebar } from './Sidebars/Layout/ListSidebar';
 import { RangeSidebar } from './Sidebars/Layout/RangeSidebar';
 import { localisation } from '../../../services/api';
 import { parseTemplate } from 'url-template';
-import { productParams } from '../../../services/api';
+import { productParams, 
+        BROWSE_TYPE, 
+        PRICE_FACET,
+        TAG_FACET,
+        CATEGORY_FACET,
+        BRAND_FACET } from '../../../services/api';
 
 
 function Products(props) {
     const { toggleQuickView, match } = props;
 
-    const BROWSE_TYPE = "browse";
     const discovery = useSelector(state => state.discovery);
 
     const query = queryString.parse(props.location.search);
@@ -169,8 +173,8 @@ function Products(props) {
     }
 
     const componentSelector = (type) => {
-        const priceFacet = stateObject.selectedFacets.filter(f => f.data.facetingName === 'price');
-        return (type === 'browse')
+        const priceFacet = stateObject.selectedFacets.filter(f => f.data.facetingName === PRICE_FACET);
+        return (type === BROWSE_TYPE)
             ? <RangeSidebar
                 heading={"Price Range"}
                 modFacet={replaceFacet}
@@ -196,7 +200,7 @@ function Products(props) {
                                 <Sidebar
                                     link={stateObject.category._links.children.href}
                                     type={type}
-                                    facets={stateObject.facets.filter(f => f.data.facetingName === 'category')}
+                                    facets={stateObject.facets.filter(f => f.data.facetingName === CATEGORY_FACET)}
                                     selectedFacets={stateObject.selectedFacets}
                                     loading={stateObject.loading}>
                                     <ListSidebar
@@ -206,7 +210,7 @@ function Products(props) {
                                 <Sidebar
                                     link={stateObject.category._links.brands.href}
                                     type={type}
-                                    facets={stateObject.facets.filter(f => f.data.facetingName === 'brand')}
+                                    facets={stateObject.facets.filter(f => f.data.facetingName === BRAND_FACET)}
                                     selectedFacets={stateObject.selectedFacets}
                                     loading={stateObject.loading}>
                                     <ListSidebar
@@ -217,7 +221,7 @@ function Products(props) {
                                     {...props}
                                     link={stateObject.category._links.maxprice.href}
                                     type={type}
-                                    facets={stateObject.facets.filter(f => f.data.facetingName === 'price')}
+                                    facets={stateObject.facets.filter(f => f.data.facetingName === PRICE_FACET)}
                                     selectedFacets={stateObject.selectedFacets}
                                     addFacet={addFacet}
                                     loading={stateObject.loading}>
@@ -226,7 +230,7 @@ function Products(props) {
                                 <Sidebar
                                     link={stateObject.category._links.tags.href}
                                     type={type}
-                                    facets={stateObject.facets.filter(f => f.data.facetingName === 'tag')}
+                                    facets={stateObject.facets.filter(f => f.data.facetingName === TAG_FACET)}
                                     selectedFacets={stateObject.selectedFacets}
                                     loading={stateObject.loading}>
                                     <ListSidebar

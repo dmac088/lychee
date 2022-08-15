@@ -4,6 +4,7 @@ import { Route, Link } from 'react-router-dom';
 import { getHomePath, getCategoryPath } from '../Helpers/route';
 import { localization } from '../Localization/Localization';
 import { Spinner } from '../Helpers/animation';
+import { CATEGORY_FACET } from '../../../services/api';
 
 
 function BreadCrumb(props) {
@@ -21,17 +22,17 @@ function BreadCrumb(props) {
             array.map((s, index) => {
     
                 //lookup category to get the localized description 
-                if(array[index-1] === 'category') {
+                if(array[index-1] === CATEGORY_FACET) {
                     const category = categories.list.find(x => x.data.id === array[index]);
                     categoryDesc = (category) ? category.data.desc : '';
                 }
 
                 return (
                     <li key={index} className={match.isExact ? 'breadcrumb-active' : ''}>
-                        <Link to={  array[index-1] === 'category'
+                        <Link to={  array[index-1] === CATEGORY_FACET
                                     ? getCategoryPath(s, match)
                                     : match.url || ''}>
-                            { array[index-1] === 'category'
+                            { array[index-1] === CATEGORY_FACET
                             ? categoryDesc
                             : localization[match.params.lang][s] || s}
                         </Link>
