@@ -7,10 +7,15 @@ import ShippingType from './Type/ShippingType';
 import { getShippingDestinations, findByCode } from '../../../../services/Shipping/Destination/index';
 import { getShippingProduct } from '../../../../services/Shipping/Products/index';
 
-function Shipping() {
+function Shipping(props) {
+
+    const { match } = props;
+    const { lang, curr } = match.params;
+
+    console.log(lang);
+    console.log(curr)
 
     const dispatch              = useDispatch();
-    const discovery             = useSelector(state => state.discovery);
     const bag                   = useSelector(state => state.bag);
     const shippingDestinations  = useSelector(state => state.shippingDestinations);
     const shippingProduct       = useSelector(state => state.shippingProduct);
@@ -44,25 +49,22 @@ function Shipping() {
     useEffect(() => {
         let isSubscribed = true;
         if (isSubscribed) {
-                if(!bag.loading) {
-                    dispatch(getShippingDestinations(discovery))
-                }
+            dispatch(getShippingDestinations(lang, curr));    
         }
         return () => (isSubscribed = false);
     }, [bag.loading]);
 
 
-    useEffect(() => {
-        let isSubscribed = true;
-        if (isSubscribed) {
-                if(!bag.loading) {
-                    dispatch(getShippingProduct(stateObject.currentDestinationCode, stateObject.currentShipTypeCode)).then(() => {
-                    })   
-                }
-        }
-        return () => (isSubscribed = false);
-    }, [stateObject.currentDestinationCode,
-        stateObject.currentShipTypeCode]);
+    // useEffect(() => {
+    //     let isSubscribed = true;
+    //     if (isSubscribed) {
+    //             if(!bag.loading) {
+    //                 dispatch(getShippingProduct(stateObject.currentDestinationCode, stateObject.currentShipTypeCode));
+    //             }
+    //     }
+    //     return () => (isSubscribed = false);
+    // }, [stateObject.currentDestinationCode,
+    //     stateObject.currentShipTypeCode]);
 
 
     const bagReady          = ((!bag.loading));
@@ -76,15 +78,15 @@ function Shipping() {
             <h4>Calculate Shipping</h4>
             <form action="#">
                 <div className="row">
-                    <ShippingProvider />
+                    {/* <ShippingProvider /> */}
                     <ShippingDestination
                         shippingDestinations={shippingDestinations}
                         currentDestinationCode={stateObject.currentDestinationCode}
                         setDestination={setDestinationCode} />
-                    <ShippingType 
+                    {/* <ShippingType 
                         destinationCode={stateObject.currentDestinationCode}
                         setShipTypeCode={setShipTypeCode}
-                        destination={findByCode(shippingDestinations._embedded.shippingDestinationResources, stateObject.currentDestinationCode)}/>
+                        destination={findByCode(shippingDestinations._embedded.shippingDestinationResources, stateObject.currentDestinationCode)}/> */}
                     <div className="col-md-6 col-12 mb-25">
                         <input type="submit" defaultValue="Estimate" />
                     </div>

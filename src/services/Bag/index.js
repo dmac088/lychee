@@ -105,6 +105,7 @@ export const getBag = (locale, currency) => {
         const { href } = getState().discovery.links.customerResource;
         return axios.get(href)
             .then((response) => {
+                console.log(response.data._links.bag.href)
                return  axios.get(parseTemplate(response.data._links.bag.href).expand({
                     ...localisation,
                     "locale": locale,
@@ -120,7 +121,7 @@ export const getBag = (locale, currency) => {
     }
 }
 
-export const clearBag = () => {
+export const clearBag = () => { 
     return (dispatch) => {
         dispatch(emptyBag());
         dispatch(emptyBagContents());
@@ -128,10 +129,18 @@ export const clearBag = () => {
 }
 
 //we need to inject the dependencies into the function
-export const getBagContents = () => {
+export const getBagContents = (locale, currency) => {
     return (dispatch, getState) => {
         dispatch(getBagContentsStarted());
-        return axios.get(getState().bag._links.bagContents.href)
+        const { href } = getState().bag._links.bagContents;
+        console.log(href)
+        const link = parseTemplate(href).expand({
+            ...localisation,
+            "locale": locale,
+            "currency": currency,
+        })
+        console.log(link)
+        return axios.get(link)
             .then((payload) => {
                 return (payload.data._embedded)
                     ? payload.data._embedded.bagItemResources

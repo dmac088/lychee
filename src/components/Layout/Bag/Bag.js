@@ -7,7 +7,7 @@ import { Spinner } from '../../Layout/Helpers/animation';
 import { round } from '../Helpers/math';
 import Auth from '../Login/Auth';
 
-function Bag() {
+function Bag(props) {
 
     const bag = useSelector(state => state.bag);
     const bagContents = useSelector(state => state.bagContents);
@@ -105,7 +105,9 @@ function Bag() {
                             </form>
                             <div className="row">
                                 <div className="col-lg-6 col-12">
-                                    <Shipping />
+                                    <Shipping 
+                                        {...props}
+                                    />
                                     <div className="discount-coupon">
                                         <h4>Discount Coupon Code</h4>
                                         <form action="#">

@@ -10,7 +10,7 @@ const $ = window.$;
 
 function Accordion(props) {
   const { match } = props;
-  const { lang } = match.params;
+  const { lang, curr } = match.params;
  
   const bag = useSelector(state => state.bag);
   const bagContents = useSelector(state => state.bagContents);
@@ -26,7 +26,7 @@ function Accordion(props) {
 
   useEffect(() => {
     if(!bag.loading && session.authenticated) {
-        dispatch(bagService.getBagContents());
+        dispatch(bagService.getBagContents(lang, curr));
     }
   }, [bag.loading, session.authenticated]);
   

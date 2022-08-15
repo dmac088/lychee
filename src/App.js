@@ -23,6 +23,7 @@ import Auth from "./components/Layout/Login/Auth";
 import Forgot from "./components/Layout/Login/Forgot";
 import Products from "./components/Layout/Products/Products";
 import Product from "./components/Layout/Products/Product/Product";
+import { localisation } from './services/api'
 
 
 function App() { 
@@ -89,7 +90,8 @@ function App() {
              path="/:lang/:curr/registrationConfirmation"
             render={(props) => renderContainer(Confirmation, props)} />     
 
-          <Redirect from="/" to="/en-GB/HKD" />
+          
+          <Redirect from="/" to={`/${localisation.locale}/${localisation.currency}`} />
 
           <Route component={NotFound} />
 

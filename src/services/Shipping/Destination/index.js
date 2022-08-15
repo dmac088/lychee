@@ -4,11 +4,19 @@ import {
     getShippingDestinationsSuccess,
     getShippingDestinationsFailure,
 } from "../../../actions/ShippingDesinationActions";
+import { parseTemplate } from 'url-template';
+import { localisation } from "../../api";
 
-export const getShippingDestinations = () => {
+export const getShippingDestinations = (locale, currency) => {
     return (dispatch, getState) => {
         dispatch(getShippingDestinationsStarted());
-        return axios.get(getState().discovery.links.getShippingDestinations.href)
+        const { href } = getState().bag._links.getShippingDestinations;
+        const link = parseTemplate(href).expand({
+            ...localisation,
+            "locale": locale,
+            "currency": currency,
+        });
+        return  axios.get(link)
         .then((payload) => {
             return payload.data;
         }).then((providers) => {
