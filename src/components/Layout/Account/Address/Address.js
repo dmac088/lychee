@@ -11,6 +11,7 @@ function Address(props) {
 
     const [stateObject, setObjectState] = useState({
         showEdit: false,
+        loading: true,
     });
 
     const toggleEdit = () => {
