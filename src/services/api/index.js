@@ -31,5 +31,5 @@ export const BROWSE_TYPE = "browse"
 export const SEARCH_TYPE = "search"
 export const PRICE_FACET = 'price'
 export const TAG_FACET = 'tag'
-export const CATEGORY_FACET = 'tag'
+export const CATEGORY_FACET = 'category'
 export const BRAND_FACET = 'brand'
