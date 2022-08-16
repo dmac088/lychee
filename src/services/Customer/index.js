@@ -31,20 +31,20 @@ export const findByUserName = () => {
 
 export const register = customer => {
   return (dispatch, getState) => {
-
-    const state = getState();
-    const { href } = state.discovery.links.registerCustomer;
-    dispatch(regCustomerStarted());
-    
-   return  axios.post(href, customer)
-      .then(() => {
-        dispatch(regCustomerSuccess(customer));
+    const { href } = getState().discovery.links.customerResource;
+    dispatch(regCustomerStarted())
+    return axios.get(href)
+      .then((response) => {
+        return axios.post(response.data._links.register.href, customer)
+          .then(() => {
+            dispatch(regCustomerSuccess(customer));
+          })
+          .catch((error) => {
+            dispatch(regCustomerFailure(error.response.data));
+          });
       })
-      .catch((error) => {
-        dispatch(regCustomerFailure(error.response.data));
-      });
-    }
   }
+}
 
 
   // export const confirm = () => {
