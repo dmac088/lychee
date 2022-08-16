@@ -1,10 +1,9 @@
-import { instance } from "../../components/Layout/Helpers/api";
+import { instance as axios } from "../../components/Layout/Helpers/api";
 import {
   clearSession,
   getSessionStarted,
   getSessionSuccess
 } from '../../actions/SessionActions';
-import axios from "axios";
 import LocalStorageService from '../../components/Layout/Helpers/storage/token';
 import * as apiConfig from '../api';
 import { parseTemplate } from 'url-template';
@@ -13,10 +12,14 @@ import { parseTemplate } from 'url-template';
 
 export const confirm = (token) => {
   return (dispatch, getState) => {
-    const { href } = getState().discovery.links.confirmRegistration;
-    return axios.get(parseTemplate(href).expand({
-      "token": token
-    }));
+    const { href } = getState().discovery.links.customerResource;
+    return axios.get(href)
+    .then((response) => {
+      console.log(response)
+      return axios.get(parseTemplate(response.data._links.confirm.href).expand({
+        "token": token
+      }))
+    })
   }
 }
 
@@ -37,9 +40,9 @@ export const authenticate = (username, password) => {
 
     dispatch(getSessionStarted());
 
-    return instance.get(href)
+    return axios.get(href)
     .then((response) => {
-      return instance({
+      return axios({
         method: "post",
         crossDomain: true,
         url: response.data._links.token.href,
@@ -81,7 +84,7 @@ export const reauthenticate = () => {
           console.log('assigning new access token to further requests.....');
           dispatch(refreshTokens(response.data));
           localStorageService.setToken(response.data);
-          instance.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access_token;
+          axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access_token;
         }
       })
       .catch((error) => {

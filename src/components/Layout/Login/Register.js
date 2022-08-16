@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../../services/Customer';
 import { Spinner } from '../../Layout/Helpers/animation';
 
-function Register() {
+function Register(props) {
+  const { lang, curr } = props.match.params;
 
   const [stateObject, setObjectState] = useState({
     givenName: null,
@@ -73,7 +74,7 @@ function Register() {
 
   useEffect(() => {
     if (stateObject.loading) {
-      dispatch(register(stateObject))
+      dispatch(register(stateObject, lang, curr))
         .finally(() => {
           setObjectState((prevState) => ({
             ...prevState,

@@ -9,6 +9,7 @@ import {
   getCustomerSuccess,
   getCustomerFailure
 } from '../../actions/CustomerActions'
+import { localisation } from "../api";
 
 export const findByUserName = () => {
   return (dispatch, getState) => {
@@ -29,13 +30,17 @@ export const findByUserName = () => {
   }
 }
 
-export const register = customer => {
+export const register = (customer, locale, currency) => {
   return (dispatch, getState) => {
     const { href } = getState().discovery.links.customerResource;
-    dispatch(regCustomerStarted())
+    dispatch(regCustomerStarted());
     return axios.get(href)
       .then((response) => {
-        return axios.post(response.data._links.register.href, customer)
+        return axios.post(parseTemplate(response.data._links.register.href).expand({
+          ...localisation,
+          "locale": locale,
+          "currency": currency
+        }), customer)
           .then(() => {
             dispatch(regCustomerSuccess(customer));
           })
