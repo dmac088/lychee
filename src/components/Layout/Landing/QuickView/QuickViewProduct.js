@@ -42,7 +42,7 @@ function QuickViewProduct(props) {
   const addToBag = (e, product, quantity) => {
     console.log('addToBag');
     e.preventDefault();
-    bagService.addToBag(product.data.productUPC, quantity);
+    bagService.addItem(product.data.productUPC, quantity);
   }
 
   useEffect(() => {

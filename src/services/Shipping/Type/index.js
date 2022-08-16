@@ -12,7 +12,6 @@ export const getShippingType = (destinationCode, locale, currency) => {
      return (dispatch, getState) => {
         dispatch(getShippingTypeStarted());
         const { href } = getState().bag._links.getShippingTypes;
-        console.log(href);
         const link = parseTemplate(href).expand({
             ...localisation,
             "locale": locale,

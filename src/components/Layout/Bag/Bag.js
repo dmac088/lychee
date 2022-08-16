@@ -22,12 +22,12 @@ function Bag(props) {
 
     const incrementQty = (e) => {
         e.preventDefault();
-        bagService.addToBag(e.target.id);
+        bagService.addItem(e.target.id);
     }
 
     const decrementQty = (e) => {
         e.preventDefault();
-        bagService.addToBag(e.target.id, -1);
+        bagService.addItem(e.target.id, -1);
     }
 
     const renderCartProducts = (items = []) => {

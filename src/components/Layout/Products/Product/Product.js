@@ -55,7 +55,7 @@ function Product(props) {
     const addToBag = (e, productCode, quantity) => {
         console.log('addToBag');
         e.preventDefault();
-        bagService.addToBag(productCode, quantity);
+        bagService.addItem(productCode, quantity);
     }
 
     useEffect(() => {

@@ -42,27 +42,21 @@ const isAuthenticated = () => {
     return authenticated;
 }
 
-export const addToBag = (productCode, quantity = 1) => {
-    if (isAuthenticated()) {
-        store.dispatch(addItem({
-            "itemUPC": productCode,
-            "itemQty": quantity,
-        }));
-    }
-}
-
-const addItem = (item) => {
+export const addItem = (productCode, quantity = 1) => {
     return (dispatch, getState) => {
         dispatch(addBagItemStarted());
-        return axios.post(getState().bag._links.addItem.href, item)
+        return axios.post(getState().bag._links.addItem.href, {
+            "itemUPC": productCode,
+            "itemQty": quantity,
+        })
             .then(() => {
                 dispatch(addBagItemSuccess());
             })
-            .then(() => {
-                dispatch(getBag());
-            })
             .catch(() => {
                 dispatch(addBagItemFailure());
+            })
+            .finally(() => {
+                dispatch(getBag());
             });
     }
 }
@@ -70,15 +64,19 @@ const addItem = (item) => {
 export const removeItem = (itemCode) => {
     return (dispatch, getState) => {
         dispatch(removeBagItemStarted());
-        return axios.get(getState().bag._links.removeItem.href.replace('{itemCode}', itemCode))
+        const { href } = getState().bag._links.removeItem;
+        const link = parseTemplate(href).expand({
+            "itemCode": itemCode
+        })
+        return axios.get(link)
             .then(() => {
                 dispatch(removeBagItemSuccess());
             })
-            .then(() => {
-                dispatch(getBag());
-            })
             .catch(() => {
                 dispatch(removeBagItemFailure());
+            })
+            .finally(() => {
+                dispatch(getBag());
             });
     }
 }
@@ -90,11 +88,11 @@ export const updateItem = (item) => {
             .then(() => {
                 dispatch(updateBagItemSuccess());
             })
-            .then(() => {
-                dispatch(getBag());
-            })
             .catch(() => {
                 dispatch(updateBagItemFailure());
+            })
+            .finally(() => {
+                dispatch(getBag());
             });
     }
 }
@@ -105,12 +103,12 @@ export const getBag = (locale, currency) => {
         const { href } = getState().discovery.links.customerResource;
         return axios.get(href)
             .then((response) => {
-                console.log(response.data._links.bag.href)
-               return  axios.get(parseTemplate(response.data._links.bag.href).expand({
+                return axios.get(parseTemplate(response.data._links.bag.href).expand({
                     ...localisation,
                     "locale": locale,
                     "currency": currency,
-                }))})
+                }))
+            })
             .then((payload) => {
                 return payload.data;
             }).then((response) => {
@@ -121,10 +119,10 @@ export const getBag = (locale, currency) => {
     }
 }
 
-export const clearBag = () => { 
+export const clearBag = () => {
     return (dispatch) => {
-        dispatch(emptyBag());
-        dispatch(emptyBagContents());
+        dispatch(emptyBag())
+            .then(dispatch(emptyBagContents()));
     }
 }
 

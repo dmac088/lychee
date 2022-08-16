@@ -9,7 +9,7 @@ function Product(props) {
 
   const addToBag = (e) => {
     e.preventDefault();
-    bagService.addToBag(e.target.id);
+    bagService.addItem(e.target.id);
   }
 
   return (
