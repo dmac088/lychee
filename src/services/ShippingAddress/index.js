@@ -7,12 +7,16 @@ import {
     updateShippingAddressSuccess,
     updateShippingAddressFailure,
 } from "../../actions/ShippingAddressActions";
+import { parseTemplate } from 'url-template';
 
 export const getAddress = (customer, addressTypeCode) => {
     return (dispatch) => {
         dispatch(getShippingAddressStarted());
-        
-        return axios.get(customer._links.address.href.replace('{addressTypeCode}', addressTypeCode))
+        const { href } = customer._links.address;
+        const link = parseTemplate(href).expand({
+            "addressTypeCode": addressTypeCode,
+        })
+        return axios.get(link)
             .then((payload) => {
                 return payload.data;
             }).then((address) => {
@@ -27,14 +31,15 @@ export const getAddress = (customer, addressTypeCode) => {
 export const updateAddress = (address, payload) => {
     return (dispatch) => {
         dispatch(updateShippingAddressStarted());
-        return axios.post(  address._links.updateAddress.href,
-                            payload)
-        .then((payload) => {
-            return payload.data;
-        }).then((address) => {
-            dispatch(updateShippingAddressSuccess(address));
-        }).catch((error) => {
-            dispatch(updateShippingAddressFailure(error.response));
-        });
+        const { href } = address._links.updateAddress;
+        return axios.post(href,
+            payload)
+            .then((payload) => {
+                return payload.data;
+            }).then((address) => {
+                dispatch(updateShippingAddressSuccess(address));
+            }).catch((error) => {
+                dispatch(updateShippingAddressFailure(error.response));
+            });
     }
 }

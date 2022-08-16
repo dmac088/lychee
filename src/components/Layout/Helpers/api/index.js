@@ -9,9 +9,9 @@ import * as apiConfig from '../../../../services/api';
 import queryString from 'query-string';
 
 export const instance = axios.create({
-    baseURL: (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') 
-              ? 'https://localhost:8080' 
-              : 'https://app.sv2.io:8090',
+    baseURL: (!process.env.NODE_ENV || process.env.NODE_ENV === 'development')
+        ? 'https://localhost:8080'
+        : 'https://app.sv2.io:8090',
     crossDomain: true,
     headers: {
         "content-type": "application/json"
@@ -33,14 +33,6 @@ instance.interceptors.request.use(config => {
         exact: false,
         strict: true
     });
-
-    // url = url.replace('{locale}', match.params.lang);
-    // url = url.replace('{currency}', match.params.curr);
-
- //   const query = queryString.parse(history.location.search);
-    // url = url.replace('{page}', query.page || 0);
-    // url = url.replace('{size}', query.size || 10);
-    // url = url.replace('{sort}', query.sort || 'bestMatch');
 
     //firstly try to retrieve the token from the file system, then try redux
     const token = state.session.access_token;
@@ -91,7 +83,7 @@ instance.interceptors.response.use((response) => {
         exact: true,
         strict: true
     });
-    
+
     //get the token link
     const tokenLink = '/oauth/token';
 
@@ -101,7 +93,7 @@ instance.interceptors.response.use((response) => {
         console.log('using refresh token to obtain new access token.....');
 
         originalRequest._retry = true;
-    
+
         //if the token is refreshing then add to the failed queue
         if (isRefreshing) {
             return new Promise(function (resolve, reject) {

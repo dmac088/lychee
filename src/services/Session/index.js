@@ -7,13 +7,16 @@ import {
 import axios from "axios";
 import LocalStorageService from '../../components/Layout/Helpers/storage/token';
 import * as apiConfig from '../api';
+import { parseTemplate } from 'url-template';
 
 
 
 export const confirm = (token) => {
   return (dispatch, getState) => {
     const { href } = getState().discovery.links.confirmRegistration;
-    return axios.get(href.replace('{token}', token));
+    return axios.get(parseTemplate(href).expand({
+      "token": token
+    }));
   }
 }
 

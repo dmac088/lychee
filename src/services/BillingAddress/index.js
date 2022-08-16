@@ -7,11 +7,16 @@ import {
     updateBillingAddressSuccess,
     updateBillingAddressFailure,
 } from "../../actions/BillingAddressActions";
+import { parseTemplate } from "url-template";
 
 export const getAddress = (customer, addressTypeCode) => {
     return (dispatch) => {
         dispatch(getBillingAddressStarted());
-        return axios.get(customer._links.address.href.replace('{addressTypeCode}', addressTypeCode))
+        const { href } = customer._links.address;
+        const link = parseTemplate(href).expand({
+            "addressTypeCode": addressTypeCode
+        })
+        return axios.get(link)
             .then((payload) => {
                 return payload.data;
             }).then((address) => {
@@ -26,14 +31,14 @@ export const getAddress = (customer, addressTypeCode) => {
 export const updateAddress = (address, payload) => {
     return (dispatch) => {
         dispatch(updateBillingAddressStarted());
-        return axios.post(  address._links.updateAddress.href,
-                            payload)
-        .then((payload) => {
-            return payload.data;
-        }).then((address) => {
-            dispatch(updateBillingAddressSuccess(address));
-        }).catch((error) => {
-            dispatch(updateBillingAddressFailure(error.response));
-        });
+        return axios.post(address._links.updateAddress.href,
+            payload)
+            .then((payload) => {
+                return payload.data;
+            }).then((address) => {
+                dispatch(updateBillingAddressSuccess(address));
+            }).catch((error) => {
+                dispatch(updateBillingAddressFailure(error.response));
+            });
     }
 }
