@@ -74,7 +74,8 @@ function Bag(props) {
     return (
         <React.Fragment>
             {(!authenticated) 
-            ? <Auth/>
+            ? <Auth
+                {...props}/>
             : (bag.loading || bagContents.loading)
                ? <Spinner />
                :

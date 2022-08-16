@@ -8,15 +8,16 @@ import { parseTemplate } from 'url-template';
 import { localisation } from "../../api";
 
 //we inject the selected destination to get the relevant types
-export const getShippingType = (destination, locale, currency) => {  
+export const getShippingType = (destinationCode, locale, currency) => {  
      return (dispatch, getState) => {
         dispatch(getShippingTypeStarted());
         const { href } = getState().bag._links.getShippingTypes;
+        console.log(href);
         const link = parseTemplate(href).expand({
             ...localisation,
             "locale": locale,
             "currency": currency,
-            "destination": destination,
+            "destination": destinationCode,
         });
         return axios.get(link)
         .then((payload) => {

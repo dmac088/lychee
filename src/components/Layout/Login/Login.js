@@ -7,7 +7,6 @@ import { Form } from 'react-bootstrap';
 import { getSessionFailure } from '../../../actions/SessionActions';
 
 function Login(props) {
-
   const { match } = props;
   const { lang, curr } = match.params;
 

@@ -7,7 +7,7 @@ import "./assets/css/font-awesome.min.css";
 import "./assets/css/elegent.min.css";
 import "./assets/css/plugins.css";
 import "./assets/css/helper.css";
-import Account from "./components/Layout/Account/Account";
+import Account  from "./components/Layout/Account/Account";
 import Confirmation from "./components/Layout/Account/Confirmation/Confirmation";
 import Landing from "./components/Layout/Landing/Landing";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
