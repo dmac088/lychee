@@ -4,9 +4,11 @@ import { parseTemplate } from 'url-template';
 import { instance as axios } from "../../Helpers/api";
 import { Spinner } from '../../Helpers/animation';
 import { localisation, BROWSE_TYPE, PRICE_FACET } from '../../../../services/api';
+import Language from '../../Header/Language/Language';
 
 function Sidebar(props) {
-    const { type, selectedFacets, facets, link } = props;
+    const { type, selectedFacets, facets, link, match} = props;
+    const { lang, curr } = match.params;
 
     const categories = useSelector(state => state.categories);
 
@@ -19,23 +21,28 @@ function Sidebar(props) {
     //this way we have only on component that is aware of the hateoas config
     useEffect(() => {
         let isSubscribed = true;
-        if (!categories.loading) {
-            axios.post(parseTemplate(link).expand({
-                ...localisation,
-            }), (type === BROWSE_TYPE)
-                ? selectedFacets.map(f => f.data)
-                : [])
-                .then((response) => {
-                    if (isSubscribed) {
-                        setObjectState((prevState) => ({
-                            ...prevState,
-                            facetState: (response.data._embedded)
-                                ? response.data._embedded.objects
-                                : [],
-                            loading: false,
-                        }));
-                    }
+        if (isSubscribed) {
+            if (!categories.loading) {
+                const parsedLink = parseTemplate(link).expand({
+                    ...localisation,
+                    "locale": lang,
+                    "currency": curr
                 });
+                axios.post(parsedLink, (type === BROWSE_TYPE)
+                    ? selectedFacets.map(f => f.data)
+                    : [])
+                    .then((response) => {
+                        if (isSubscribed) {
+                            setObjectState((prevState) => ({
+                                ...prevState,
+                                facetState: (response.data._embedded)
+                                    ? response.data._embedded.objects
+                                    : [],
+                                loading: false,
+                            }));
+                        }
+                    });
+            }
         }
         return () => (isSubscribed = false);
     }, [categories.loading]);

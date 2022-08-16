@@ -21,15 +21,18 @@ export const findRootNode = (categories) => {
   return min;
 }
 
-export const getAllCategories = (def = localisation) => {
+export const getAllCategories = (locale, currency) => {
   return (dispatch, getState) => {
     dispatch(getCategoriesStarted());
     return axios.get(getState().discovery.links.categoryResource.href)
       .then((response) => {
         const { href } = response.data._links.categories;
-        return parseTemplate(href).expand({
-          ...def
+        const link =  parseTemplate(href).expand({
+          ...localisation,
+          "locale": locale,
+          "currency": currency
         })
+        return link;
       })
       .then((link) => axios.get(link))
       .then((payload) => {

@@ -9,7 +9,7 @@ export const initialize = (locale, currency) => {
     return (dispatch) => {
         return dispatch(discover())
             .then(() => {
-                dispatch(getAllCategories({locale, currency}));
+                dispatch(getAllCategories(locale, currency));
             });
     }
 }

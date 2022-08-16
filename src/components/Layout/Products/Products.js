@@ -99,55 +99,58 @@ function Products(props) {
 
     useEffect(() => {
         let isSubscribed = true;
+        if (isSubscribed) {
+            //categories is the application root, if it refreshes everything else refreshes
+            if (!categories.loading) {
 
-        //categories is the application root, if it refreshes everything else refreshes
-        if (!categories.loading) {
+                const category = findByCode(categoryCode);
+                const rootCategory = findRootNode(categories.list);
 
-            const category = findByCode(categoryCode);
-            const rootCategory = findRootNode(categories.list);
+                const { href } = discovery.links.searchResource
 
-            const { href } = discovery.links.searchResource
+                const node = (type == BROWSE_TYPE)
+                    ? category
+                    : rootCategory
 
-            const node = (type == BROWSE_TYPE)
-                ? category
-                : rootCategory
+                const params = {
+                    ...localisation,
+                    "locale": lang,
+                    "currency": curr,
+                    "category": node.data.id,
+                    "q": q,
+                    "page": page,
+                    "size": size,
+                    "sort": sort,
+                }
 
-            const params = {
-                ...localisation,
-                "locale": lang,
-                "currency": curr,
-                "category": node.data.id,
-                "q": q,
-                "page": page,
-                "size": size,
-                "sort": sort,
+                if (isSubscribed) {
+                    axios.get(href)
+                        .then((response) => {
+                            return jp.query(response, `data._links.${type}`)[0].href;
+                        })
+                        .then((response) => {
+                            const link = parseTemplate(response).expand({
+                                ...productParams,
+                                ...params,
+                            });
+                           return  axios.post(link, stateObject.selectedFacets.map(f => f.data))
+                        })
+                                .then((response) => {
+                                    if (isSubscribed) {
+                                        const { _embedded } = response.data.searchResults;
+                                        setObjectState((prevState) => ({
+                                            ...prevState,
+                                            page: response.data.searchResults.page,
+                                            products: (_embedded) ? _embedded.products : [],
+                                            facets: response.data.searchFacets || [],
+                                            category: category,
+                                            loading: false,
+                                        }));
+                                    }
+                                });
+                }
+
             }
-
-            if (isSubscribed) {
-                axios.get(href)
-                    .then((response) => {
-                        return jp.query(response, `data._links.${type}`)[0].href;
-                    })
-                    .then((response) =>
-                        axios.post(parseTemplate(response).expand({
-                            ...productParams,
-                            ...params,
-                        }), stateObject.selectedFacets.map(f => f.data))
-                            .then((response) => {
-                                if (isSubscribed) {
-                                    const { _embedded } = response.data.searchResults;
-                                    setObjectState((prevState) => ({
-                                        ...prevState,
-                                        page: response.data.searchResults.page,
-                                        products: (_embedded) ? _embedded.products : [],
-                                        facets: response.data.searchFacets || [],
-                                        category: category,
-                                        loading: false,
-                                    }));
-                                }
-                            }));
-            }
-
         }
         return () => (isSubscribed = false);
     }, [categories.loading,
@@ -207,20 +210,24 @@ function Products(props) {
                         <div className="col-lg-3 order-2 order-lg-1">
                             <div className="sidebar-area">
                                 <ListSidebar
+                                    {...props}
                                     heading={"Selection"}
                                     items={stateObject.selectedFacets}
                                     modFacet={removeFacet} />
                                 <Sidebar
+                                    {...props}
                                     link={stateObject.category._links.children.href}
                                     type={type}
                                     facets={stateObject.facets.filter(f => f.data.facetingName === CATEGORY_FACET)}
                                     selectedFacets={stateObject.selectedFacets}
                                     loading={stateObject.loading}>
                                     <ListSidebar
+                                        {...props}
                                         heading={"Categories"}
                                         modFacet={addFacet} />
                                 </Sidebar>
                                 <Sidebar
+                                    {...props}
                                     link={stateObject.category._links.brands.href}
                                     type={type}
                                     facets={stateObject.facets.filter(f => f.data.facetingName === BRAND_FACET)}
@@ -241,6 +248,7 @@ function Products(props) {
                                     {componentSelector(type)}
                                 </Sidebar>
                                 <Sidebar
+                                    {...props}
                                     link={stateObject.category._links.tags.href}
                                     type={type}
                                     facets={stateObject.facets.filter(f => f.data.facetingName === TAG_FACET)}

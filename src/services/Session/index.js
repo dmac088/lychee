@@ -15,7 +15,6 @@ export const confirm = (token) => {
     const { href } = getState().discovery.links.customerResource;
     return axios.get(href)
     .then((response) => {
-      console.log(response)
       return axios.get(parseTemplate(response.data._links.confirm.href).expand({
         "token": token
       }))
