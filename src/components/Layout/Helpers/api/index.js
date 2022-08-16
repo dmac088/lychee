@@ -6,7 +6,6 @@ import { history } from '../route';
 import { matchPath } from 'react-router'
 import { refreshTokens, logoutSession } from '../../../../services/Session';
 import * as apiConfig from '../../../../services/api';
-import queryString from 'query-string';
 
 export const instance = axios.create({
     baseURL: (!process.env.NODE_ENV || process.env.NODE_ENV === 'development')

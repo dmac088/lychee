@@ -29,8 +29,6 @@ function Dashboard(props) {
   const { match, history } = props;
   const dispatch = useDispatch();
   const customer = useSelector(state => state.customer);
-  // const discovery = useSelector(state => state.discovery);
-  // const session = useSelector(state => state.session);
 
   const logout = (e) => {
     e.preventDefault();
