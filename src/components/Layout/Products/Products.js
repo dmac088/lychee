@@ -17,12 +17,14 @@ import { ListSidebar } from './Sidebars/Layout/ListSidebar';
 import { RangeSidebar } from './Sidebars/Layout/RangeSidebar';
 import { localisation } from '../../../services/api';
 import { parseTemplate } from 'url-template';
-import { productParams, 
-        BROWSE_TYPE, 
-        PRICE_FACET,
-        TAG_FACET,
-        CATEGORY_FACET,
-        BRAND_FACET } from '../../../services/api';
+import {
+    productParams,
+    BROWSE_TYPE,
+    PRICE_FACET,
+    TAG_FACET,
+    CATEGORY_FACET,
+    BRAND_FACET
+} from '../../../services/api';
 
 
 function Products(props) {
@@ -48,10 +50,9 @@ function Products(props) {
 
     const addToBag = (e) => {
         e.preventDefault();
-        if(bagService.isAuthenticated()) {
-            console.log('pop')
+        if (bagService.isAuthenticated()) {
             dispatch(bagService.addItem(e.target.id, 1, lang, curr))
-            .then(() => dispatch(bagService.getBag(lang, curr)));
+                .then(() => dispatch(bagService.getBag(lang, curr)));
         }
     }
 
@@ -122,28 +123,30 @@ function Products(props) {
                 "sort": sort,
             }
 
-            axios.get(href)
-                .then((response) => {
-                    return jp.query(response, `data._links.${type}`)[0].href;
-                })
-                .then((response) =>
-                    axios.post(parseTemplate(response).expand({
-                        ...productParams,
-                        ...params,
-                    }), stateObject.selectedFacets.map(f => f.data))
-                        .then((response) => {
-                            if (isSubscribed) {
-                                const { _embedded } = response.data.searchResults;
-                                setObjectState((prevState) => ({
-                                    ...prevState,
-                                    page: response.data.searchResults.page,
-                                    products: (_embedded) ? _embedded.products : [],
-                                    facets: response.data.searchFacets || [],
-                                    category: category,
-                                    loading: false,
-                                }));
-                            }
-                        }));
+            if (isSubscribed) {
+                axios.get(href)
+                    .then((response) => {
+                        return jp.query(response, `data._links.${type}`)[0].href;
+                    })
+                    .then((response) =>
+                        axios.post(parseTemplate(response).expand({
+                            ...productParams,
+                            ...params,
+                        }), stateObject.selectedFacets.map(f => f.data))
+                            .then((response) => {
+                                if (isSubscribed) {
+                                    const { _embedded } = response.data.searchResults;
+                                    setObjectState((prevState) => ({
+                                        ...prevState,
+                                        page: response.data.searchResults.page,
+                                        products: (_embedded) ? _embedded.products : [],
+                                        facets: response.data.searchFacets || [],
+                                        category: category,
+                                        loading: false,
+                                    }));
+                                }
+                            }));
+            }
 
         }
         return () => (isSubscribed = false);
