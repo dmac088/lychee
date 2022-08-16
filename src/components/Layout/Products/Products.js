@@ -133,10 +133,11 @@ function Products(props) {
                     }), stateObject.selectedFacets.map(f => f.data))
                         .then((response) => {
                             if (isSubscribed) {
+                                const { _embedded } = response.data.searchResults;
                                 setObjectState((prevState) => ({
                                     ...prevState,
                                     page: response.data.searchResults.page,
-                                    products: response.data.searchResults._embedded.products,
+                                    products: (_embedded) ? _embedded.products : [],
                                     facets: response.data.searchFacets || [],
                                     category: category,
                                     loading: false,
