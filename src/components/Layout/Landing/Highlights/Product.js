@@ -2,14 +2,20 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { getCategoryProductPath } from '../../Helpers/route';
 import * as bagService from "../../../../services/Bag/index";
-
+import { useDispatch } from 'react-redux';
 
 function Product(props) {
   const { match, category, toggleQuickView, product } = props;
+  const { lang, curr } = match.params;
+
+  const dispatch = useDispatch();
 
   const addToBag = (e) => {
     e.preventDefault();
-    bagService.addItem(e.target.id);
+    if(bagService.isAuthenticated()) {
+      dispatch(bagService.addItem(e.target.id, 1, lang, curr))
+      .then(() => dispatch(bagService.getBag(lang, curr)));
+    }
   }
 
   return (
@@ -20,7 +26,7 @@ function Product(props) {
           <img src={product._links.defaultImage.href} alt="Image not found" className="img-fluid" />
         </Link>
         <div className="product-hover-icons">
-          <a id={product.data.productUPC} href="#" className="active" onClick={addToBag} href="#" data-tooltip="Add to bag"> <span id={product.data.productUPC} className="icon_cart_alt" /></a>
+          <a id={product.data.productUPC} href="#" className="active" onClick={addToBag} data-tooltip="Add to bag"> <span id={product.data.productUPC} className="icon_cart_alt" /></a>
 
           {/* <a id="#test" href="#" data-tooltip="Add to wishlist"> <span className="icon_heart_alt" /> </a> */}
           <a id="#test" href="#" onClick={(e) => toggleQuickView(e, product)} data-tooltip="Quick view" data-toggle="modal" data-target={"#modal-"} >

@@ -28,7 +28,7 @@ import {
 } from '../../actions/BagContentsActions';
 
 
-const isAuthenticated = () => {
+export const isAuthenticated = () => {
     const authenticated = store.getState().session.authenticated;
 
     if (!authenticated) {
@@ -42,10 +42,16 @@ const isAuthenticated = () => {
     return authenticated;
 }
 
-export const addItem = (productCode, quantity = 1) => {
+export const addItem = (productCode, quantity = 1, locale, currency) => {
     return (dispatch, getState) => {
         dispatch(addBagItemStarted());
-        return axios.post(getState().bag._links.addItem.href, {
+        const { href } = getState().bag._links.addItem;
+        const link = parseTemplate(href).expand({
+            ...localisation,
+            "locale": locale,
+            "currency": currency
+        })
+        return axios.post(link, {
             "itemUPC": productCode,
             "itemQty": quantity,
         })
@@ -54,18 +60,18 @@ export const addItem = (productCode, quantity = 1) => {
             })
             .catch(() => {
                 dispatch(addBagItemFailure());
-            })
-            .finally(() => {
-                dispatch(getBag());
             });
     }
 }
 
-export const removeItem = (itemCode) => {
+export const removeItem = (itemCode, locale, currency) => {
     return (dispatch, getState) => {
         dispatch(removeBagItemStarted());
         const { href } = getState().bag._links.removeItem;
         const link = parseTemplate(href).expand({
+            ...localisation,
+            "locale": locale,
+            "currency": currency,
             "itemCode": itemCode
         })
         return axios.get(link)
@@ -74,9 +80,6 @@ export const removeItem = (itemCode) => {
             })
             .catch(() => {
                 dispatch(removeBagItemFailure());
-            })
-            .finally(() => {
-                dispatch(getBag());
             });
     }
 }
@@ -90,9 +93,6 @@ export const updateItem = (item) => {
             })
             .catch(() => {
                 dispatch(updateBagItemFailure());
-            })
-            .finally(() => {
-                dispatch(getBag());
             });
     }
 }
@@ -122,7 +122,7 @@ export const getBag = (locale, currency) => {
 export const clearBag = () => {
     return (dispatch) => {
         dispatch(emptyBag())
-            .then(dispatch(emptyBagContents()));
+        dispatch(emptyBagContents());
     }
 }
 

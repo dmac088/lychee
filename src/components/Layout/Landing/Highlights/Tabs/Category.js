@@ -58,6 +58,8 @@ const settings = {
 function Category(props) {
   const { category } = props;
   const { lang, curr } = props.match.params;
+
+
   //we need local state to store products 
   const [stateObject, setObjectState] = useState({
     products: [],
@@ -65,14 +67,13 @@ function Category(props) {
 
   useEffect(() => {
     let isSubscribed = true;
-
+    if(isSubscribed) {
     const { href } = category._links.products;
     const uri = parseTemplate(href).expand({
       ...productParams,
-      "locale:": lang,
+      "locale": lang,
       "currency": curr,
     })
-
     axios.post(uri, [])
       .then((response) => {
         if (isSubscribed) {
@@ -83,6 +84,7 @@ function Category(props) {
           }));
         }
       })
+    }
     return () => (isSubscribed = false);
   }, [lang, curr]);
 

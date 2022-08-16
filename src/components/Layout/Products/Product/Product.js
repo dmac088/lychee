@@ -3,12 +3,15 @@ import { useSelector } from 'react-redux';
 import { Spinner } from '../../Helpers/animation';
 import { instance as axios } from "../../../Layout/Helpers/api";
 import * as bagService from "../../../../services/Bag/index";
+import { useDispatch } from 'react-redux';
 import { localisation } from "../../../../services/api";
 import { parseTemplate } from 'url-template';
 
 function Product(props) {
     const { match } = props;
     const { productCode, lang, curr } = match.params;
+
+    const dispatch = useDispatch();
 
     const [stateObject, setObjectState] = useState({
         product: {},
@@ -55,11 +58,14 @@ function Product(props) {
     const addToBag = (e, productCode, quantity) => {
         console.log('addToBag');
         e.preventDefault();
-        bagService.addItem(productCode, quantity);
+        if (bagService.isAuthenticated()) {
+            dispatch(bagService.addItem(productCode, quantity, lang, curr))
+                .then(() => dispatch(bagService.getBag(lang, curr)));
+        }
     }
 
     useEffect(() => {
-            retrieveProduct();
+        retrieveProduct();
     }, [lang, curr]);
 
     const { product } = stateObject;

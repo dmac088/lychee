@@ -21,7 +21,8 @@ function Accordion(props) {
 
   const removeItem = (e) => {
     e.preventDefault();
-    dispatch(bagService.removeItem(e.target.id));
+    dispatch(bagService.removeItem(e.target.id, lang, curr))
+    .then(() => dispatch(bagService.getBag(lang, curr)));
   }
 
   useEffect(() => {

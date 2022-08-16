@@ -3,6 +3,7 @@ import queryString from 'query-string';
 import { useSelector } from 'react-redux';
 import { instance as axios } from "../../../components/Layout/Helpers/api";
 import * as bagService from "../../../services/Bag/index";
+import { useDispatch } from 'react-redux';
 import { findByCode, findRootNode } from '../../../services/Category';
 import ProductGrid from './Product/Grid/ProductGrid';
 import ProductList from './Product/List/ProductList';
@@ -26,8 +27,10 @@ import { productParams,
 
 function Products(props) {
     const { toggleQuickView, match } = props;
+    const { lang, curr } = match.params;
 
     const discovery = useSelector(state => state.discovery);
+    const dispatch = useDispatch();
 
     const query = queryString.parse(props.location.search);
     const { page, size, sort, q } = query;
@@ -45,7 +48,11 @@ function Products(props) {
 
     const addToBag = (e) => {
         e.preventDefault();
-        bagService.addItem(e.target.id);
+        if(bagService.isAuthenticated()) {
+            console.log('pop')
+            dispatch(bagService.addItem(e.target.id, 1, lang, curr))
+            .then(() => dispatch(bagService.getBag(lang, curr)));
+        }
     }
 
     const { categoryCode, type } = match.params;
@@ -106,6 +113,8 @@ function Products(props) {
 
             const params = {
                 ...localisation,
+                "locale": lang,
+                "currency": curr,
                 "category": node.data.id,
                 "q": q,
                 "page": page,

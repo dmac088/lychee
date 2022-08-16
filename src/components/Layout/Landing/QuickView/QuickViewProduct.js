@@ -5,10 +5,13 @@ import { Spinner } from '../../Helpers/animation';
 import { useSelector } from 'react-redux';
 import { settings } from './Helper';
 import * as bagService from "../../../../services/Bag/index";
+import { useDispatch } from 'react-redux';
 function QuickViewProduct(props) {
 
   const { toggleQuickView, match, product } = props;
   const { lang, curr } = match.params;
+
+  const dispatch = useDispatch();
 
   const closeModal = (e) => {
     toggleQuickView(e);
@@ -42,7 +45,10 @@ function QuickViewProduct(props) {
   const addToBag = (e, product, quantity) => {
     console.log('addToBag');
     e.preventDefault();
-    bagService.addItem(product.data.productUPC, quantity);
+    if (bagService.isAuthenticated()) {
+      dispatch(bagService.addItem(product.data.productUPC, quantity, lang, curr))
+        .then(() => dispatch(bagService.getBag(lang, curr)));
+    }
   }
 
   useEffect(() => {

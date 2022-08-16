@@ -41,7 +41,7 @@ function Search(props) {
             return axios.get(
                 parseTemplate(response.data._links.suggest.href).expand({
                     ...searchParams,
-                    "locale:": lang,
+                    "locale": lang,
                     "currency": curr,
                     "q": query,
                   }))
