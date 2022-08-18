@@ -52,21 +52,25 @@ function Shipping(props) {
     }, [bag.loading]);
 
 
-    // useEffect(() => {
-    //     let isSubscribed = true;
-    //     if (isSubscribed) {
-    //             if(!bag.loading) {
-    //                 dispatch(getShippingProduct(stateObject.currentDestinationCode, stateObject.currentShipTypeCode));
-    //             }
-    //     }
-    //     return () => (isSubscribed = false);
-    // }, [stateObject.currentDestinationCode,
-    //     stateObject.currentShipTypeCode]);
+    useEffect(() => {
+        let isSubscribed = true;
+        if (isSubscribed) {
+                if(!bag.loading) {
+                    dispatch(getShippingProduct(stateObject.currentDestinationCode, 
+                                                stateObject.currentShipTypeCode,
+                                                lang, 
+                                                curr));
+                }
+        }
+        return () => (isSubscribed = false);
+    }, [stateObject.currentDestinationCode,
+        stateObject.currentShipTypeCode]);
 
 
     const bagReady          = ((!bag.loading));
     const destinationsReady = ((!shippingDestinations.loading));
 
+    console.log(shippingProduct)
     return (
         (!(destinationsReady && bagReady))
         ? <Spinner />
