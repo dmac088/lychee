@@ -12,7 +12,7 @@ function Default() {
             : <React.Fragment>
                 <h3>Dashboard</h3>
 
-                <div className="welcome"><p>Hello, <strong></strong> (If Not <strong>{customer.givenName} </strong><a href="login-register.html" className="logout"> Logout</a>)</p>
+                <div className="welcome"><p>Hello, <strong></strong> (If Not <strong>{customer.data.givenName} </strong><a href="login-register.html" className="logout"> Logout</a>)</p>
                 </div>
 
                 <p className="mb-0">From your account dashboard. you can easily check &amp; view your

@@ -13,15 +13,14 @@ import { localisation } from "../api";
 
 export const findByUserName = () => {
   return (dispatch, getState) => {
-    
-    const { userName } = getState().session;
+
     const { href } = getState().discovery.links.customerResource;
 
     dispatch(getCustomerStarted());
-
-   return axios.get(parseTemplate(href).expand({
-                  "username": userName
-                  }))
+   return axios.get(href)
+      .then((response) => {
+        return axios.get(response.data._links.customer.href);
+      })
       .then((response) => {
         dispatch(getCustomerSuccess(response));
       }).catch((error) => {
