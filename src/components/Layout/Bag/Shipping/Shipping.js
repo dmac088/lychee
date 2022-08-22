@@ -5,17 +5,20 @@ import ShippingProvider from './Provider/ShippingProvider';
 import ShippingDestination from './Destination/ShippingDestination';
 import ShippingType from './Type/ShippingType';
 import { getShippingDestinations, findByCode } from '../../../../services/Shipping/Destination/index';
+import { addShipping } from '../../../../services/Bag/index';
 import { getShippingProduct } from '../../../../services/Shipping/Products/index';
+import * as bagService from '../../../../services/Bag/index';
+import { Form } from 'react-bootstrap';
 
 function Shipping(props) {
 
     const { match } = props;
     const { lang, curr } = match.params;
 
-    const dispatch              = useDispatch();
-    const bag                   = useSelector(state => state.bag);
-    const shippingDestinations  = useSelector(state => state.shippingDestinations);
-    const shippingProduct       = useSelector(state => state.shippingProduct);
+    const dispatch = useDispatch();
+    const bag = useSelector(state => state.bag);
+    const shippingDestinations = useSelector(state => state.shippingDestinations);
+    const shippingProduct = useSelector(state => state.shippingProduct);
 
     //selected shipping destination stored in local state
     const [stateObject, setObjectState] = useState({
@@ -24,29 +27,36 @@ function Shipping(props) {
         currentShipTypeCode: "LEG",
     });
 
-    function setDestinationCode(e) {
+    const setDestinationCode = (e) => {
         e.preventDefault();
         const value = e.target.value;
-        setObjectState((prevState) => ({ 
-          ...prevState, 
-          currentDestinationCode: value,
+        setObjectState((prevState) => ({
+            ...prevState,
+            currentDestinationCode: value,
         }));
     }
 
-    function setShipTypeCode(e) {
+    const setShipTypeCode = (e) => {
         e.preventDefault();
         const value = e.target.value;
-        setObjectState((prevState) => ({ 
-          ...prevState, 
-          currentShipTypeCode: value,
+        setObjectState((prevState) => ({
+            ...prevState,
+            currentShipTypeCode: value,
         }));
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(addShipping(shippingProduct.data.productUPC, lang, curr))
+        .then(() => dispatch(bagService.getBag(lang, curr)));        
+    }
 
     useEffect(() => {
         let isSubscribed = true;
         if (isSubscribed) {
-            dispatch(getShippingDestinations(lang, curr));    
+            if (!bag.loading) {
+                dispatch(getShippingDestinations(lang, curr));
+            }
         }
         return () => (isSubscribed = false);
     }, [bag.loading]);
@@ -55,49 +65,49 @@ function Shipping(props) {
     useEffect(() => {
         let isSubscribed = true;
         if (isSubscribed) {
-                if(!bag.loading) {
-                    dispatch(getShippingProduct(stateObject.currentDestinationCode, 
-                                                stateObject.currentShipTypeCode,
-                                                lang, 
-                                                curr));
-                }
+            if (!bag.loading) {
+                dispatch(getShippingProduct(stateObject.currentDestinationCode,
+                    stateObject.currentShipTypeCode,
+                    lang,
+                    curr));
+            }
         }
         return () => (isSubscribed = false);
     }, [stateObject.currentDestinationCode,
-        stateObject.currentShipTypeCode]);
+    stateObject.currentShipTypeCode,
+    bag.loading]);
 
+    const bagReady = ((!bag.loading));
+    const shippingReady = ((!shippingProduct.loading));
 
-    const bagReady          = ((!bag.loading));
-    const destinationsReady = ((!shippingDestinations.loading));
-
-    console.log(shippingProduct)
     return (
-        (!(destinationsReady && bagReady))
-        ? <Spinner />
-        :
-        <div className="calculate-shipping">
-            <h4>Calculate Shipping</h4>
-            <form action="#">
-                <div className="row">
-                    <ShippingProvider 
-                        {...props}
-                    />
-                    <ShippingDestination
-                        {...props}
-                        shippingDestinations={shippingDestinations}
-                        currentDestinationCode={stateObject.currentDestinationCode}
-                        setDestination={setDestinationCode} />
-                     <ShippingType 
-                        {...props}
-                        destinationCode={stateObject.currentDestinationCode}
-                        setShipTypeCode={setShipTypeCode}
-                        destination={findByCode(shippingDestinations._embedded.shippingDestinationResources, stateObject.currentDestinationCode)}/> 
-                    <div className="col-md-6 col-12 mb-25">
-                        <input type="submit" defaultValue="Estimate" />
+        (!(shippingReady && bagReady))
+            ? <Spinner />
+            :
+            <div className="calculate-shipping">
+                <h4>Calculate Shipping</h4>
+                <Form onSubmit={handleSubmit}>
+                    <div className="row">
+                        <ShippingProvider
+                            {...props}
+                        />
+                        <ShippingDestination
+                            {...props}
+                            shippingDestinations={shippingDestinations}
+                            currentDestinationCode={stateObject.currentDestinationCode}
+                            setDestination={setDestinationCode} />
+                        <ShippingType
+                            {...props}
+                            destinationCode={stateObject.currentDestinationCode}
+                            shipTypeCode={stateObject.currentShipTypeCode}
+                            setShipTypeCode={setShipTypeCode}
+                            destination={findByCode(shippingDestinations._embedded.shippingDestinationResources, stateObject.currentDestinationCode)} />
+                        <div className="col-md-6 col-12 mb-25">
+                            <input type="submit" defaultValue="Estimate" />
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
+                </Form>
+            </div>
     );
 }
 

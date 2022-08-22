@@ -25,6 +25,9 @@ import {
     updateBagItemStarted,
     updateBagItemSuccess,
     updateBagItemFailure,
+    addShippingStarted,
+    addShippingSuccess,
+    addShippingFailure,
 } from '../../actions/BagContentsActions';
 
 
@@ -63,6 +66,30 @@ export const addItem = (productCode, quantity = 1, locale, currency) => {
             });
     }
 }
+
+
+export const addShipping = (productCode, locale, currency) => {
+    return (dispatch, getState) => {
+        dispatch(addShippingStarted());
+        const { href } = getState().bag._links.addShipping;
+        const link = parseTemplate(href).expand({
+            ...localisation,
+            "locale": locale,
+            "currency": currency
+        })
+        return axios.post(link, {
+            "shippingProductCode": productCode
+        })
+            .then((response) => {
+               // console.log(response.data);
+                dispatch(addShippingSuccess());
+            })
+            .catch(() => {
+                dispatch(addShippingFailure());
+            });
+    }
+}
+
 
 export const removeItem = (itemCode, locale, currency) => {
     return (dispatch, getState) => {

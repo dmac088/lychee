@@ -13,6 +13,12 @@ import {
   UPDATE_BAG_ITEM_STARTED,
   UPDATE_BAG_ITEM_SUCCESS,
   UPDATE_BAG_ITEM_FAILURE,
+  ADD_SHIPPING_STARTED,
+  ADD_SHIPPING_SUCCESS,
+  ADD_SHIPPING_FAILURE,
+  UPDATE_SHIPPING_STARTED,
+  UPDATE_SHIPPING_SUCCESS,
+  UPDATE_SHIPPING_FAILURE,
 } from "./ActionTypes";
 
 export const emptyBagContents = () => ({
@@ -108,5 +114,49 @@ export const updateBagItemFailure = error => ({
   payload: {
     error,
     loading: false,
+  }
+});
+
+export const addShippingStarted = () => ({
+  type: ADD_SHIPPING_STARTED,
+  payload: {
+      loading: true,
+  }
+});
+
+export const addShippingSuccess = () => ({
+  type: ADD_SHIPPING_SUCCESS,
+  payload: {
+      loading: false,
+  }
+});
+
+export const addShippingFailure = error => ({
+  type: ADD_SHIPPING_FAILURE,
+  payload: {
+      error,
+      loading: false,
+  }
+});
+
+export const updateShippingStarted = () => ({
+  type: UPDATE_SHIPPING_STARTED,
+  payload: {
+      loading: true,
+  }
+});
+
+export const updateShippingSuccess = shipping => ({
+  type: UPDATE_SHIPPING_SUCCESS,
+  payload: {
+      loading: false,
+      ...shipping,
+  }
+});
+
+export const updateShippingFailure = error => ({
+  type: UPDATE_SHIPPING_FAILURE,
+  payload: {
+      error,
   }
 });

@@ -12,6 +12,7 @@ function Bag(props) {
     const bag = useSelector(state => state.bag);
     const bagContents = useSelector(state => state.bagContents);
     const authenticated = useSelector(state => state.session.authenticated);
+    const shippingItem = bag.data.shippingItem || {markdownPrice: 0};
 
     const dispatch = useDispatch();
 
@@ -139,7 +140,7 @@ function Bag(props) {
                                                     <h4>Bag Summary</h4>
                                                     <p>Total Weight<span>{round(totalWeight)} kg</span></p>
                                                     <p>Sub Total <span>${round(totalAmount)}</span></p>
-                                                    <p>Shipping Cost <span>$00.00</span></p>
+                                                    <p>Shipping Cost <span>${round(shippingItem.markdownPrice)}</span></p>
                                                     <h2>Grand Total <span>$00.00</span></h2>
                                                 </div>
                                                 <div className="cart-summary-button">
