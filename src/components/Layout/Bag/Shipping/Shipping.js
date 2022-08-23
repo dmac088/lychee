@@ -8,7 +8,6 @@ import { getShippingDestinations, findByCode } from '../../../../services/Shippi
 import { addShipping } from '../../../../services/Bag/index';
 import { getShippingProduct } from '../../../../services/Shipping/Products/index';
 import * as bagService from '../../../../services/Bag/index';
-import { Form } from 'react-bootstrap';
 
 function Shipping(props) {
 
@@ -25,7 +24,9 @@ function Shipping(props) {
         currentDestinationCode: "HKG",
         currentDestination: null,
         currentShipTypeCode: "LEG",
+        loading: true,
     });
+
 
     const setDestinationCode = (e) => {
         e.preventDefault();
@@ -47,8 +48,23 @@ function Shipping(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(stateObject.currentShipTypeCode)
         dispatch(addShipping(shippingProduct.data.productUPC, lang, curr))
-        .then(() => dispatch(bagService.getBag(lang, curr)));        
+        .then(() => dispatch(bagService.getBag(lang, curr)));
+    }
+
+    const loadingStop = () => {
+        setObjectState((prevState) => ({
+            ...prevState,
+            loading: false,
+        }));
+    }
+
+    const loadingStart = () => {
+        setObjectState((prevState) => ({
+            ...prevState,
+            loading: false,
+        }));
     }
 
     useEffect(() => {
@@ -67,26 +83,24 @@ function Shipping(props) {
         if (isSubscribed) {
             if (!bag.loading) {
                 dispatch(getShippingProduct(stateObject.currentDestinationCode,
-                    stateObject.currentShipTypeCode,
-                    lang,
-                    curr));
+                                            stateObject.currentShipTypeCode,
+                                            lang,
+                                            curr));
             }
         }
         return () => (isSubscribed = false);
     }, [stateObject.currentDestinationCode,
-    stateObject.currentShipTypeCode,
-    bag.loading]);
-
-    const bagReady = ((!bag.loading));
-    const shippingReady = ((!shippingProduct.loading));
+        stateObject.currentShipTypeCode,
+        bag.loading]);
 
     return (
-        (!(shippingReady && bagReady))
+        (bag.loading || 
+         shippingDestinations.loading)
             ? <Spinner />
             :
             <div className="calculate-shipping">
                 <h4>Calculate Shipping</h4>
-                <Form onSubmit={handleSubmit}>
+                <form>
                     <div className="row">
                         <ShippingProvider
                             {...props}
@@ -102,11 +116,14 @@ function Shipping(props) {
                             shipTypeCode={stateObject.currentShipTypeCode}
                             setShipTypeCode={setShipTypeCode}
                             destination={findByCode(shippingDestinations._embedded.shippingDestinationResources, stateObject.currentDestinationCode)} />
-                        <div className="col-md-6 col-12 mb-25">
-                            <input type="submit" defaultValue="Estimate" />
-                        </div>
+                        { // submit button is not rendered unless we have a shipping product
+                        (shippingProduct.loading) 
+                        ? <Spinner />
+                        : <div className="col-md-6 col-12 mb-25">
+                            <input onClick={handleSubmit} type="submit" defaultValue="Estimate" />
+                          </div>}
                     </div>
-                </Form>
+                </form>
             </div>
     );
 }
