@@ -81,7 +81,6 @@ export const addShipping = (productCode, locale, currency) => {
             "shippingProductCode": productCode
         })
             .then((response) => {
-               // console.log(response.data);
                 dispatch(addShippingSuccess());
             })
             .catch(() => {

@@ -48,23 +48,8 @@ function Shipping(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(stateObject.currentShipTypeCode)
         dispatch(addShipping(shippingProduct.data.productUPC, lang, curr))
         .then(() => dispatch(bagService.getBag(lang, curr)));
-    }
-
-    const loadingStop = () => {
-        setObjectState((prevState) => ({
-            ...prevState,
-            loading: false,
-        }));
-    }
-
-    const loadingStart = () => {
-        setObjectState((prevState) => ({
-            ...prevState,
-            loading: false,
-        }));
     }
 
     useEffect(() => {
@@ -100,7 +85,7 @@ function Shipping(props) {
             :
             <div className="calculate-shipping">
                 <h4>Calculate Shipping</h4>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="row">
                         <ShippingProvider
                             {...props}
@@ -120,7 +105,7 @@ function Shipping(props) {
                         (shippingProduct.loading) 
                         ? <Spinner />
                         : <div className="col-md-6 col-12 mb-25">
-                            <input onClick={handleSubmit} type="submit" defaultValue="Estimate" />
+                            <input type="submit" defaultValue="Estimate" />
                           </div>}
                     </div>
                 </form>

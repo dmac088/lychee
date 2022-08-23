@@ -49,7 +49,7 @@ function Accordion(props) {
     });
   }
 
-  const { totalAmount } = bag.data;
+  const { subTotalAmount } = bag.data;
   return (
     
     (authenticated && bag.loading)
@@ -60,7 +60,7 @@ function Accordion(props) {
       </div>
       <div className="cart-calculation">
         <div className="calculation-details">
-          <p className="total">{localization[lang]['subtotal']}<span>${round(totalAmount) || 0}</span></p>
+          <p className="total">{localization[lang]['subtotal']}<span>${round(subTotalAmount) || 0}</span></p>
         </div>
         <div className="floating-cart-btn text-center">
           <Link to={getCheckoutPath(match)}>

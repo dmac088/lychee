@@ -81,7 +81,7 @@ function Bag(props) {
         });
     }
 
-    const { totalWeight, totalAmount } = bag.data;
+    const { totalWeight, subTotalAmount, grandTotalAmount } = bag.data;
     return (
         <React.Fragment>
             {(!authenticated)
@@ -139,9 +139,9 @@ function Bag(props) {
                                                 <div className="cart-summary-wrap">
                                                     <h4>Bag Summary</h4>
                                                     <p>Total Weight<span>{round(totalWeight)} kg</span></p>
-                                                    <p>Sub Total <span>${round(totalAmount)}</span></p>
+                                                    <p>Sub Total <span>${round(subTotalAmount)}</span></p>
                                                     <p>Shipping Cost <span>${round(shippingItem.markdownPrice)}</span></p>
-                                                    <h2>Grand Total <span>$00.00</span></h2>
+                                                    <h2>Grand Total <span>${round(grandTotalAmount)}</span></h2>
                                                 </div>
                                                 <div className="cart-summary-button">
                                                     <button className="checkout-btn">Checkout</button>

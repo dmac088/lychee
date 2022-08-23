@@ -56,7 +56,7 @@ function BagMenu(props) {
   }
 
   const { data } = bag;
-  const { totalItems, totalAmount } = data;
+  const { totalItems, subTotalAmount } = data;
   return (
     <React.Fragment>
     <div 
@@ -70,7 +70,7 @@ function BagMenu(props) {
         </div>
         <div className="cart-info d-inline-block">
           <p>{localization[lang]['mybag']}
-          <span>{totalItems || 0} {localization[lang]['items']} - ${round(totalAmount || 0)}</span>
+          <span>{totalItems || 0} {localization[lang]['items']} - ${round(subTotalAmount || 0)}</span>
           </p>
         </div>
         </Link>
