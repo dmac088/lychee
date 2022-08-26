@@ -10,7 +10,6 @@ function Checkout() {
 
   const renderItems = (items) => {
     return items.map((i, index) => {
-      console.log(i)
       return <li key={index}>{i.data.itemDesc} x {i.data.itemQty}<span>${i.data.bagItemTotal}</span></li>
     })
   }
