@@ -122,7 +122,7 @@ instance.interceptors.response.use((response) => {
         }
 
         return new Promise(function (resolve, reject) {
-            axios.post(
+            instance.post(
                 tokenLink,
                 form,
                 apiConfig.config)
