@@ -7,15 +7,21 @@ import { matchPath } from 'react-router'
 import { refreshTokens, logoutSession } from '../../../../services/Session';
 import * as apiConfig from '../../../../services/api';
 
+const server = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development')
+? 'https://localhost:8080'
+: 'https://app.sv2.io:8090';
+
 export const instance = axios.create({
-    baseURL: (!process.env.NODE_ENV || process.env.NODE_ENV === 'development')
-        ? 'https://localhost:8080'
-        : 'https://app.sv2.io:8090',
+    baseURL: server, 
     crossDomain: true,
     headers: {
         "content-type": "application/json"
     },
     // responseType: "json"
+});
+
+export const reTryInstance = axios.create({
+    baseURL: server
 });
 
 // LocalstorageService
@@ -122,7 +128,7 @@ instance.interceptors.response.use((response) => {
         }
 
         return new Promise(function (resolve, reject) {
-            instance.post(
+            reTryInstance.post(
                 tokenLink,
                 form,
                 apiConfig.config)
