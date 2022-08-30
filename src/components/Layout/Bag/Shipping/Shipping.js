@@ -48,8 +48,9 @@ function Shipping(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!shippingProduct.data) { return; }
         dispatch(addShipping(shippingProduct.data.productUPC, lang, curr))
-        .then(() => dispatch(bagService.getBag(lang, curr)));
+            .then(() => dispatch(bagService.getBag(lang, curr)));
     }
 
     useEffect(() => {
@@ -67,20 +68,22 @@ function Shipping(props) {
         let isSubscribed = true;
         if (isSubscribed) {
             if (!bag.loading) {
-                dispatch(getShippingProduct(stateObject.currentDestinationCode,
-                                            stateObject.currentShipTypeCode,
-                                            lang,
-                                            curr));
+                if (!(bag.data.bagItems.length == 0)) {
+                    dispatch(getShippingProduct(stateObject.currentDestinationCode,
+                        stateObject.currentShipTypeCode,
+                        lang,
+                        curr));
+                }
             }
         }
         return () => (isSubscribed = false);
     }, [stateObject.currentDestinationCode,
-        stateObject.currentShipTypeCode,
-        bag.loading]);
+    stateObject.currentShipTypeCode,
+    bag.loading]);
 
     return (
-        (bag.loading || 
-         shippingDestinations.loading)
+        (bag.loading ||
+            shippingDestinations.loading)
             ? <Spinner />
             :
             <div className="calculate-shipping">
@@ -101,12 +104,10 @@ function Shipping(props) {
                             shipTypeCode={stateObject.currentShipTypeCode}
                             setShipTypeCode={setShipTypeCode}
                             destination={findByCode(shippingDestinations._embedded.shippingDestinationResources, stateObject.currentDestinationCode)} />
-                        { // submit button is not rendered unless we have a shipping product
-                        (shippingProduct.loading) 
-                        ? <Spinner />
-                        : <div className="col-md-6 col-12 mb-25">
+
+                        <div className="col-md-6 col-12 mb-25">
                             <input type="submit" defaultValue="Estimate" />
-                          </div>}
+                        </div>
                     </div>
                 </form>
             </div>
