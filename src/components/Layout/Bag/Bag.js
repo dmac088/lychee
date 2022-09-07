@@ -51,7 +51,9 @@ function Bag(props) {
     }
 
     const renderCartProducts = (items = []) => {
-        return items.map((item, index) => {
+        return [...items]
+        .sort((a, b) => a.data.itemId > b.data.itemId ? 1 : -1)
+        .map((item, index) => {
             return (
                 <tr key={index}>
                     <td className="pro-thumbnail">

@@ -10,8 +10,7 @@ import { getShippingProduct } from '../../../../services/Shipping/Products/index
 import * as bagService from '../../../../services/Bag/index';
 
 function Shipping(props) {
-    const { history, match } = props;
-    const { params } = match;
+    const { match } = props;
     const { lang, curr } = match.params;
 
     const dispatch = useDispatch();
