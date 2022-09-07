@@ -1,5 +1,6 @@
 import React from 'react';
 import Shipping from './Shipping/Shipping';
+import { routeToPage } from '../../../services/Routing/Helper';
 import { useSelector } from 'react-redux';
 import * as bagService from '../../../services/Bag/index';
 import { useDispatch } from 'react-redux';
@@ -8,7 +9,9 @@ import { round } from '../Helpers/math';
 import Auth from '../Login/Auth';
 
 function Bag(props) {
-    const { lang, curr } = props.match.params;
+    const { history, match } = props;
+    const { params } = match;
+    const { lang, curr } = params;
     const bag = useSelector(state => state.bag);
     const bagContents = useSelector(state => state.bagContents);
     const authenticated = useSelector(state => state.session.authenticated);
@@ -39,6 +42,12 @@ function Bag(props) {
             dispatch(bagService.addItem(e.target.id, -1, lang, curr))
                 .then(() => dispatch(bagService.getBag(lang, curr)));
         }
+    }
+
+    const routeCheckout = (e) => {
+        e.preventDefault();
+        console.log('routeCheckout')
+        routeToPage(history, params, 'mycheckout');
     }
 
     const renderCartProducts = (items = []) => {
@@ -144,8 +153,7 @@ function Bag(props) {
                                                     <h2>Grand Total <span>${round(grandTotalAmount)}</span></h2>
                                                 </div>
                                                 <div className="cart-summary-button">
-                                                    <button className="checkout-btn">Checkout</button>
-                                                    <button className="update-btn">Update Cart</button>
+                                                    <button onClick={routeCheckout} className="checkout-btn">Checkout</button>
                                                 </div>
                                             </div>
                                         </div>

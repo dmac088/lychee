@@ -10,8 +10,8 @@ import { getShippingProduct } from '../../../../services/Shipping/Products/index
 import * as bagService from '../../../../services/Bag/index';
 
 function Shipping(props) {
-
-    const { match } = props;
+    const { history, match } = props;
+    const { params } = match;
     const { lang, curr } = match.params;
 
     const dispatch = useDispatch();
@@ -26,7 +26,6 @@ function Shipping(props) {
         currentShipTypeCode: "LEG",
         loading: true,
     });
-
 
     const setDestinationCode = (e) => {
         e.preventDefault();
@@ -63,7 +62,6 @@ function Shipping(props) {
         return () => (isSubscribed = false);
     }, [bag.loading]);
 
-
     useEffect(() => {
         let isSubscribed = true;
         if (isSubscribed) {
@@ -76,8 +74,8 @@ function Shipping(props) {
         }
         return () => (isSubscribed = false);
     }, [stateObject.currentDestinationCode,
-    stateObject.currentShipTypeCode,
-    bag.loading]);
+        stateObject.currentShipTypeCode,
+        bag.loading]);
 
     return (
         (bag.loading ||
