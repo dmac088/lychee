@@ -42,38 +42,38 @@ function Bag(props) {
     }
 
     const renderCartProducts = (items = []) => {
-        return items.map((product, index) => {
+        return items.map((item, index) => {
             return (
                 <tr key={index}>
                     <td className="pro-thumbnail">
-                        <a id={product.data.itemUPC} href="#" onClick={(e) => console.log(e)}>
-                            <img src={product._links.defaultImage.href} className="img-fluid" alt="Product" />
+                        <a id={item.data.itemUPC} href="#" onClick={(e) => console.log(e)}>
+                            <img src={item._links.defaultImage.href} className="img-fluid" alt="Product" />
                         </a>
                     </td>
                     <td className="pro-title">
-                        <a id={product.data.itemUPC} href="#" onClick={(e) => console.log(e)}>
-                            {product.data.itemDesc}
+                        <a id={item.productUPC} href="#" onClick={(e) => console.log(e)}>
+                            {item.data.itemDesc}
                         </a>
                     </td>
                     <td className="pro-price">
-                        <span>${product.data.markdownPrice}</span>
+                        <span>${item.data.markdownPrice}</span>
                     </td>
                     <td className="pro-quantity">
                         <div className="pro-qty">
-                            <input type="text" defaultValue={product.data.itemQty} />
-                            <a id={product.data.itemUPC} onClick={incrementQty} href="#" className="inc qty-btn">+</a>
-                            <a id={product.data.itemUPC} onClick={decrementQty} href="#" className="dec qty-btn">-</a>
+                            <input type="text" defaultValue={item.data.itemQty} />
+                            <a id={item.data.itemUPC} onClick={incrementQty} href="#" className="inc qty-btn">+</a>
+                            <a id={item.data.itemUPC} onClick={decrementQty} href="#" className="dec qty-btn">-</a>
                         </div>
                     </td>
                     <td className="pro-quantity">
-                        <span>{round(product.data.bagItemWeight)} kg</span>
+                        <span>{round(item.data.bagItemWeight)} kg</span>
                     </td>
                     <td className="pro-subtotal">
-                        <span>${round(product.data.itemQty * product.data.markdownPrice)}</span>
+                        <span>${round(item.data.bagItemTotal)}</span>
                     </td>
                     <td className="pro-remove">
-                        <a id={product.data.itemUPC} onClick={removeItem} href="#">
-                            <i id={product.data.itemUPC} onClick={removeItem} className="fa fa-trash-o"></i>
+                        <a id={item.data.itemUPC} onClick={removeItem} href="#">
+                            <i id={item.data.itemUPC} onClick={removeItem} className="fa fa-trash-o"></i>
                         </a>
                     </td>
                 </tr>

@@ -68,12 +68,10 @@ function Shipping(props) {
         let isSubscribed = true;
         if (isSubscribed) {
             if (!bag.loading) {
-                if (!(bag.data.bagItems.length == 0)) {
                     dispatch(getShippingProduct(stateObject.currentDestinationCode,
                         stateObject.currentShipTypeCode,
                         lang,
                         curr));
-                }
             }
         }
         return () => (isSubscribed = false);
