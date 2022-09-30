@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardGroup } from 'react-bootstrap';
+import { round } from '../Helpers/math';
 import { useSelector } from 'react-redux';
 import { Spinner } from '../../Layout/Helpers/animation';
 
@@ -10,7 +10,7 @@ function Checkout() {
 
   const renderItems = (items) => {
     return items.map((i, index) => {
-      return <li key={index}>{i.data.itemDesc} x {i.data.itemQty}<span>${i.data.bagItemTotal}</span></li>
+      return <li key={index}>{i.data.itemDesc} x {i.data.itemQty}<span>${round(i.data.bagItemTotal)}</span></li>
     })
   }
 
@@ -37,10 +37,10 @@ function Checkout() {
                       {renderItems(bagContents.items)}
                     </ul>
 
-                    <p>Sub Total <span>${bag.data.subTotalAmount}</span></p>
-                    <p>Shipping Fee <span>${bag.data.shippingItem.markdownPrice}</span></p>
+                    <p>Sub Total <span>${round(bag.data.subTotalAmount)}</span></p>
+                    <p>Shipping Fee <span>${round(bag.data.shippingItem.markdownPrice)}</span></p>
 
-                    <h4>Grand Total <span>${bag.data.grandTotalAmount}</span></h4>
+                    <h4>Grand Total <span>${round(bag.data.grandTotalAmount)}</span></h4>
 
                   </div>
 
