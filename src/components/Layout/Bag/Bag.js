@@ -78,9 +78,6 @@ function Bag(props) {
                             <a id={item.data.itemUPC} onClick={decrementQty} href="#" className="dec qty-btn">-</a>
                         </div>
                     </td>
-                    <td className="pro-quantity">
-                        <span>{round(item.data.bagItemWeight)} kg</span>
-                    </td>
                     <td className="pro-title">
                         <span>${round(item.data.bagItemDiscount)}</span>
                     </td>
@@ -119,7 +116,6 @@ function Bag(props) {
                                                         <th className="pro-title">Product</th>
                                                         <th className="pro-price">Price</th>
                                                         <th className="pro-quantity">Quantity</th>
-                                                        <th className="pro-quantity">Weight</th>
                                                         <th className="pro-title">Discount</th>
                                                         <th className="pro-subtotal">Total</th>
                                                         <th className="pro-remove">Remove</th>
