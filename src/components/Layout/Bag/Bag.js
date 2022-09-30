@@ -17,6 +17,8 @@ function Bag(props) {
     const authenticated = useSelector(state => state.session.authenticated);
     const shippingItem = bag.data.shippingItem || {markdownPrice: 0};
 
+    const { totalWeight, subTotalAmount, grandTotalAmount, totalDiscount, totalAmount } = bag.data;
+
     const dispatch = useDispatch();
 
     const removeItem = (e) => {
@@ -79,6 +81,9 @@ function Bag(props) {
                     <td className="pro-quantity">
                         <span>{round(item.data.bagItemWeight)} kg</span>
                     </td>
+                    <td className="pro-title">
+                        <span>${round(item.data.bagItemDiscount)}</span>
+                    </td>
                     <td className="pro-subtotal">
                         <span>${round(item.data.bagItemTotal)}</span>
                     </td>
@@ -92,7 +97,6 @@ function Bag(props) {
         });
     }
 
-    const { totalWeight, subTotalAmount, grandTotalAmount } = bag.data;
     return (
         <React.Fragment>
             {(!authenticated)
@@ -116,6 +120,7 @@ function Bag(props) {
                                                         <th className="pro-price">Price</th>
                                                         <th className="pro-quantity">Quantity</th>
                                                         <th className="pro-quantity">Weight</th>
+                                                        <th className="pro-title">Discount</th>
                                                         <th className="pro-subtotal">Total</th>
                                                         <th className="pro-remove">Remove</th>
                                                     </tr>
@@ -150,6 +155,8 @@ function Bag(props) {
                                                 <div className="cart-summary-wrap">
                                                     <h4>Bag Summary</h4>
                                                     <p>Total Weight<span>{round(totalWeight)} kg</span></p>
+                                                    <p>Bag Total <span>${round(totalAmount)}</span></p>
+                                                    <p>Discount Total <span>${round(totalDiscount)}</span></p>
                                                     <p>Sub Total <span>${round(subTotalAmount)}</span></p>
                                                     <p>Shipping Cost <span>${round(shippingItem.markdownPrice)}</span></p>
                                                     <h2>Grand Total <span>${round(grandTotalAmount)}</span></h2>
@@ -166,7 +173,7 @@ function Bag(props) {
                             </div>
                         </div>
                     </div>}
-        </React.Fragment>
+        </React.Fragment> 
     );
 }
 
