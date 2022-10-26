@@ -10,15 +10,19 @@ import { localisation } from "../../api";
 export const getShippingDestinations = (locale, currency) => {
     return (dispatch, getState) => {
         dispatch(getShippingDestinationsStarted());
-        const { href } = getState().bag._links.getShippingDestinations;
-        const link = parseTemplate(href).expand({
-            ...localisation,
-            "locale": locale,
-            "currency": currency,
-        });
-        return  axios.get(link)
+        return axios.get(getState().discovery.links.shippingResource.href)
+        .then((response) => {
+            const { href } = response.data._links.countries;
+            const link = parseTemplate(href).expand({
+                ...localisation,
+                "locale": locale,
+                "currency": currency,
+            })
+            return link;
+        })
+        .then((link) => axios.get(link))
         .then((payload) => {
-            return payload.data;
+            return payload;
         }).then((providers) => {
             dispatch(getShippingDestinationsSuccess(providers));
         }).catch((error) => {

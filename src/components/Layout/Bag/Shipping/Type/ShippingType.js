@@ -5,6 +5,8 @@ import { getShippingType } from '../../../../../services/Shipping/Type/index';
 
 function ShippingType(props) {
 
+    console.log(props)
+
     const { match } = props;
     const { lang, curr } = match.params;
 
@@ -23,7 +25,10 @@ function ShippingType(props) {
     useEffect(() => {
         let isSubscribed = true;
         if (isSubscribed) {
-            dispatch(getShippingType(destinationCode, lang, curr));
+            console.log(destinationCode)
+            console.log(lang)
+            console.log(curr)
+            //dispatch(getShippingType(destinationCode, lang, curr));
 
         }
         return () => (isSubscribed = false);

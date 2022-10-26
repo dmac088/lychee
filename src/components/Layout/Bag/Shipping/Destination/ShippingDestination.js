@@ -9,7 +9,7 @@ function ShippingDestination(props) {
         return providers.map((p, index) => {
           return <option  
                          key={index} 
-                         value={p.data.productDestinationCode}>{p.data.productDestinationDesc}</option>
+                         value={p.data.countryode}>{p.data.countryDesc}</option>
         })
     }
 
@@ -19,7 +19,7 @@ function ShippingDestination(props) {
         :
             <div className="col-md-6 col-12 mb-25">
                 <select defaultValue={currentDestinationCode} onChange={setDestination} className="nice-select">
-                    {renderDestinations(shippingDestinations._embedded.shippingDestinationResources)}
+                    {renderDestinations(shippingDestinations.data._embedded.shippingCountryResources)}
                 </select>
             </div>
     );

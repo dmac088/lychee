@@ -65,16 +65,18 @@ function Shipping(props) {
         let isSubscribed = true;
         if (isSubscribed) {
             if (!bag.loading) {
-                    dispatch(getShippingProduct(stateObject.currentDestinationCode,
-                        stateObject.currentShipTypeCode,
-                        lang,
-                        curr));
+                    // dispatch(getShippingProduct(stateObject.currentDestinationCode,
+                    //     stateObject.currentShipTypeCode,
+                    //     lang,
+                    //     curr));
             }
         }
         return () => (isSubscribed = false);
     }, [stateObject.currentDestinationCode,
         stateObject.currentShipTypeCode,
         bag.loading]);
+
+
 
     return (
         (bag.loading ||
@@ -98,7 +100,7 @@ function Shipping(props) {
                             destinationCode={stateObject.currentDestinationCode}
                             shipTypeCode={stateObject.currentShipTypeCode}
                             setShipTypeCode={setShipTypeCode}
-                            destination={findByCode(shippingDestinations._embedded.shippingDestinationResources, stateObject.currentDestinationCode)} />
+                            destination={findByCode(shippingDestinations.data._embedded.shippingDestinationResources, stateObject.currentDestinationCode)} />
 
                         <div className="col-md-6 col-12 mb-25">
                             <input type="submit" defaultValue="Estimate" />
