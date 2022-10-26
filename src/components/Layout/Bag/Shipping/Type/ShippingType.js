@@ -5,8 +5,6 @@ import { getShippingType } from '../../../../../services/Shipping/Type/index';
 
 function ShippingType(props) {
 
-    console.log(props)
-
     const { match } = props;
     const { lang, curr } = match.params;
 
@@ -18,23 +16,20 @@ function ShippingType(props) {
     const renderTypes = (types) => {
         return types.map((p, index) => {
             return <option key={index}
-                value={p.data.shippingTypeCode}>{p.data.shippingTypeDesc}</option>
+                value={p.data.code}>{p.data.name}</option>
         })
     }
 
     useEffect(() => {
         let isSubscribed = true;
         if (isSubscribed) {
-            console.log(destinationCode)
-            console.log(lang)
-            console.log(curr)
-            //dispatch(getShippingType(destinationCode, lang, curr));
-
+            dispatch(getShippingType(destinationCode, lang, curr));
         }
         return () => (isSubscribed = false);
     }, [
         destinationCode,
-        bag.loading]);
+        bag.loading
+    ]);
 
     return (
         (shippingTypes.loading)
@@ -42,7 +37,7 @@ function ShippingType(props) {
             :
             <div className="col-md-6 col-12 mb-25">
                 <select defaultValue={shipTypeCode} onChange={setShipTypeCode} className="nice-select">
-                    {renderTypes(shippingTypes._embedded.shippingTypeResources)}
+                    {renderTypes(shippingTypes._embedded.shippingCodeResources)}
                 </select>
             </div>
     );

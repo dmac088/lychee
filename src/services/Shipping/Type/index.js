@@ -8,23 +8,28 @@ import { parseTemplate } from 'url-template';
 import { localisation } from "../../api";
 
 //we inject the selected destination to get the relevant types
-export const getShippingType = (destinationCode, locale, currency) => {  
-     return (dispatch, getState) => {
+export const getShippingType = (destinationCode, locale, currency) => {
+    return (dispatch, getState) => {
         dispatch(getShippingTypeStarted());
-        const { href } = getState().bag._links.getShippingTypes;
-        const link = parseTemplate(href).expand({
-            ...localisation,
-            "locale": locale,
-            "currency": currency,
-            "destination": destinationCode,
-        });
-        return axios.get(link)
-        .then((payload) => {
-            return payload.data;
-        }).then((types) => {
-            dispatch(getShippingTypeSuccess(types));
-        }).catch((error) => {
-            dispatch(getShippingTypeFailure(error.response));
-        });
-     }
+        return axios.get(getState().discovery.links.shippingResource.href)
+            .then((response) => {
+                const { href } = response.data._links.shipCodes;
+                const link = parseTemplate(href).expand({
+                    ...localisation,
+                    "locale": locale,
+                    "currency": currency,
+                    "destination": destinationCode,
+                })
+                return link
+            })
+            .then((link) => axios.get(link))
+            .then((payload) => {
+                return payload.data;
+            }).then((types) => {
+                dispatch(getShippingTypeSuccess(types));
+            }).catch((error) => {
+                dispatch(getShippingTypeFailure(error.response));
+            });
+    }
+
 }
