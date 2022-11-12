@@ -9,6 +9,8 @@ const initialState = {
     error: {},
 };
 
+const DEFAULT_SELECTION = {data: {countryCode: 'NA', countryDesc: '--Select--'}};
+
 export default function (state = initialState, action) {
   
     switch (action.type) {
@@ -22,7 +24,12 @@ export default function (state = initialState, action) {
       case GET_SHIPPING_DESTINATIONS_SUCCESS:
         return {
           ...state,
-          ...action.payload,
+         data: { _embedded: {
+            shippingCountryResources: [
+              DEFAULT_SELECTION,...action.payload.data._embedded.shippingCountryResources
+            ]
+          }
+        },
           loading: false,
       }
   

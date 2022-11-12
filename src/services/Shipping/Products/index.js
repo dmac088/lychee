@@ -5,9 +5,8 @@ import {
     getShippingProductFailure,
 } from "../../../actions/ShippingProductActions";
 import { parseTemplate } from 'url-template';
-import { Link } from "react-router-dom";
 
-export const getShippingProduct = (destCode, typeCode, locale, currency) => {
+export const getShippingProduct = (countryCode, shipCode, locale, currency) => {
     return (dispatch, getState) => {
         dispatch(getShippingProductStarted());
         return axios.get(getState().discovery.links.shippingResource.href)
@@ -16,8 +15,8 @@ export const getShippingProduct = (destCode, typeCode, locale, currency) => {
                 const uri = parseTemplate(href).expand({
                     "locale": locale,
                     "currency": currency,
-                    "code": destCode,
-                    "type": typeCode,
+                    "countryCode": countryCode,
+                    "shipCode": shipCode
                 });
                 return uri;
             })

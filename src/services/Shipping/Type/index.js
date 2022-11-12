@@ -18,7 +18,7 @@ export const getShippingType = (destinationCode, locale, currency) => {
                     ...localisation,
                     "locale": locale,
                     "currency": currency,
-                    "destination": destinationCode,
+                    "destinationCode": destinationCode,
                 })
                 return link
             })

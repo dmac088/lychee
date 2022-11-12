@@ -17,12 +17,17 @@ function Shipping(props) {
     const bag = useSelector(state => state.bag);
     const shippingDestinations = useSelector(state => state.shippingDestinations);
     const shippingProduct = useSelector(state => state.shippingProduct);
+    const defaultProvCode = "HKP";
+    const defaultDestCode = "NA";
+    const defaultShipCode = "NA";
+    
 
     //selected shipping destination stored in local state
     const [stateObject, setObjectState] = useState({
-        currentDestinationCode: "HKG",
+        currentProviderCode: defaultProvCode,
+        currentDestinationCode: defaultDestCode,
         currentDestination: null,
-        currentShipTypeCode: "LEG",
+        currentShipTypeCode: defaultShipCode,
         loading: true,
     });
 
@@ -32,6 +37,7 @@ function Shipping(props) {
         setObjectState((prevState) => ({
             ...prevState,
             currentDestinationCode: value,
+            currentShipTypeCode: defaultShipCode,
         }));
     }
 
@@ -46,9 +52,10 @@ function Shipping(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!shippingProduct.data) { return; }
-        dispatch(addShipping(shippingProduct.data.productUPC, lang, curr))
-            .then(() => dispatch(bagService.getBag(lang, curr)));
+        if (!shippingProduct) { return; }
+        if(!shippingProduct.productUPC) {return;}
+        dispatch(addShipping(shippingProduct, lang, curr))
+             .then(() => dispatch(bagService.getBag(lang, curr)));
     }
 
     useEffect(() => {
@@ -65,12 +72,13 @@ function Shipping(props) {
         let isSubscribed = true;
         if (isSubscribed) {
             if (!bag.loading) {
-                console.log('hi')
+                if(!(stateObject.currentShipTypeCode == defaultShipCode || stateObject.currentDestinationCode == defaultDestCode)) {
+                    console.log('pop')
                     dispatch(getShippingProduct(stateObject.currentDestinationCode,
-                        stateObject.currentShipTypeCode,
-                        lang,
-                        curr));
-                console.log(shippingProduct)
+                                                stateObject.currentShipTypeCode,
+                                                lang,
+                                                curr));
+                }
             }
         }
         return () => (isSubscribed = false);
@@ -78,8 +86,7 @@ function Shipping(props) {
         stateObject.currentShipTypeCode,
         bag.loading]);
 
-
-
+        console.log(shippingProduct)
     return (
         (bag.loading ||
             shippingDestinations.loading)
@@ -99,13 +106,14 @@ function Shipping(props) {
                             setDestination={setDestinationCode} />
                         <ShippingType
                             {...props}
+                            defaultShipCode={defaultShipCode}
                             destinationCode={stateObject.currentDestinationCode}
                             shipTypeCode={stateObject.currentShipTypeCode}
                             setShipTypeCode={setShipTypeCode}
                             destination={findByCode(shippingDestinations.data._embedded.shippingDestinationResources, stateObject.currentDestinationCode)} />
 
                         <div className="col-md-6 col-12 mb-25">
-                            <input type="submit" defaultValue="Estimate" />
+                            <input type="submit" defaultShipCode="Estimate" />
                         </div>
                     </div>
                 </form>

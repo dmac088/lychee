@@ -93,7 +93,7 @@ function Bag(props) {
             )
         });
     }
-
+    
     return (
         <React.Fragment>
             {(!authenticated)

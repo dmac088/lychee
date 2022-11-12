@@ -52,7 +52,7 @@ export const addItem = (productCode, quantity = 1, locale, currency) => {
         const link = parseTemplate(href).expand({
             ...localisation,
             "locale": locale,
-            "currency": currency
+            "currency": currency,
         })
         return axios.post(link, {
             "itemUPC": productCode,
@@ -68,24 +68,24 @@ export const addItem = (productCode, quantity = 1, locale, currency) => {
 }
 
 
-export const addShipping = (productCode, locale, currency) => {
+export const addShipping = (shippingProduct, locale, currency) => {
     return (dispatch, getState) => {
         dispatch(addShippingStarted());
         const { href } = getState().bag._links.addShipping;
         const link = parseTemplate(href).expand({
             ...localisation,
             "locale": locale,
-            "currency": currency
+            "currency": currency,
         })
         return axios.post(link, {
-            "shippingProductCode": productCode
+            "shippingProductCode": shippingProduct.productUPC
         })
-            .then((response) => {
-                dispatch(addShippingSuccess());
-            })
-            .catch(() => {
-                dispatch(addShippingFailure());
-            });
+        .then((response) => {
+            dispatch(addShippingSuccess());
+        })
+        .catch(() => {
+            dispatch(addShippingFailure());
+        });
     }
 }
 

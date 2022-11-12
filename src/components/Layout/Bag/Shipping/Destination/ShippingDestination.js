@@ -9,7 +9,7 @@ function ShippingDestination(props) {
         return providers.map((p, index) => {
           return <option  
                          key={index} 
-                         value={p.data.countryode}>{p.data.countryDesc}</option>
+                         value={p.data.countryCode}>{p.data.countryDesc}</option>
         })
     }
 

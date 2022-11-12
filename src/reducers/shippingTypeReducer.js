@@ -7,10 +7,9 @@ import {
 const initialState = {
   loading: true,
   error: {},
-  _embedded: {
-    shippingTypeResources: [],
-  },
 };
+
+const DEFAULT_SELECTION = {data: {code: 'NA', name: '--Select--'}};
 
 export default function (state = initialState, action) {
 
@@ -19,13 +18,15 @@ export default function (state = initialState, action) {
     case GET_SHIPPING_TYPES_STARTED:
       return {
         ...state,
-        ...action.payload,
     }
 
     case GET_SHIPPING_TYPES_SUCCESS:
       return {
-        ...state,
-        ...action.payload,
+        _embedded: {
+          shippingCodeResources: [
+            DEFAULT_SELECTION,...action.payload._embedded.shippingCodeResources
+          ]
+        },
         loading: false,
     }
 

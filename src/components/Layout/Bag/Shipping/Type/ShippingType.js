@@ -8,7 +8,7 @@ function ShippingType(props) {
     const { match } = props;
     const { lang, curr } = match.params;
 
-    const { destinationCode, setShipTypeCode, shipTypeCode } = props;
+    const { destinationCode, setShipTypeCode, shipTypeCode, defaultShipCode } = props;
     const dispatch = useDispatch();
     const shippingTypes = useSelector(state => state.shippingTypes);
     const bag = useSelector(state => state.bag);
@@ -23,7 +23,9 @@ function ShippingType(props) {
     useEffect(() => {
         let isSubscribed = true;
         if (isSubscribed) {
-            dispatch(getShippingType(destinationCode, lang, curr));
+            if(destinationCode !== defaultShipCode) {
+                dispatch(getShippingType(destinationCode, lang, curr));
+            }
         }
         return () => (isSubscribed = false);
     }, [
