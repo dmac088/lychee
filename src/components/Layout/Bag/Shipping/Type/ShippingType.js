@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { Spinner } from '../../../../Layout/Helpers/animation';
 import { useDispatch, useSelector } from 'react-redux';
 import { getShippingType } from '../../../../../services/Shipping/Type/index';
 
@@ -8,7 +7,7 @@ function ShippingType(props) {
     const { match } = props;
     const { lang, curr } = match.params;
 
-    const { destinationCode, setShipTypeCode, shipTypeCode, defaultShipCode } = props;
+    const { destinationCode, setShipTypeCode, defaultDestCode, defaultShipCode } = props;
     const dispatch = useDispatch();
     const shippingTypes = useSelector(state => state.shippingTypes);
     const bag = useSelector(state => state.bag);
@@ -16,14 +15,15 @@ function ShippingType(props) {
     const renderTypes = (types) => {
         return types.map((p, index) => {
             return <option key={index}
-                value={p.data.code}>{p.data.name}</option>
-        })
+                           value={p.data.code}>{p.data.name}
+                    </option>
+        }) 
     }
 
     useEffect(() => {
         let isSubscribed = true;
         if (isSubscribed) {
-            if(destinationCode !== defaultShipCode) {
+            if(destinationCode !== defaultDestCode) {
                 dispatch(getShippingType(destinationCode, lang, curr));
             }
         }
@@ -34,13 +34,14 @@ function ShippingType(props) {
     ]);
 
     return (
-        (shippingTypes.loading)
-            ? <Spinner />
-            :
             <div className="col-md-6 col-12 mb-25">
-                <select defaultValue={shipTypeCode} onChange={setShipTypeCode} className="nice-select">
+                {(!shippingTypes.loading)
+                ?   <select defaultValue={defaultShipCode} 
+                            onChange={setShipTypeCode} 
+                            className="nice-select">
                     {renderTypes(shippingTypes._embedded.shippingCodeResources)}
-                </select>
+                    </select>
+                :   <select className="nice-select"/>}
             </div>
     );
 }

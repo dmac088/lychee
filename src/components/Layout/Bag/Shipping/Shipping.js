@@ -28,7 +28,6 @@ function Shipping(props) {
         currentDestinationCode: defaultDestCode,
         currentDestination: null,
         currentShipTypeCode: defaultShipCode,
-        loading: true,
     });
 
     const setDestinationCode = (e) => {
@@ -62,6 +61,7 @@ function Shipping(props) {
         let isSubscribed = true;
         if (isSubscribed) {
             if (!bag.loading) {
+                
                 dispatch(getShippingDestinations(lang, curr));
             }
         }
@@ -73,7 +73,6 @@ function Shipping(props) {
         if (isSubscribed) {
             if (!bag.loading) {
                 if(!(stateObject.currentShipTypeCode == defaultShipCode || stateObject.currentDestinationCode == defaultDestCode)) {
-                    console.log('pop')
                     dispatch(getShippingProduct(stateObject.currentDestinationCode,
                                                 stateObject.currentShipTypeCode,
                                                 lang,
@@ -86,7 +85,6 @@ function Shipping(props) {
         stateObject.currentShipTypeCode,
         bag.loading]);
 
-        console.log(shippingProduct)
     return (
         (bag.loading ||
             shippingDestinations.loading)
@@ -107,13 +105,14 @@ function Shipping(props) {
                         <ShippingType
                             {...props}
                             defaultShipCode={defaultShipCode}
+                            defaultDestCode={defaultDestCode}
                             destinationCode={stateObject.currentDestinationCode}
                             shipTypeCode={stateObject.currentShipTypeCode}
                             setShipTypeCode={setShipTypeCode}
                             destination={findByCode(shippingDestinations.data._embedded.shippingDestinationResources, stateObject.currentDestinationCode)} />
 
                         <div className="col-md-6 col-12 mb-25">
-                            <input type="submit" defaultShipCode="Estimate" />
+                            <input type="submit" name="Estimate" />
                         </div>
                     </div>
                 </form>
