@@ -5,7 +5,7 @@ import {
 } from "../actions/ActionTypes";
 
 const initialState = {
-  loading: true,
+  loading: false,
   error: {},
 };
 
@@ -17,6 +17,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         ...action.payload,
+        loading: true,
     }
 
     case GET_SHIPPING_PRODUCT_SUCCESS:

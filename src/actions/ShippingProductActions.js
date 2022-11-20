@@ -11,10 +11,12 @@ export const getShippingProductStarted = () => ({
     }
 });
 
-export const getShippingProductSuccess = shippingProduct => ({
+export const getShippingProductSuccess = (shippingProduct, dest, type) => ({
     type: GET_SHIPPING_PRODUCT_SUCCESS,
     payload: {
         loading: false,
+        shippingDestination: dest,
+        shippingType: type,
         ...shippingProduct,
     }
 });

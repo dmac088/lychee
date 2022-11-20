@@ -9,14 +9,13 @@ function ShippingType(props) {
 
     const { destinationCode, setShipTypeCode, defaultDestCode, defaultShipCode } = props;
     const dispatch = useDispatch();
+
     const shippingTypes = useSelector(state => state.shippingTypes);
     const bag = useSelector(state => state.bag);
 
     const renderTypes = (types) => {
         return types.map((p, index) => {
-            return <option key={index}
-                           value={p.data.code}>{p.data.name}
-                    </option>
+            return  <option key={index} value={p.data.code}>{p.data.name}</option>
         }) 
     }
 

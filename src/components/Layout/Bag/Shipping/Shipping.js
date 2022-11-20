@@ -51,8 +51,6 @@ function Shipping(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!shippingProduct) { return; }
-        if(!shippingProduct.productUPC) {return;}
         dispatch(addShipping(shippingProduct, lang, curr))
              .then(() => dispatch(bagService.getBag(lang, curr)));
     }
@@ -60,8 +58,7 @@ function Shipping(props) {
     useEffect(() => {
         let isSubscribed = true;
         if (isSubscribed) {
-            if (!bag.loading) {
-                
+            if (!bag.loading) { 
                 dispatch(getShippingDestinations(lang, curr));
             }
         }
@@ -72,7 +69,7 @@ function Shipping(props) {
         let isSubscribed = true;
         if (isSubscribed) {
             if (!bag.loading) {
-                if(!(stateObject.currentShipTypeCode == defaultShipCode || stateObject.currentDestinationCode == defaultDestCode)) {
+                if(!(stateObject.currentShipTypeCode == defaultShipCode)) {
                     dispatch(getShippingProduct(stateObject.currentDestinationCode,
                                                 stateObject.currentShipTypeCode,
                                                 lang,
@@ -81,13 +78,13 @@ function Shipping(props) {
             }
         }
         return () => (isSubscribed = false);
-    }, [stateObject.currentDestinationCode,
-        stateObject.currentShipTypeCode,
+    }, [stateObject.currentShipTypeCode,
         bag.loading]);
 
     return (
-        (bag.loading ||
-            shippingDestinations.loading)
+        (   bag.loading ||
+            shippingDestinations.loading ||
+            shippingProduct.loading)
             ? <Spinner />
             :
             <div className="calculate-shipping">
@@ -104,10 +101,9 @@ function Shipping(props) {
                             setDestination={setDestinationCode} />
                         <ShippingType
                             {...props}
-                            defaultShipCode={defaultShipCode}
+                            defaultShipCode={stateObject.currentShipTypeCode}
                             defaultDestCode={defaultDestCode}
                             destinationCode={stateObject.currentDestinationCode}
-                            shipTypeCode={stateObject.currentShipTypeCode}
                             setShipTypeCode={setShipTypeCode}
                             destination={findByCode(shippingDestinations.data._embedded.shippingDestinationResources, stateObject.currentDestinationCode)} />
 

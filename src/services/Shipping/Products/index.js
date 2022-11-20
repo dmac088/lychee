@@ -24,7 +24,7 @@ export const getShippingProduct = (countryCode, shipCode, locale, currency) => {
             .then((payload) => {
                 return payload.data;
             }).then((product) => {
-                dispatch(getShippingProductSuccess(product));
+                dispatch(getShippingProductSuccess(product, countryCode, shipCode));
             }).catch((error) => {
                 dispatch(getShippingProductFailure(error.response));
             });
