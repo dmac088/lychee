@@ -18,19 +18,19 @@ function MainMenu(props) {
                     <BasicMenuItem
                         {...props}
                         routePath={getCategoryPath('FRT01', match)}
-                        descKey={'fruit'} />
+                        descKey={'mens'} />
                 </li>
                 <li>
                     <BasicMenuItem
                         {...props}
                         routePath={getCategoryPath('VEG01', match)}
-                        descKey={'vegetables'} />
+                        descKey={'womans'} />
                 </li>
                 <li>
                     <BasicMenuItem
                         {...props}
                         routePath={getCategoryPath('NUT01', match)}
-                        descKey={'nuts'} />
+                        descKey={'unisex'} />
                 </li>
                 <li>
                     <BasicMenuItem

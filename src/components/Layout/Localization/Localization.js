@@ -35,6 +35,9 @@ export const localization = {
         "homeandlifestyle": "Home & Lifestyle",
         "registrationConfirmation": "Registration Confirmation",
         "forgot": "Forgot Password",
+        "mens": "Mens",
+        "womans": "Womans",
+        "unisex": "Unisex"
     },
     "zh-HK": {
         "home": "首頁",
@@ -62,5 +65,8 @@ export const localization = {
         "nuts": "堅果",
         "registrationConfirmation": "註冊確認",
         "forgot": "忘記密碼",
+        "mens": "男士",
+        "womans": "女人",
+        "unisex": "男女通用的",
     }
 }
