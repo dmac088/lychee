@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import CategoryMenuContainer from "./CategoryMenu/CategoryMenuContainer";
 import Slider from "react-slick";
 import { HsSlickArrowLeft, HsSlickArrowRight } from './sliderHelper';
-import placeholder from '../../../../assets/images/banners/home3-banner1-2.jpg';
+import placeholder1 from '../../../../assets/images/landing/home3-banner1-1.jpg';
+import placeholder2 from '../../../../assets/images/landing/home3-banner1-2.jpg';
 
 
 const $ = window.$;
@@ -100,14 +101,14 @@ function HeroSlider(props) {
                 <div className="col-lg-12 col-sm-6">
                   <div className="slider-side-banner mb-20 mb-sm-0 mb-xs-0">
                     <a href="#">
-                      <img src={placeholder} className="img-fluid" alt="" />
+                      <img src={placeholder1} className="img-fluid" alt="" />
                     </a>
                   </div>
                 </div>
                 <div className="col-lg-12 col-sm-6">
                   <div className="slider-side-banner mb-0 mb-sm-0 mb-xs-0">
                     <a href="#">
-                      <img src={placeholder} className="img-fluid" alt="" />
+                      <img src={placeholder2} className="img-fluid" alt="" />
                     </a>
                   </div>
                 </div>

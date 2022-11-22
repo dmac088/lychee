@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Shipping from './Shipping/Shipping';
 import { routeToPage } from '../../../services/Routing/Helper';
 import { useSelector } from 'react-redux';
@@ -18,6 +18,10 @@ function Bag(props) {
     const shippingItem = bag.data.shippingItem || {markdownPrice: 0};
 
     const { totalWeight, subTotalAmount, grandTotalAmount, totalDiscount, totalAmount } = bag.data;
+
+    const [stateObject, setObjectState] = useState({
+        couponCode: null,
+    });
 
     const dispatch = useDispatch();
 
@@ -50,6 +54,22 @@ function Bag(props) {
         e.preventDefault();
         console.log('routeCheckout')
         routeToPage(history, params, 'mycheckout');
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(stateObject.couponCode)
+        // dispatch(addShipping(shippingProduct, lang, curr))
+        //      .then(() => dispatch(bagService.getBag(lang, curr)));
+    }
+
+    const setCouponCode = (e) => {
+        e.preventDefault();
+        const value = e.target.value;
+        setObjectState((prevState) => ({ 
+          ...prevState, 
+          couponCode: value,
+        }));
     }
 
     const renderCartProducts = (items = []) => {
@@ -94,6 +114,8 @@ function Bag(props) {
         });
     }
     
+    
+
     return (
         <React.Fragment>
             {(!authenticated)
@@ -134,10 +156,10 @@ function Bag(props) {
                                             />
                                             <div className="discount-coupon">
                                                 <h4>Discount Coupon Code</h4>
-                                                <form action="#">
+                                                <form onSubmit={handleSubmit}>
                                                     <div className="row">
                                                         <div className="col-md-6 col-12 mb-25">
-                                                            <input type="text" placeholder="Coupon Code" />
+                                                            <input onChange={setCouponCode} type="text" placeholder="Coupon Code" />
                                                         </div>
                                                         <div className="col-md-6 col-12 mb-25">
                                                             <input type="submit" defaultValue="Apply Code" />
